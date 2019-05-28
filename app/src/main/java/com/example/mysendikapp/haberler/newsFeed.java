@@ -59,7 +59,6 @@ public class newsFeed extends AppCompatActivity {
         deleteCache(this);
         super.onDestroy();
     }
-//QQWEQWE
     private void fetchingJSON() {
 
         showSimpleProgressDialog(this, "Loading...", "Fetching Json", false);
@@ -112,8 +111,8 @@ public class newsFeed extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("page", "0");
-                params.put("count", "4");
+                params.put("page", getResources().getString(R.string.page));
+                params.put("count", getResources().getString(R.string.count));
                 return params;
             }
         };

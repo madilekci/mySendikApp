@@ -5,7 +5,8 @@
     <string name="denemUrl">https://www.yucelyavuz.com/muhammed/login/getNewsDeneme.php</string>
     <string name="signInUrl">https://www.yucelyavuz.com/muhammed/login/kaydol.php</string>
 
-
+    <string name="page">0</string>
+    <string name="count">5</string>
     <string name="haberUrl">https://www.dogruweb.com/api/getAllNews</string>
     <string name="haberDetayUrl">https://www.dogruweb.com/api/getNewsDetail</string>
 
