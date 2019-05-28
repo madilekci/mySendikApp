@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dim_rv_one_Fullheight">200dp</dimen>
+    <dimen name="dim_rv_one_Imagesize">150dp</dimen>
+    <dimen name="dim_rv_one_BlankHeight">50dp</dimen>
+
+</resources>

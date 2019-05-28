@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Türk-Harb-İş</string>
+
+    <string name="loginUrl">https://www.yucelyavuz.com/muhammed/login/girisYap.php</string>
+    <string name="denemUrl">https://www.yucelyavuz.com/muhammed/login/getNewsDeneme.php</string>
+    <string name="signInUrl">https://www.yucelyavuz.com/muhammed/login/kaydol.php</string>
+
+
+    <string name="haberUrl">https://www.dogruweb.com/api/getAllNews</string>
+    <string name="haberDetayUrl">https://www.dogruweb.com/api/getNewsDetail</string>
+
+    <string name="webViewBoardMembersUrl">https://www.apple.com/tr/leadership/</string>
+    <string name="webViewFacebookUrl">http://touch.facebook.com/HARBISSENDIKASI</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="claimComplaintHint">Görüşleriniz bizim için çok değerli.  Lütfen bize yazmaktan çekinmeyin.</string>
+    <string name="btnHaberleriGor">Tüm Haberleri Gör</string>
+    <string-array name="claimComplaint">
+        <item>Talep Oluştur</item>
+        <item>Şikayet Oluştur</item>
+        <item>Diğer</item>
+    </string-array>
+
+</resources>
