@@ -6,16 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.R;
@@ -29,6 +27,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import es.dmoral.toasty.Toasty;
+
 public class newsFeed extends AppCompatActivity {
 
     private static ProgressDialog mProgressDialog;
@@ -36,21 +36,36 @@ public class newsFeed extends AppCompatActivity {
 
     private RvAdapter rvAdapter;
     private RecyclerView recyclerView;
-
-    String postCount, postPage;
+    boolean isLoading = false;
+    int postCount, postPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_feed);
 
-        this.postCount = "2";
-        this.postPage = "0";
-
+        this.postCount = 4;
+        this.postPage = -1;
+        this.haberModelArrayList = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.rv_newsFeed);
         recyclerView.getAdapter();
         fetchingJSON();
+        initScrollListener();
 
+    }
+
+    public void initScrollListener() {
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if ( !recyclerView.canScrollVertically(1) ) {
+                    fetchingJSON();
+                }
+            }
+        });
 
     }
 
@@ -60,7 +75,9 @@ public class newsFeed extends AppCompatActivity {
         super.onDestroy();
     }
     private void fetchingJSON() {
-
+        this.postPage++;
+        System.out.println("postpage : "+postPage);
+        System.out.println("count : "+postCount);
         showSimpleProgressDialog(this, "Loading...", "Fetching Json", false);
 
         String url = getResources().getString(R.string.haberUrl);    // Post atılan adres.
@@ -68,7 +85,7 @@ public class newsFeed extends AppCompatActivity {
                 Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
-            public void onResponse(String response) {
+                    public void onResponse(String response) {
 
                         System.out.println("***********************************************");
                         System.out.println("Response to newsFeed >> " + response.toString());
@@ -77,10 +94,12 @@ public class newsFeed extends AppCompatActivity {
 
                             removeSimpleProgressDialog();
 //                            JSONObject obj = new JSONObject(response);
-                            haberModelArrayList = new ArrayList<>();
                             JSONObject obj = new JSONObject(response);
                             JSONArray dataArray = obj.getJSONArray("data");
                             System.out.println("Gelen haber sayısı : " + dataArray.length());
+                            if(dataArray.length()==0){
+                                Toasty.warning(newsFeed.this,"Bütün haberler listelendi",Toasty.LENGTH_SHORT);
+                            }
 
                             for (int i = 0; i < dataArray.length(); i++) {
                                 haberModel haberModel1 = new haberModel();
@@ -111,8 +130,8 @@ public class newsFeed extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("page", getResources().getString(R.string.page));
-                params.put("count", getResources().getString(R.string.count));
+                params.put("page", String.valueOf(postPage));
+                params.put("count", String.valueOf(postCount));
                 return params;
             }
         };
@@ -122,9 +141,8 @@ public class newsFeed extends AppCompatActivity {
         jsonStringRequest.setShouldCache(false);        // "CacheTutulmasıDurumu=false"
         queue.add(jsonStringRequest);
 
-
+        isLoading = false;
     }       //getAllNews
-
     private void setupRecycler() {
 
         rvAdapter = new RvAdapter(this, haberModelArrayList);
@@ -134,43 +152,42 @@ public class newsFeed extends AppCompatActivity {
     }
 
     public static void removeSimpleProgressDialog() {
-        try {
-            if (mProgressDialog != null) {
-                if (mProgressDialog.isShowing()) {
-                    mProgressDialog.dismiss();
-                    mProgressDialog = null;
-                }
-            }
-        } catch (IllegalArgumentException ie) {
-            ie.printStackTrace();
-
-        } catch (RuntimeException re) {
-            re.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            if (mProgressDialog != null) {
+//                if (mProgressDialog.isShowing()) {
+//                    mProgressDialog.dismiss();
+//                    mProgressDialog = null;
+//                }
+//            }
+//        } catch (IllegalArgumentException ie) {
+//            ie.printStackTrace();
+//
+//        } catch (RuntimeException re) {
+//            re.printStackTrace();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
     }
-
     public static void showSimpleProgressDialog(Context context, String title,
                                                 String msg, boolean isCancelable) {
-        try {
-            if (mProgressDialog == null) {
-                mProgressDialog = ProgressDialog.show(context, title, msg);
-                mProgressDialog.setCancelable(isCancelable);
-            }
-
-            if (!mProgressDialog.isShowing()) {
-                mProgressDialog.show();
-            }
-
-        } catch (IllegalArgumentException ie) {
-            ie.printStackTrace();
-        } catch (RuntimeException re) {
-            re.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            if (mProgressDialog == null) {
+//                mProgressDialog = ProgressDialog.show(context, title, msg);
+//                mProgressDialog.setCancelable(isCancelable);
+//            }
+//
+//            if (!mProgressDialog.isShowing()) {
+//                mProgressDialog.show();
+//            }
+//
+//        } catch (IllegalArgumentException ie) {
+//            ie.printStackTrace();
+//        } catch (RuntimeException re) {
+//            re.printStackTrace();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
 
@@ -182,7 +199,6 @@ public class newsFeed extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
     public static boolean deleteDir(File dir) {
         if (dir != null && dir.isDirectory()) {
             String[] children = dir.list();
@@ -208,5 +224,6 @@ public class newsFeed extends AppCompatActivity {
             }
         });
     }
+
 
 }

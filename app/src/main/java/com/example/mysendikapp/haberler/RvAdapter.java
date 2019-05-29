@@ -71,7 +71,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder> {
 
         @Override
         public void onClick(View v) {
-            //if (v.)
+            System.out.println("Clicked to rv item");
         }
     }
 }

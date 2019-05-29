@@ -5,7 +5,7 @@
     android:id="@+id/ll_newsFeed"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#cd15e6"
+    android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -23,7 +23,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:background="@color/colorPrimaryDark"
+        />
 
 
 </LinearLayout>
