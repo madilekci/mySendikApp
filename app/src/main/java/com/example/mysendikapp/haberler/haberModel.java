@@ -31,9 +31,6 @@ public class haberModel {
 
     }
 
-
-
-
     public String getId() {
         return id;
     }

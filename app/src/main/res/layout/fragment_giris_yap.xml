@@ -4,17 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color11"
     android:orientation="vertical"
-    android:background="@color/colorAccent"
-    tools:context=".login.fragmentGirisYap"
-    >
+    tools:context=".login.fragmentGirisYap">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Kullanıcı adınız"
-        android:textColor="@android:color/white"
-        />
+        android:textColor="@android:color/black" />
 
     <EditText
         android:id="@+id/tvUsernameGirisYap"
@@ -22,14 +20,13 @@
         android:layout_height="50dp"
         android:background="@android:color/background_light"
         android:padding="10dp"
-        android:textColor="#111111" />
+        android:textColor="@android:color/black" />
 
     <TextView
         android:layout_width="94dp"
         android:layout_height="wrap_content"
         android:text="Şifreniz"
-        android:textColor="@android:color/white"
-        />
+        android:textColor="@android:color/black" />
 
     <EditText
         android:id="@+id/tvPasswordGirisYap"
@@ -38,14 +35,14 @@
         android:background="@android:color/background_light"
         android:inputType="textPassword"
         android:padding="10dp"
-        android:textColor="#111111" />
+        android:textColor="@android:color/black" />
 
     <Button
         android:id="@+id/btnGirisYap"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#d9d9d9"
+        android:background="@color/colorPrimary"
         android:text="Giriş Yap"
-        android:textColor="#000000" />
+        android:textColor="@android:color/black" />
 
 </LinearLayout>

@@ -26,6 +26,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.optionMenuActivities.ActivityAboutUs;
 import com.example.mysendikapp.optionMenuActivities.ActivityBoardMembers;
 import com.example.mysendikapp.optionMenuActivities.ActivityBranches;
@@ -40,6 +46,12 @@ import com.nightonke.boommenu.BoomMenuButton;
 import com.nightonke.boommenu.Util;
 import com.viewpagerindicator.CirclePageIndicator;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -48,13 +60,11 @@ import es.dmoral.toasty.Toasty;
 
 public class ActivityDashboard extends AppCompatActivity  {
 
-    private static final String DEBUG_TAG = "sout";
     private static ViewPager mPager;
     private static int currentPage = 0;
     private static int NUM_PAGES = 0;
-    private static String[] haber_id;
-
-    private String[] urls;
+    private  String[] haber_id;
+    private  String[] urls;
     SharedPreferences sp = null;
 
     @Override
@@ -62,8 +72,13 @@ public class ActivityDashboard extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        initImages();
+        this.urls = new String[5];
+        this.haber_id = new String[5];
 
+        //SlidingImages
+        fetchingJSON();
+
+//TopBar
         ActionBar mActionBar = getSupportActionBar();
         assert mActionBar != null;
         mActionBar.setDisplayShowHomeEnabled(false);
@@ -77,92 +92,20 @@ public class ActivityDashboard extends AppCompatActivity  {
         mActionBar.setDisplayShowCustomEnabled(true);
         ((Toolbar) actionBar.getParent()).setContentInsetsAbsolute(0, 0);
 
+        //OptionMenu
         BoomMenuButton leftBmb = (BoomMenuButton) actionBar.findViewById(R.id.action_bar_left_bmb);
         BoomMenuButton rightBmb = (BoomMenuButton) actionBar.findViewById(R.id.action_bar_right_bmb);
 
         this.setOptionMenuBMB(leftBmb);
         this.setOptionMenuBMB(rightBmb);
 
+
+
         setMenuActivites();
 
-
-
     }
 
 
-
-    //Initialize the slider images
-    private void initImages() {
-        setUrls();
-        mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setAdapter(new SlidingImage_Adapter(ActivityDashboard.this, urls));
-
-        CirclePageIndicator indicator = (CirclePageIndicator) findViewById(R.id.indicator);
-        indicator.setViewPager(mPager);
-        final float density = getResources().getDisplayMetrics().density;
-//Set circle indicator radius
-        indicator.setRadius(5 * density);
-
-        NUM_PAGES = urls.length;
-        this.haber_id = new String[NUM_PAGES];
-        setHaber_id();
-
-        // Auto start of viewpager
-        final Handler handler = new Handler();
-        final Runnable Update = new Runnable() {
-            public void run() {
-                if (currentPage == NUM_PAGES) {
-                    currentPage = 0;
-                }
-                mPager.setCurrentItem(currentPage++, true);
-            }
-        };
-
-        Timer swipeTimer = new Timer();
-        swipeTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(Update);
-            }
-        }, 3000, 3000);
-
-        // Pager listener over indicator
-        indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            @Override
-            public void onPageSelected(int position) {
-                currentPage = position;
-            }
-
-            @Override
-            public void onPageScrolled(int pos, float arg1, int arg2) {
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int pos) {
-            }
-        });
-    }
-    private void setUrls() {
-        this.urls = new String[]{"https://demonuts.com/Demonuts/SampleImages/W-03.JPG",
-                "https://demonuts.com/Demonuts/SampleImages/W-08.JPG",
-                "https://demonuts.com/Demonuts/SampleImages/W-10.JPG",
-                "https://demonuts.com/Demonuts/SampleImages/W-13.JPG",
-                "https://demonuts.com/Demonuts/SampleImages/W-17.JPG",
-                "https://demonuts.com/Demonuts/SampleImages/W-21.JPG"};
-    }
-    public static void setHaber_id() {
-        for (int i = 0; i < haber_id.length; i++) {
-            ActivityDashboard.haber_id[i] = String.valueOf(i);
-        }
-
-    }
-    public void ImageOnClick(View v) {
-        Toasty.info(ActivityDashboard.this, "PAGE : " + currentPage, Toasty.LENGTH_SHORT).show();
-        Intent i = new Intent(ActivityDashboard.this, haberDetaylari.class);
-        i.putExtra("haber_id", "" + ActivityDashboard.haber_id[currentPage]);
-        startActivity(i);
-    }
     //Options menu
     public void setOptionMenuBMB(BoomMenuButton bmb) {
         for (int i = 0; i < bmb.getPiecePlaceEnum().pieceNumber(); i++) {
@@ -342,6 +285,125 @@ public class ActivityDashboard extends AppCompatActivity  {
         return true;
     }
 
+
+    //Initialize the slider images
+    private void initImages() {
+
+
+        CirclePageIndicator indicator = (CirclePageIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(mPager);
+
+        final float density = getResources().getDisplayMetrics().density;
+        //Set circle indicator radius
+        indicator.setRadius(5 * density);
+
+        NUM_PAGES = urls.length;
+
+        // Auto start of viewpager
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+                if (currentPage == NUM_PAGES) {
+                    currentPage = 0;
+                }
+                mPager.setCurrentItem(currentPage++, true);
+            }
+        };
+
+        Timer swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 1500, 1500);
+        // Pager listener over indicator
+        indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageSelected(int position) {
+                currentPage = position;
+            }
+            @Override
+            public void onPageScrolled(int pos, float arg1, int arg2) {
+            }
+            @Override
+            public void onPageScrollStateChanged(int pos) {
+            }
+        });
+
+
+    }
+    public void ImageOnClick(View v) {
+        Intent i = new Intent(ActivityDashboard.this, haberDetaylari.class);
+        i.putExtra("haber_id", "" + this.haber_id[currentPage]);
+        startActivity(i);
+    }
+
+    private void fetchingJSON() {
+
+        String url = ActivityDashboard.this.getResources().getString(R.string.haberSlideUrl);    // Post atılan adres.
+        StringRequest jsonStringRequest = new StringRequest(
+                Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        parseJSONData(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something when error occurred
+                        Toast.makeText(ActivityDashboard.this, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("count", String.valueOf(5));
+                return params;
+            }
+        };
+
+        // request queue
+        RequestQueue queue = Volley.newRequestQueue(this);
+        jsonStringRequest.setShouldCache(false);        // "CacheTutulmasıDurumu=false"
+        queue.add(jsonStringRequest);
+
+
+    }       //getAllNews
+    public void parseJSONData(String response){
+        try {
+            JSONObject obj = new JSONObject(response);
+            JSONArray dataArray = obj.getJSONArray("data");
+            System.out.println("Gelen haber sayısı : " + dataArray.length());
+
+            for (int i = 0; i < dataArray.length(); i++) {
+                haberModel haberModel1 = new haberModel();
+                JSONObject dataobj = dataArray.getJSONObject(i);
+
+                urls[i]=dataobj.getString("picture");
+                haber_id[i]=dataobj.getString("id");
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after 5s = 5000ms
+                mPager = (ViewPager) findViewById(R.id.pager);
+                mPager.setAdapter(new SlidingImage_Adapter(ActivityDashboard.this, urls));
+                initImages();
+            }
+        }, 300);
+    }
+
     public void logout() {
         Log.d("logout Function", "Logout function");
 
@@ -356,6 +418,7 @@ public class ActivityDashboard extends AppCompatActivity  {
         Intent i = new Intent(this, com.example.mysendikapp.login.loginActivity.class);
         startActivity(i);
     }
+
 
     //  OVERRIDE METHODS NOT USED \\
     //  OVERRIDE METHODS NOT USED \\

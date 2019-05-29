@@ -5,27 +5,15 @@
     android:id="@+id/ll_newsFeed"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
     tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/tv_newsFeed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Below RecyclerView is populated from JSON Data Volley"
-        android:textColor="#fff"
-        android:textStyle="bold" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_newsFeed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:padding="10dp"
-        android:background="@color/colorPrimaryDark"
-        />
+        android:padding="10dp" />
 
 
 </LinearLayout>

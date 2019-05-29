@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.fragmentKayitOL"
+    android:background="@color/color11"
     android:orientation="vertical"
-    android:background="@color/colorAccent"
-    >
+    tools:context=".login.fragmentKayitOL">
 
     <TextView
         android:layout_width="94dp"
         android:layout_height="wrap_content"
         android:text="Adınız"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/black" />
 
     <EditText
         android:id="@+id/kayitOl_txtAd"
@@ -27,8 +26,7 @@
         android:layout_width="97dp"
         android:layout_height="wrap_content"
         android:text="Soyadınız"
-        android:textColor="@android:color/white"
-        />
+        android:textColor="@android:color/black" />
 
     <EditText
         android:id="@+id/kayitOl_txtSoyad"
@@ -42,8 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Kullanıcı adınız"
-        android:textColor="@android:color/white"
-        />
+        android:textColor="@android:color/black" />
 
     <EditText
         android:id="@+id/kayitOl_txtUsername"
@@ -57,8 +54,7 @@
         android:layout_width="94dp"
         android:layout_height="wrap_content"
         android:text="Şifreniz"
-        android:textColor="@android:color/white"
-        />
+        android:textColor="@android:color/black" />
 
     <EditText
         android:id="@+id/kayitOl_txtPassword"
@@ -73,8 +69,7 @@
         android:layout_width="94dp"
         android:layout_height="wrap_content"
         android:text="Email adresiniz"
-        android:textColor="@android:color/white"
-        />
+        android:textColor="@android:color/black" />
 
     <EditText
         android:id="@+id/kayitOl_txtEmail"
@@ -88,7 +83,7 @@
         android:id="@+id/btnKayitOl"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#d9d9d9"
+        android:background="@color/colorPrimary"
         android:text="Kayıt Ol"
         android:textColor="#000000" />
 

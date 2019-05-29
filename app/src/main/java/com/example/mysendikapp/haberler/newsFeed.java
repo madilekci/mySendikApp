@@ -109,6 +109,7 @@ public class newsFeed extends AppCompatActivity {
                                 haberModel1.setSummary(dataobj.getString("summary"));
                                 haberModel1.setUrl(dataobj.getString("picture"));
                                 haberModel1.setView(dataobj.getString("readed"));
+                                haberModel1.setId(dataobj.getString("id"));
                                 haberModelArrayList.add(haberModel1);
                                 setupRecycler();
                             }
@@ -216,14 +217,6 @@ public class newsFeed extends AppCompatActivity {
         }
     }
 
-    public void haberOnClick(RecyclerView rv) {
-        rv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-    }
 
 
 }

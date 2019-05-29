@@ -2,13 +2,11 @@
     <string name="app_name">Türk-Harb-İş</string>
 
     <string name="loginUrl">https://www.yucelyavuz.com/muhammed/login/girisYap.php</string>
-    <string name="denemUrl">https://www.yucelyavuz.com/muhammed/login/getNewsDeneme.php</string>
     <string name="signInUrl">https://www.yucelyavuz.com/muhammed/login/kaydol.php</string>
 
-    <string name="page">0</string>
-    <string name="count">5</string>
     <string name="haberUrl">https://www.dogruweb.com/api/getAllNews</string>
     <string name="haberDetayUrl">https://www.dogruweb.com/api/getNewsDetail</string>
+    <string name="haberSlideUrl">https://www.dogruweb.com/api/getLastNews</string>
 
     <string name="webViewBoardMembersUrl">https://www.apple.com/tr/leadership/</string>
     <string name="webViewFacebookUrl">http://touch.facebook.com/HARBISSENDIKASI</string>

@@ -7,9 +7,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.mysendikapp.R;
+import com.example.mysendikapp.haberler.haberModel;
+import com.example.mysendikapp.haberler.newsFeed;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import es.dmoral.toasty.Toasty;
 
 public class SlidingImage_Adapter extends PagerAdapter {
 
@@ -29,12 +48,10 @@ public class SlidingImage_Adapter extends PagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View) object);
     }
-
     @Override
     public int getCount() {
         return urls.length;
     }
-
     @Override
     public Object instantiateItem(ViewGroup view, int position) {
         View imageLayout = inflater.inflate(R.layout.slidingimages_layout, view, false);
@@ -43,28 +60,24 @@ public class SlidingImage_Adapter extends PagerAdapter {
         final ImageView imageView = (ImageView) imageLayout.findViewById(R.id.sliding_image);
 
 
-        Glide.with(context)
-                .load(urls[position])
-                .into(imageView);
-
+        Picasso.get().load("https://"+ urls[position] ).into(imageView);
         view.addView(imageLayout, 0);
 
         return imageLayout;
     }
-
     @Override
     public boolean isViewFromObject(View view, Object object) {
         return view.equals(object);
     }
-
     @Override
     public void restoreState(Parcelable state, ClassLoader loader) {
     }
-
     @Override
     public Parcelable saveState() {
         return null;
     }
+
+
 
 
 }

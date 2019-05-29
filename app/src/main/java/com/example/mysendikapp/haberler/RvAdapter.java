@@ -1,6 +1,7 @@
 package com.example.mysendikapp.haberler;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,23 +33,19 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder> {
 
         return holder;
     }
-
     @Override
     public void onBindViewHolder(RvAdapter.MyViewHolder holder, int position) {
 
-//        Picasso.get().load("https://demonuts.com/Demonuts/SampleImages/W-03.JPG").into(holder.pic);
-//        Picasso.get().load("https://www.dogruweb.com/assets/images/haber/d7742305d5b840373db6fe06828d68f1-taseron-isci-dha-1_16_9_1524634621.jpg").into(holder.pic);
-        Picasso.get().load("https://"+haberModelArrayList.get(position).getUrl() ).into(holder.pic);
-        holder.title.setText(haberModelArrayList.get(position).getTitle() );
-        holder.summary.setText(haberModelArrayList.get(position).getSummary() );
-        holder.btn_view.setText(haberModelArrayList.get(position).getView() +" Kez Görüntülendi" );
-        holder.id=haberModelArrayList.get(position).id;
-
+        Picasso.get().load("https://"+this.haberModelArrayList.get(position).getUrl() ).into(holder.pic);
+        holder.title.setText(this.haberModelArrayList.get(position).getTitle() );
+        holder.summary.setText(this.haberModelArrayList.get(position).getSummary() );
+        holder.btn_view.setText(this.haberModelArrayList.get(position).getView() +" Kez Görüntülendi" );
+        holder.setHaberID(this.haberModelArrayList.get(position).id);
+        System.out.println("-->>>>>>>"+this.haberModelArrayList.get(position).id);
     }
-
     @Override
     public int getItemCount() {
-        return haberModelArrayList.size();
+        return this.haberModelArrayList.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -56,7 +53,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder> {
         TextView title, summary;
         ImageView pic;
         Button btn_view;
-        String id;
+        String haberID;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -66,12 +63,20 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder> {
             summary = (TextView) itemView.findViewById(R.id.tv_rv_one_summary);
             pic = (ImageView) itemView.findViewById(R.id.NewsFeedPic);
             btn_view = (Button) itemView.findViewById(R.id.rv_one_btn_view);
+            itemView.setOnClickListener(this);
 
         }
 
         @Override
         public void onClick(View v) {
-            System.out.println("Clicked to rv item");
+            System.out.println("Clicked to rv item  --> "+ haberID);
+            Context ctx = v.getContext();
+            Intent i = new Intent(ctx,haberDetaylari.class);
+            i.putExtra("haber_id",""+haberID);
+            ctx.startActivity(i);
+        }
+        public void setHaberID(String gelenID){
+            this.haberID=gelenID;
         }
     }
 }
