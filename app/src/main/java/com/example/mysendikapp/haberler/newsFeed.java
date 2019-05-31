@@ -60,7 +60,6 @@ public class newsFeed extends AppCompatActivity {
 
     public void initScrollListener() {
 
-
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -72,17 +71,12 @@ public class newsFeed extends AppCompatActivity {
 
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                         && firstVisibleItemPosition >= 0
-                        && totalItemCount >= PAGE_SIZE) {
-                    if (!isLoading) {
-                        System.out.println("isPageScrolledToEnd" + "VIC : " + visibleItemCount + "\nFVIP : " + firstVisibleItemPosition + "\nTIC : " + totalItemCount);
-                        newsFeed.this.postPage++;
-                        fetchingJSON();
+                        && totalItemCount >= PAGE_SIZE && !isLoading) {
 
-                    } else {
-                        System.out.println("Trying to load while application is already loading ...");
-                    }
+                    newsFeed.this.postPage++;
+                    fetchingJSON();
+
                 }
-
             }
         });
     }
@@ -101,24 +95,8 @@ public class newsFeed extends AppCompatActivity {
         isLoading = false;
     }
 
-    public static void removeSimpleProgressDialog() {
-        try {
-            if (mProgressDialog != null) {
-                if (mProgressDialog.isShowing()) {
-                    mProgressDialog.dismiss();
-                    mProgressDialog = null;
-                }
-            }
-        } catch (IllegalArgumentException ie) {
-            ie.printStackTrace();
 
-        } catch (RuntimeException re) {
-            re.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-    }
 
     public static void showSimpleProgressDialog(Context context, String title,
                                                 String msg, boolean isCancelable) {
@@ -139,6 +117,24 @@ public class newsFeed extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public static void removeSimpleProgressDialog() {
+        try {
+            if (mProgressDialog != null) {
+                if (mProgressDialog.isShowing()) {
+                    mProgressDialog.dismiss();
+                    mProgressDialog = null;
+                }
+            }
+        } catch (IllegalArgumentException ie) {
+            ie.printStackTrace();
+
+        } catch (RuntimeException re) {
+            re.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static void deleteCache(Context context) {
@@ -181,7 +177,7 @@ public class newsFeed extends AppCompatActivity {
                     public void onResponse(String response) {
 
                         System.out.println("***********************************************");
-                        System.out.println("Response to newsFeed >> " + response.toString());
+                        System.out.println("Response to newsFeed >> " + response);
                         System.out.println("***********************************************");
                         parseJSONData(response);
                     }
@@ -214,13 +210,12 @@ public class newsFeed extends AppCompatActivity {
     public void parseJSONData(String response) {
 
         try {
-
             removeSimpleProgressDialog();
 //                            JSONObject obj = new JSONObject(response);
             JSONObject obj = new JSONObject(response);
             JSONArray dataArray = obj.getJSONArray("data");
             System.out.println("Gelen haber sayısı : " + dataArray.length());
-            if (dataArray.length() == 0) {
+            if (!(dataArray.length()>0) ) {
                 Toasty.warning(newsFeed.this, "Bütün haberler listelendi", Toasty.LENGTH_SHORT);
                 return;
             }
@@ -228,14 +223,20 @@ public class newsFeed extends AppCompatActivity {
             for (int i = 0; i < dataArray.length(); i++) {
                 haberModel haberModel1 = new haberModel();
                 JSONObject dataobj = dataArray.getJSONObject(i);
-
                 haberModel1.setTitle(dataobj.getString("header"));
                 haberModel1.setSummary(dataobj.getString("summary"));
                 haberModel1.setUrl(dataobj.getString("picture"));
                 haberModel1.setView(dataobj.getString("readed"));
                 haberModel1.setId(dataobj.getString("id"));
                 haberModelArrayList.add(haberModel1);
+            }
+            if(rvAdapter==null){
                 setupRecycler();
+            }else {
+                int itemCount = rvAdapter.getItemCount();
+                // TODO: add method setItems() to your adapter
+                rvAdapter.setItems(haberModelArrayList);
+                rvAdapter.notifyItemRangeInserted(itemCount, dataArray.length());
             }
 
         } catch (JSONException e) {

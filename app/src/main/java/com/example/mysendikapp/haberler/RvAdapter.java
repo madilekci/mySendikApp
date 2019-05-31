@@ -48,6 +48,10 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder> {
         return this.haberModelArrayList.size();
     }
 
+    public void setItems(ArrayList<haberModel> haberModelArrayList){
+        this.haberModelArrayList=haberModelArrayList;
+    }
+
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView title, summary;

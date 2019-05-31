@@ -10,14 +10,20 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <LinearLayout
-
-
-        android:id="@+id/contentView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:context=".haberler.haberDetaylari">
+        <TextView
+            android:id="@+id/tvHaberBaslik"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:lineSpacingExtra="10sp"
+            android:padding="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="16dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,21 +55,6 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvHaberBaslik"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:lineSpacingExtra="10sp"
-            android:padding="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="5dp"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="16dp" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -77,32 +68,16 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:padding="10dp" />
-        </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvHaberContent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:padding="10dp"
-            android:textColor="@color/vpi__bright_foreground_holo_light"
-            android:textSize="18sp"
-            android:textStyle="italic" />
-
-    </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/loadingView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            tools:context=".haberler.haberDetaylari">
-
-            <ProgressBar
-                android:id="@+id/haber_detaylari_progressBar"
-                style="?android:attr/progressBarStyle"
+            <TextView
+                android:id="@+id/tvHaberContent"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="10dp"
+                android:textColor="@color/vpi__bright_foreground_holo_light"
+                android:textSize="18sp"
+                android:textStyle="italic" />
         </LinearLayout>
 
     </LinearLayout>
