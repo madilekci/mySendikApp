@@ -32,68 +32,12 @@ public class haberDetaylari extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_haber_detaylari);
-
         this.ne_haber=new haberModel();
-        haberOlustur();
-    }
 
-
-    public void haberYazdirConsole(){
-        System.out.println("*//--*------*-----*-------*-------//*");
-        System.out.println(""+this.ne_haber.getContent());
-        System.out.println(""+this.ne_haber.getTitle());
-        System.out.println(""+this.ne_haber.getUrl());
-        System.out.println(""+this.ne_haber.getDate());
-        System.out.println(""+this.ne_haber.getView());
-        System.out.println("*//--*------*-----*-------*-------//*");
-        haberGoster();
-    }
-    public void haberGoster(){
-        if(this.ne_haber.getDate().equals( null ) ){
-            return;
-        }
-        Button btnDate = (Button) findViewById(R.id.btn_haberDetaylari_Date);
-        btnDate.setText(""+this.ne_haber.getDate() );
-
-        Button btnView = (Button) findViewById(R.id.btn_haberDetaylari_View);
-        btnView.setText(""+this.ne_haber.getView()+" Kez görüntülendi" );
-
-        TextView tv_baslik = (TextView) findViewById(R.id.tvHaberBaslik);
-        tv_baslik.setText(this.ne_haber.getTitle() );
-
-        ImageView iv = (ImageView) findViewById(R.id.haber_detaylari_imageView);
-        Picasso.get().load("https://"+ this.ne_haber.getUrl() ).into(iv);
-
-        TextView tv_content=(TextView) findViewById(R.id.tvHaberContent);
-        tv_content.setText(this.ne_haber.getContent() );
-    }
-
-    public void haberOlustur() {
-        String id =getIntent().getExtras().getString("haber_id");
-        this.getNewDetails(id,this.ne_haber);
-        final Handler handler = new Handler();
-
-        final View contentView;
-        final View loadingView;
-        contentView = (LinearLayout) findViewById(R.id.contentView);
-        loadingView = findViewById(R.id.haber_detaylari_progressBar);
-
-        contentView.setVisibility(View.GONE);
-        loadingView.setVisibility(View.VISIBLE);
-
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // Do something after 5s = 5000ms
-                haberDetaylari.this.haberYazdirConsole();
-                loadingView.setVisibility(View.GONE);
-                contentView.setVisibility(View.VISIBLE);
-            }
-        }, 300);
+        this.getNewDetails(getIntent().getExtras().getString("haber_id"),this.ne_haber);
 
     }
-
-    public  void getNewDetails (final String haber_id, final  haberModel haberModel_neHaber){
+    public  void getNewDetails (final String haber_id, final  haberModel haberModel_neHaber) {
         newsFeed.showSimpleProgressDialog(this, "Loading...", "Fetching Json", false);
 
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -104,26 +48,9 @@ public class haberDetaylari extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-//                        Log.d("Response getDetail id",">>"+haber_id);
                         Log.d("Response to getDetail", ">>" + response);
-                        try {
-                            newsFeed.removeSimpleProgressDialog();
-                            JSONObject obj = new JSONObject(response);
-                            JSONObject dataobj = obj.getJSONObject("data");
-
-                            haberModel_neHaber.setTitle(dataobj.getString("header"));
-                            haberModel_neHaber.setContent(dataobj.getString("content"));
-                            haberModel_neHaber.setUrl(dataobj.getString("picture"));
-                            haberModel_neHaber.setDate(dataobj.getString("date"));
-                            haberModel_neHaber.setView(dataobj.getString("readed"));
-                            Log.d("Response to getTitle" ,""+ne_haber.getTitle());
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        parseJson(response , haberModel_neHaber);
                     }
-
                 },
                 new Response.ErrorListener() {
                     @Override
@@ -142,6 +69,55 @@ public class haberDetaylari extends AppCompatActivity {
         // request queue
         jsonStringRequest.setShouldCache(false);        // "CacheTutulmasıDurumu=false"
         queue.add(jsonStringRequest);
+    }
+    public void parseJson(String response , haberModel haberModel_neHaber){
+
+        try {
+            newsFeed.removeSimpleProgressDialog();
+            JSONObject obj = new JSONObject(response);
+            JSONObject dataobj = obj.getJSONObject("data");
+
+            haberModel_neHaber.setTitle(dataobj.getString("header"));
+            haberModel_neHaber.setContent(dataobj.getString("content"));
+            haberModel_neHaber.setUrl(dataobj.getString("picture"));
+            haberModel_neHaber.setDate(dataobj.getString("date"));
+            haberModel_neHaber.setView(dataobj.getString("readed"));
+            Log.d("Response to getTitle", "" + ne_haber.getTitle());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        haberYazdirConsole();
+        haberGoster();
+
+
+    }
+    public void haberYazdirConsole(){
+        System.out.println("*//--*------*-----*-------*-------//*");
+        System.out.println(""+this.ne_haber.getContent());
+        System.out.println(""+this.ne_haber.getTitle());
+        System.out.println(""+this.ne_haber.getUrl());
+        System.out.println(""+this.ne_haber.getDate());
+        System.out.println(""+this.ne_haber.getView());
+        System.out.println("*//--*------*-----*-------*-------//*");
+    }
+    public void haberGoster(){
+        if(this.ne_haber.equals( null ) ){
+            return;
+        }
+        Button btnDate = (Button) findViewById(R.id.btn_haberDetaylari_Date);
+        btnDate.setText(""+this.ne_haber.getDate() );
+
+        Button btnView = (Button) findViewById(R.id.btn_haberDetaylari_View);
+        btnView.setText(""+this.ne_haber.getView()+" Kez görüntülendi" );
+
+        TextView tv_baslik = (TextView) findViewById(R.id.tvHaberBaslik);
+        tv_baslik.setText(this.ne_haber.getTitle() );
+
+        ImageView iv = (ImageView) findViewById(R.id.haber_detaylari_imageView);
+        Picasso.get().load("https://"+ this.ne_haber.getUrl() ).into(iv);
+
+        TextView tv_content=(TextView) findViewById(R.id.tvHaberContent);
+        tv_content.setText(this.ne_haber.getContent() );
     }
 
 

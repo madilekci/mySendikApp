@@ -13,7 +13,7 @@
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="claimComplaintHint">Görüşleriniz bizim için çok değerli.  Lütfen bize yazmaktan çekinmeyin.</string>
+    <string name="claimComplaintHint">Görüşleriniz bizim için çok değerli.\nLütfen bize yazmaktan çekinmeyin.</string>
     <string name="btnHaberleriGor">Tüm Haberleri Gör</string>
     <string-array name="claimComplaint">
         <item>Talep Oluştur</item>

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -29,15 +30,18 @@ import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
+import static android.nfc.tech.MifareUltralight.PAGE_SIZE;
+
 public class newsFeed extends AppCompatActivity {
 
     private static ProgressDialog mProgressDialog;
     ArrayList<haberModel> haberModelArrayList;
+    LinearLayoutManager lManager;
 
     private RvAdapter rvAdapter;
     private RecyclerView recyclerView;
-    boolean isLoading = false;
     int postCount, postPage;
+    public boolean isLoading = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +49,7 @@ public class newsFeed extends AppCompatActivity {
         setContentView(R.layout.activity_news_feed);
 
         this.postCount = 4;
-        this.postPage = -1;
+        this.postPage = 0;
         this.haberModelArrayList = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.rv_newsFeed);
         recyclerView.getAdapter();
@@ -56,17 +60,31 @@ public class newsFeed extends AppCompatActivity {
 
     public void initScrollListener() {
 
+
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int visibleItemCount = lManager.getChildCount();
+                int totalItemCount = lManager.getItemCount();
+                int firstVisibleItemPosition = lManager.findFirstVisibleItemPosition();
 
-                if ( !recyclerView.canScrollVertically(1) ) {
-                    fetchingJSON();
+
+                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                        && firstVisibleItemPosition >= 0
+                        && totalItemCount >= PAGE_SIZE) {
+                    if (!isLoading) {
+                        System.out.println("isPageScrolledToEnd" + "VIC : " + visibleItemCount + "\nFVIP : " + firstVisibleItemPosition + "\nTIC : " + totalItemCount);
+                        newsFeed.this.postPage++;
+                        fetchingJSON();
+
+                    } else {
+                        System.out.println("Trying to load while application is already loading ...");
+                    }
                 }
+
             }
         });
-
     }
 
     @Override
@@ -74,10 +92,85 @@ public class newsFeed extends AppCompatActivity {
         deleteCache(this);
         super.onDestroy();
     }
+
+    private void setupRecycler() {
+        lManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(lManager);
+        rvAdapter = new RvAdapter(this, haberModelArrayList);
+        recyclerView.setAdapter(rvAdapter);
+        isLoading = false;
+    }
+
+    public static void removeSimpleProgressDialog() {
+        try {
+            if (mProgressDialog != null) {
+                if (mProgressDialog.isShowing()) {
+                    mProgressDialog.dismiss();
+                    mProgressDialog = null;
+                }
+            }
+        } catch (IllegalArgumentException ie) {
+            ie.printStackTrace();
+
+        } catch (RuntimeException re) {
+            re.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void showSimpleProgressDialog(Context context, String title,
+                                                String msg, boolean isCancelable) {
+        try {
+            if (mProgressDialog == null) {
+                mProgressDialog = ProgressDialog.show(context, title, msg);
+                mProgressDialog.setCancelable(isCancelable);
+            }
+
+            if (!mProgressDialog.isShowing()) {
+                mProgressDialog.show();
+            }
+
+        } catch (IllegalArgumentException ie) {
+            ie.printStackTrace();
+        } catch (RuntimeException re) {
+            re.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteCache(Context context) {
+        try {
+            File dir = context.getCacheDir();
+            deleteDir(dir);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+            return dir.delete();
+        } else if (dir != null && dir.isFile()) {
+            return dir.delete();
+        } else {
+            return false;
+        }
+    }
+
     private void fetchingJSON() {
-        this.postPage++;
-        System.out.println("postpage : "+postPage);
-        System.out.println("count : "+postCount);
+        isLoading = true;
+        System.out.println("postpage : " + postPage);
+        System.out.println("count : " + postCount);
         showSimpleProgressDialog(this, "Loading...", "Fetching Json", false);
 
         String url = getResources().getString(R.string.haberUrl);    // Post atılan adres.
@@ -90,33 +183,7 @@ public class newsFeed extends AppCompatActivity {
                         System.out.println("***********************************************");
                         System.out.println("Response to newsFeed >> " + response.toString());
                         System.out.println("***********************************************");
-                        try {
-
-                            removeSimpleProgressDialog();
-//                            JSONObject obj = new JSONObject(response);
-                            JSONObject obj = new JSONObject(response);
-                            JSONArray dataArray = obj.getJSONArray("data");
-                            System.out.println("Gelen haber sayısı : " + dataArray.length());
-                            if(dataArray.length()==0){
-                                Toasty.warning(newsFeed.this,"Bütün haberler listelendi",Toasty.LENGTH_SHORT);
-                            }
-
-                            for (int i = 0; i < dataArray.length(); i++) {
-                                haberModel haberModel1 = new haberModel();
-                                JSONObject dataobj = dataArray.getJSONObject(i);
-
-                                haberModel1.setTitle(dataobj.getString("header"));
-                                haberModel1.setSummary(dataobj.getString("summary"));
-                                haberModel1.setUrl(dataobj.getString("picture"));
-                                haberModel1.setView(dataobj.getString("readed"));
-                                haberModel1.setId(dataobj.getString("id"));
-                                haberModelArrayList.add(haberModel1);
-                                setupRecycler();
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        parseJSONData(response);
                     }
 
                 },
@@ -142,81 +209,39 @@ public class newsFeed extends AppCompatActivity {
         jsonStringRequest.setShouldCache(false);        // "CacheTutulmasıDurumu=false"
         queue.add(jsonStringRequest);
 
-        isLoading = false;
     }       //getAllNews
-    private void setupRecycler() {
 
-        rvAdapter = new RvAdapter(this, haberModelArrayList);
-        recyclerView.setAdapter(rvAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+    public void parseJSONData(String response) {
 
-    }
-
-    public static void removeSimpleProgressDialog() {
-//        try {
-//            if (mProgressDialog != null) {
-//                if (mProgressDialog.isShowing()) {
-//                    mProgressDialog.dismiss();
-//                    mProgressDialog = null;
-//                }
-//            }
-//        } catch (IllegalArgumentException ie) {
-//            ie.printStackTrace();
-//
-//        } catch (RuntimeException re) {
-//            re.printStackTrace();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-    }
-    public static void showSimpleProgressDialog(Context context, String title,
-                                                String msg, boolean isCancelable) {
-//        try {
-//            if (mProgressDialog == null) {
-//                mProgressDialog = ProgressDialog.show(context, title, msg);
-//                mProgressDialog.setCancelable(isCancelable);
-//            }
-//
-//            if (!mProgressDialog.isShowing()) {
-//                mProgressDialog.show();
-//            }
-//
-//        } catch (IllegalArgumentException ie) {
-//            ie.printStackTrace();
-//        } catch (RuntimeException re) {
-//            re.printStackTrace();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-    }
-
-
-    public static void deleteCache(Context context) {
         try {
-            File dir = context.getCacheDir();
-            deleteDir(dir);
-        } catch (Exception e) {
+
+            removeSimpleProgressDialog();
+//                            JSONObject obj = new JSONObject(response);
+            JSONObject obj = new JSONObject(response);
+            JSONArray dataArray = obj.getJSONArray("data");
+            System.out.println("Gelen haber sayısı : " + dataArray.length());
+            if (dataArray.length() == 0) {
+                Toasty.warning(newsFeed.this, "Bütün haberler listelendi", Toasty.LENGTH_SHORT);
+                return;
+            }
+
+            for (int i = 0; i < dataArray.length(); i++) {
+                haberModel haberModel1 = new haberModel();
+                JSONObject dataobj = dataArray.getJSONObject(i);
+
+                haberModel1.setTitle(dataobj.getString("header"));
+                haberModel1.setSummary(dataobj.getString("summary"));
+                haberModel1.setUrl(dataobj.getString("picture"));
+                haberModel1.setView(dataobj.getString("readed"));
+                haberModel1.setId(dataobj.getString("id"));
+                haberModelArrayList.add(haberModel1);
+                setupRecycler();
+            }
+
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-    public static boolean deleteDir(File dir) {
-        if (dir != null && dir.isDirectory()) {
-            String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-                boolean success = deleteDir(new File(dir, children[i]));
-                if (!success) {
-                    return false;
-                }
-            }
-            return dir.delete();
-        } else if (dir != null && dir.isFile()) {
-            return dir.delete();
-        } else {
-            return false;
-        }
-    }
-
 
 
 }

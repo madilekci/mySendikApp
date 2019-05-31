@@ -12,6 +12,9 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Random;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
@@ -23,11 +26,23 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        Log.e(TAG, "From:" + remoteMessage.getFrom());
-        Log.d(TAG, "Message Notification body: " + remoteMessage.getNotification().getBody());
-        System.out.println("Message Notification body: " + remoteMessage.getNotification().getBody());
+//        Log.e(TAG, "From:" + remoteMessage.getFrom());
+//        Log.d(TAG, "Message Notification body: " + remoteMessage.getNotification().getBody());
+//        System.out.println("Message Notification body: " + remoteMessage.getNotification().getBody());
+        if (remoteMessage.getData().size() > 0) {
+            Log.e("dataa", "Data Payload: " + remoteMessage);
+        JSONObject obj = new JSONObject(remoteMessage.getData() );
+            try {
+                Log.e("TITLE","log title : "+obj.getString("title"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
 
+        if(remoteMessage.getNotification().equals(null)){
+            showNotification("Bildirim",remoteMessage.getNotification().getBody());
+        }else
         showNotification(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody());
     }
 

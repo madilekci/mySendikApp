@@ -8,16 +8,6 @@
     android:orientation="vertical"
     tools:context=".sosyal.ActivityTwitter">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:title="Talep oluştur"
-        app:titleTextColor="@android:color/white" />
-
     <EditText
         android:id="@+id/claimComplaint_txt"
         android:layout_width="match_parent"
@@ -30,6 +20,13 @@
         android:textColor="@color/colorPrimary"
         android:inputType="text"
         />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:spinnerMode="dropdown" />
 
     <Button
         android:id="@+id/btnTalepGonder"

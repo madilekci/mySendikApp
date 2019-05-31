@@ -335,6 +335,7 @@ public class ActivityDashboard extends AppCompatActivity  {
 
     }
     public void ImageOnClick(View v) {
+        Log.d("Image onClick","haber_id = "+this.haber_id[currentPage]);
         Intent i = new Intent(ActivityDashboard.this, haberDetaylari.class);
         i.putExtra("haber_id", "" + this.haber_id[currentPage]);
         startActivity(i);
@@ -378,7 +379,7 @@ public class ActivityDashboard extends AppCompatActivity  {
         try {
             JSONObject obj = new JSONObject(response);
             JSONArray dataArray = obj.getJSONArray("data");
-            System.out.println("Gelen haber sayısı : " + dataArray.length());
+            System.out.println("Gelen slide sayısı" + dataArray.length());
 
             for (int i = 0; i < dataArray.length(); i++) {
                 haberModel haberModel1 = new haberModel();
@@ -392,16 +393,10 @@ public class ActivityDashboard extends AppCompatActivity  {
             e.printStackTrace();
         }
 
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // Do something after 5s = 5000ms
                 mPager = (ViewPager) findViewById(R.id.pager);
                 mPager.setAdapter(new SlidingImage_Adapter(ActivityDashboard.this, urls));
                 initImages();
-            }
-        }, 300);
+
     }
 
     public void logout() {
