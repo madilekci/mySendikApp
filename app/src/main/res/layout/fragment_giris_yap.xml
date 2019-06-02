@@ -20,6 +20,7 @@
         android:layout_height="50dp"
         android:background="@android:color/background_light"
         android:padding="10dp"
+        android:text="@string/defUserName"
         android:textColor="@android:color/black" />
 
     <TextView
@@ -35,6 +36,7 @@
         android:background="@android:color/background_light"
         android:inputType="textPassword"
         android:padding="10dp"
+        android:text="@string/defUserPass"
         android:textColor="@android:color/black" />
 
     <Button

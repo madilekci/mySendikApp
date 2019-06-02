@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -70,51 +70,21 @@ public class fragmentGirisYap extends Fragment {
     }
 
     public void girisYap(View v) {
-
-        EditText txtUsername = (EditText) getView().findViewById(R.id.tvUsernameGirisYap);
-        EditText txtPassword = (EditText) getView().findViewById(R.id.tvPasswordGirisYap);
+        final TextView txtUsername = (TextView) getView().findViewById(R.id.tvUsernameGirisYap);
+        final TextView txtPassword = (TextView) getView().findViewById(R.id.tvPasswordGirisYap);
 
         final String username = "" + txtUsername.getText().toString();
         final String password = "" + txtPassword.getText().toString();
 
 
         if ( !( username.equals("") || password.equals("") ) ) {
-            RequestQueue queue = Volley.newRequestQueue(getActivity());
-
             String url = getResources().getString(R.string.loginUrl);    // Post atılan adres.
-            StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+
+            StringRequest jsonStringRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            int switchCase = 0;
-                            try {
-                                System.out.println("Response :" + response);
-                                JSONObject veri_json = new JSONObject(response);
-                                switchCase = veri_json.getInt("state");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            switch (switchCase) {
-
-                                case 1:
-                                    System.out.println("Giris basarili.");
-                                    saveUserInfo(username,password);
-                                    goToMenuActivity();
-                                    break;
-                                case 2:
-                                    Log.d("girisYap", "Sifre hatali");
-                                    Toasty.error(getContext(), "Şifrenizi yanlış girdiniz. Lütfen tekrar deneyin", Toast.LENGTH_SHORT).show();
-                                    break;
-                                case 3:
-                                    Log.d("girisYap", "user_id hatali");
-                                    Toasty.error(getContext(), "Böyle bir kullanıcı bulunamadı", Toast.LENGTH_SHORT).show();
-                                    break;
-                                case 4:
-                                    Log.d("girisYap", "Onay bekleniyor");
-                                    Toasty.error(getContext(), "Şubenizden onay bekleniyor. Lütfen daha sonra tekrar deneyin", Toast.LENGTH_SHORT).show();
-
-                            }
+                            parseJson(response);
                         }
                     },
                     new Response.ErrorListener() {
@@ -132,7 +102,9 @@ public class fragmentGirisYap extends Fragment {
                     return params;
                 }
             };
-            queue.add(postRequest);
+            RequestQueue queue = Volley.newRequestQueue(getActivity());
+            jsonStringRequest.setShouldCache(false);        // "CacheTutulmasıDurumu=false"
+            queue.add(jsonStringRequest);
 
         } else {
             Toasty.error(getContext(), "Lütfen gerekli alanları doldurun.", Toast.LENGTH_LONG, true).show();
@@ -153,16 +125,48 @@ public class fragmentGirisYap extends Fragment {
 
     }
 
-    public void saveUserInfo(String username, String password){
+    public void saveUserInfo(String userToken){
         SharedPreferences xd = getActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = xd.edit();
 
-        editor.remove("username");
-        editor.remove("password");
-
-        editor.putString("username",username);
-        editor.putString("password",password);
+        editor.remove("userToken");
+        editor.putString("userToken",userToken);
         editor.apply();
+
+    }
+
+    public void parseJson(String response ){
+
+        final String[] userToken = new String[1];
+        int error = 0;
+
+        try {
+            System.out.println("Response :" + response);
+            JSONObject obj = new JSONObject(response);
+            JSONObject dataobj = obj.getJSONObject("data");
+
+            error = obj.getInt("error");
+            userToken[0] = dataobj.getString("user_token");
+            Log.d("frGirisYap","giden UserToken :"+userToken[0]);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        switch (error) {
+            case 0:
+                System.out.println("Giris basarili.");
+                saveUserInfo(userToken[0]);
+                goToMenuActivity();
+                break;
+            default:
+                Log.d("girisYap", "Kullanıcı adı veya Sifre hatali");
+                Toasty.error(getContext(), "Kullanıcı adınızı veya şifrenizi yanlış girdiniz. Lütfen tekrar deneyin", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+
+
     }
 
 }

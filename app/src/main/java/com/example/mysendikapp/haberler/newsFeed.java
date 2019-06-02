@@ -6,9 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -169,7 +166,7 @@ public class newsFeed extends AppCompatActivity {
         System.out.println("count : " + postCount);
         showSimpleProgressDialog(this, "Loading...", "Fetching Json", false);
 
-        String url = getResources().getString(R.string.haberUrl);    // Post atılan adres.
+        String url = getResources().getString(R.string.haberListeleUrl);    // Post atılan adres.
         StringRequest jsonStringRequest = new StringRequest(
                 Request.Method.POST, url,
                 new Response.Listener<String>() {
