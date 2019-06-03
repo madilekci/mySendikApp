@@ -75,6 +75,8 @@ public class fragmentGirisYap extends Fragment {
 
         final String username = "" + txtUsername.getText().toString();
         final String password = "" + txtPassword.getText().toString();
+        Log.d("login","username: "+username);
+        Log.d("login","password: "+password);
 
 
         if ( !( username.equals("") || password.equals("") ) ) {
@@ -84,6 +86,7 @@ public class fragmentGirisYap extends Fragment {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
+                            System.out.println("Log coming response :"+response);
                             parseJson(response);
                         }
                     },
@@ -138,32 +141,45 @@ public class fragmentGirisYap extends Fragment {
     public void parseJson(String response ){
 
         final String[] userToken = new String[1];
-        int error = 0;
+        int isActive;
+        int error;
 
         try {
             System.out.println("Response :" + response);
             JSONObject obj = new JSONObject(response);
-            JSONObject dataobj = obj.getJSONObject("data");
-
             error = obj.getInt("error");
-            userToken[0] = dataobj.getString("user_token");
-            Log.d("frGirisYap","giden UserToken :"+userToken[0]);
+            switch (error) {
+                case 1:
+                    Log.d("girisYap", "Kullanıcı adı veya Sifre hatali");
+                    Toasty.error(getContext(), "Kullanıcı adınızı veya şifrenizi yanlış girdiniz. Lütfen tekrar deneyin", Toast.LENGTH_SHORT).show();
+                    break;
+                case 0:
+                    JSONObject dataobj = obj.getJSONObject("data");
+                    System.out.println("Giris basarili.");
+                    userToken[0] = dataobj.getString("user_token");
+                    isActive= dataobj.getInt("is_active");
+                    if (isActive==1){
+                        Log.d("frGirisYap","giden UserToken :"+userToken[0]);
+                        saveUserInfo(userToken[0]);
+                        goToMenuActivity();
+                        break;
+                    }else if(isActive==0){      //Kullanıcı ilk kez giriş yapıyorsa
+                        Intent i= new Intent(getContext(),sifreDegistirActivity.class);
+                        startActivity(i);
+                        break;
+                    }
+
+                default:
+                    Log.d("girisYap", "Bilinmeyen bir hata oluştu");
+                    Toasty.error(getContext(), "Bilinmeyen bir hata oluştu ...", Toast.LENGTH_SHORT).show();
+                    break;
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        switch (error) {
-            case 0:
-                System.out.println("Giris basarili.");
-                saveUserInfo(userToken[0]);
-                goToMenuActivity();
-                break;
-            default:
-                Log.d("girisYap", "Kullanıcı adı veya Sifre hatali");
-                Toasty.error(getContext(), "Kullanıcı adınızı veya şifrenizi yanlış girdiniz. Lütfen tekrar deneyin", Toast.LENGTH_SHORT).show();
-                break;
-        }
+
 
 
 

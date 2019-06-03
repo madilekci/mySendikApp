@@ -11,6 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".etkinlik.etkinlik_Activity"></activity>
+        <activity android:name=".login.sifreDegistirActivity" />
         <activity
             android:name=".haberler.haberDetaylari"
             android:screenOrientation="portrait" />

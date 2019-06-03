@@ -5,6 +5,7 @@
 
     <string name="loginUrl">https://www.dogruweb.com/api/Login</string>
     <string name="notificationTokenGuncelleUrl">https://www.dogruweb.com/api/updateNotificationToken</string>
+    <string name="sifreGuncelleUrl">https://www.dogruweb.com/api/updatePassword</string>
     <string name="haberListeleUrl">https://www.dogruweb.com/api/getAllNews</string>
     <string name="haberDetayUrl">https://www.dogruweb.com/api/getNewsDetail</string>
     <string name="haberSlideUrl">https://www.dogruweb.com/api/getLastNews</string>

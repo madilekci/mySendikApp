@@ -17,6 +17,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +29,7 @@ import java.util.regex.Pattern;
 import es.dmoral.toasty.Toasty;
 
 public class SplashAct extends AppCompatActivity {
-
+    String TAG="splashAct";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,15 +45,20 @@ public class SplashAct extends AppCompatActivity {
         SharedPreferences xd = this.getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
         final String userToken = xd.getString("userToken", "noTokens");
         final String notificationToken = xd.getString("notificationToken", "noNotificationTokens");
-        Log.d("TAKTAKTAKTAK", "notificationToken : " + notificationToken);
-        Log.d("TAKTAKTAKTAK", "userToken : " + userToken);
+        Log.d(TAG, "notificationToken : " + notificationToken);
+        Log.d(TAG, "userToken : " + userToken);
 
         String url = getResources().getString(R.string.notificationTokenGuncelleUrl);    // Post atılan adres.
         StringRequest jsonStringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d("SplashAct updateToken","response :"+response);
+                        Log.d(TAG,"response :"+response);
+                        if(isNotificationTokenUpdated(response)){
+                            Log.d(TAG,"notification Token updated successfullys");
+                        }else {
+                            Log.d(TAG,"unhandled error while updating notification token");
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -72,6 +80,19 @@ public class SplashAct extends AppCompatActivity {
         jsonStringRequest.setShouldCache(false);        // "CacheTutulmasıDurumu=false"
         queue.add(jsonStringRequest);
 
+    }
+    public boolean isNotificationTokenUpdated(String response){
+        try {
+            JSONObject obj = new JSONObject(response);
+            int error= obj.getInt("error");
+            if(error==0){
+                return true;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
 

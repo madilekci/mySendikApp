@@ -6,22 +6,19 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Handler;
-import android.support.v4.view.GestureDetectorCompat;
-import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
+import android.widget.GridLayout;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -221,8 +218,11 @@ public class ActivityDashboard extends AppCompatActivity  {
     //Main menu
     public void setMenuActivites() {
 
+
+
+
         //Facebook
-        findViewById(R.id.imageViewFacebook).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ivFacebook).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ActivityDashboard.this, ActivityFacebook.class);
@@ -233,7 +233,7 @@ public class ActivityDashboard extends AppCompatActivity  {
 
 
         //Twitter
-        findViewById(R.id.imageViewTwitter).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ivTwitter).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ActivityDashboard.this, ActivityTwitter.class);
@@ -254,7 +254,7 @@ public class ActivityDashboard extends AppCompatActivity  {
         //Haberler\\
 
         //ClaimComplaint
-        findViewById(R.id.imageViewTalep).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ivTalep).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ActivityDashboard.this, ActivityClaimComplaint.class);
@@ -264,7 +264,6 @@ public class ActivityDashboard extends AppCompatActivity  {
         //ClaimComplaint\\
 
 
-        //Menu clickable images things\\
     }
 
     @Override
@@ -340,7 +339,6 @@ public class ActivityDashboard extends AppCompatActivity  {
         i.putExtra("haber_id", "" + this.haber_id[currentPage]);
         startActivity(i);
     }
-
     private void fetchingJSON() {
 
         String url = ActivityDashboard.this.getResources().getString(R.string.haberSlideUrl);    // Post atılan adres.
@@ -398,7 +396,6 @@ public class ActivityDashboard extends AppCompatActivity  {
                 initImages();
 
     }
-
     public void logout() {
         Log.d("logout Function", "Logout function");
 
@@ -413,6 +410,10 @@ public class ActivityDashboard extends AppCompatActivity  {
         Intent i = new Intent(this, com.example.mysendikapp.login.loginActivity.class);
         startActivity(i);
     }
+
+
+
+
 
 
     //  OVERRIDE METHODS NOT USED \\
