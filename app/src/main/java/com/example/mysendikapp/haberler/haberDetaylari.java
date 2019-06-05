@@ -1,13 +1,10 @@
 package com.example.mysendikapp.haberler;
 
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -104,19 +101,19 @@ public class haberDetaylari extends AppCompatActivity {
         if(this.ne_haber.equals( null ) ){
             return;
         }
-        Button btnDate = (Button) findViewById(R.id.btn_haberDetaylari_Date);
+        Button btnDate = (Button) findViewById(R.id.btn_date_haberDetaylari);
         btnDate.setText(""+this.ne_haber.getDate() );
 
-        Button btnView = (Button) findViewById(R.id.btn_haberDetaylari_View);
+        Button btnView = (Button) findViewById(R.id.btn_view_haberDetaylari);
         btnView.setText(""+this.ne_haber.getView()+" Kez görüntülendi" );
 
-        TextView tv_baslik = (TextView) findViewById(R.id.tvHaberBaslik);
+        TextView tv_baslik = (TextView) findViewById(R.id.tv_baslik_haberDetaylari);
         tv_baslik.setText(this.ne_haber.getTitle() );
 
-        ImageView iv = (ImageView) findViewById(R.id.haber_detaylari_imageView);
+        ImageView iv = (ImageView) findViewById(R.id.iv_haberDetaylari);
         Picasso.get().load("https://"+ this.ne_haber.getUrl() ).into(iv);
 
-        TextView tv_content=(TextView) findViewById(R.id.tvHaberContent);
+        TextView tv_content=(TextView) findViewById(R.id.tv_content_haberDetaylari);
         tv_content.setText(this.ne_haber.getContent() );
     }
 

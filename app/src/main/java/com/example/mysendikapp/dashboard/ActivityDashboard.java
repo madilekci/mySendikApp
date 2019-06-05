@@ -16,9 +16,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.GridLayout;
-import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -245,7 +242,7 @@ public class ActivityDashboard extends AppCompatActivity  {
 
 
         //Haberler
-        findViewById(R.id.btnHaberleriGor).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_butunHaberleriGor).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ActivityDashboard.this, newsFeed.class);
@@ -255,7 +252,7 @@ public class ActivityDashboard extends AppCompatActivity  {
         //Haberler\\
 
         //Etkinlikler
-        findViewById(R.id.btnEtkinlikleriGor).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_butunEtkinlikleriGor).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ActivityDashboard.this, etkinlikFeed.class);
@@ -300,7 +297,7 @@ public class ActivityDashboard extends AppCompatActivity  {
     private void initImages() {
 
 
-        CirclePageIndicator indicator = (CirclePageIndicator) findViewById(R.id.indicator);
+        CirclePageIndicator indicator = (CirclePageIndicator) findViewById(R.id.indicator_dashboard);
         indicator.setViewPager(mPager);
 
         final float density = getResources().getDisplayMetrics().density;
@@ -402,7 +399,7 @@ public class ActivityDashboard extends AppCompatActivity  {
             e.printStackTrace();
         }
 
-                mPager = (ViewPager) findViewById(R.id.pager);
+                mPager = (ViewPager) findViewById(R.id.pager_dashboard);
                 mPager.setAdapter(new SlidingImage_Adapter(ActivityDashboard.this, urls));
                 initImages();
 

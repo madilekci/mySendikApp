@@ -29,7 +29,7 @@ public class ActivityClaimComplaint extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_claim_complaint);
 
-        Button sendButton = (Button) findViewById(R.id.btnTalepGonder);
+        Button sendButton = (Button) findViewById(R.id.btn_talepGonder);
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +52,7 @@ public class ActivityClaimComplaint extends AppCompatActivity {
 
     public void talepGonder(View v) {
 
-        EditText txt_1 = (EditText) findViewById(R.id.claimComplaint_txt);
+        EditText txt_1 = (EditText) findViewById(R.id.tv_claimComplaint);
         final String talep = txt_1.getText().toString();
 
         final String username=getUsername();

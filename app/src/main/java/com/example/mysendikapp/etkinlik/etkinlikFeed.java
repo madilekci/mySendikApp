@@ -218,7 +218,7 @@ public class etkinlikFeed extends AppCompatActivity {
                 JSONObject dataobj = dataArray.getJSONObject(i);
 
                 etkinlikModel1.setTitle(dataobj.getString("header"));
-                etkinlikModel1.setSummary(dataobj.getString("summary"));
+                etkinlikModel1.setSummary(dataobj.getString("content"));
                 etkinlikModel1.setUrl(dataobj.getString("picture"));
                 etkinlikModel1.setDate(dataobj.getString("date"));
                 etkinlikModel1.setId(dataobj.getString("id"));

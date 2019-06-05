@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvHaberBaslik"
+            android:id="@+id/tv_baslik_haberDetaylari"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -31,7 +31,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_haberDetaylari_Date"
+                android:id="@+id/btn_date_haberDetaylari"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
@@ -42,7 +42,7 @@
                 android:padding="10dp" />
 
             <Button
-                android:id="@+id/btn_haberDetaylari_View"
+                android:id="@+id/btn_view_haberDetaylari"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
@@ -63,14 +63,14 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/haber_detaylari_imageView"
+                android:id="@+id/iv_haberDetaylari"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:padding="10dp" />
 
             <TextView
-                android:id="@+id/tvHaberContent"
+                android:id="@+id/tv_content_haberDetaylari"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"

@@ -9,7 +9,7 @@
     tools:context=".sosyal.ActivityTwitter">
 
     <EditText
-        android:id="@+id/claimComplaint_txt"
+        android:id="@+id/tv_claimComplaint"
         android:layout_width="match_parent"
         android:layout_height="515dp"
         android:layout_marginBottom="72dp"
@@ -29,7 +29,7 @@
         android:spinnerMode="dropdown" />
 
     <Button
-        android:id="@+id/btnTalepGonder"
+        android:id="@+id/btn_talepGonder"
         android:layout_width="match_parent"
         android:layout_height="53dp"
         android:layout_marginBottom="8dp"

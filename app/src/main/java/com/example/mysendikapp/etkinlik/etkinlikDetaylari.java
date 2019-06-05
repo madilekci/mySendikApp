@@ -14,7 +14,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.R;
-import com.example.mysendikapp.haberler.haberModel;
 import com.example.mysendikapp.haberler.newsFeed;
 import com.squareup.picasso.Picasso;
 
@@ -103,16 +102,16 @@ public class etkinlikDetaylari extends AppCompatActivity {
         if (this.ne_etkinlik.equals(null)) {
             return;
         }
-        Button btnDate = (Button) findViewById(R.id.btn_etkinlikDetaylari_Date);
+        Button btnDate = (Button) findViewById(R.id.btn_date_etkinlikDetaylari);
         btnDate.setText("" + this.ne_etkinlik.getDate());
 
-        TextView tv_baslik = (TextView) findViewById(R.id.tvEtkinlikBaslik);
+        TextView tv_baslik = (TextView) findViewById(R.id.tv_baslik_etkinlikDetaylari);
         tv_baslik.setText(this.ne_etkinlik.getTitle());
 
-        ImageView iv = (ImageView) findViewById(R.id.etkinlik_detaylari_imageView);
+        ImageView iv = (ImageView) findViewById(R.id.iv_etkinlikDetaylari);
         Picasso.get().load("https://" + this.ne_etkinlik.getUrl()).into(iv);
 
-        TextView tv_content = (TextView) findViewById(R.id.tvEtkinlikContent);
+        TextView tv_content = (TextView) findViewById(R.id.tv_content_etkinlikDetaylari);
         tv_content.setText(this.ne_etkinlik.getContent());
     }
 }
