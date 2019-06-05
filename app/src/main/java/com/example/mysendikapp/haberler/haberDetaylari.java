@@ -33,10 +33,10 @@ public class haberDetaylari extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_haber_detaylari);
         this.ne_haber=new haberModel();
-
         this.getNewDetails(getIntent().getExtras().getString("haber_id"),this.ne_haber);
 
     }
+
     public  void getNewDetails (final String haber_id, final  haberModel haberModel_neHaber) {
         newsFeed.showSimpleProgressDialog(this, "Loading...", "Fetching Json", false);
 

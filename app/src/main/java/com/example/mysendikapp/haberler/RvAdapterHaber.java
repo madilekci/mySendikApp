@@ -3,6 +3,7 @@ package com.example.mysendikapp.haberler;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +15,18 @@ import com.example.mysendikapp.R;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
-public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder> {
-
+public class RvAdapterHaber extends RecyclerView.Adapter<RvAdapterHaber.MyViewHolder> {
+    public String TAG="rvAdapterHaber";
     private LayoutInflater inflater;
     private ArrayList<haberModel> haberModelArrayList;
 
-    public RvAdapter(Context ctx, ArrayList<haberModel> haberModelArrayList){
-
+    public RvAdapterHaber(Context ctx, ArrayList<haberModel> haberModelArrayList){
         inflater = LayoutInflater.from(ctx);
         this.haberModelArrayList = haberModelArrayList;
     }
 
     @Override
-    public RvAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RvAdapterHaber.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = inflater.inflate(R.layout.rv_one, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
@@ -34,25 +34,26 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder> {
         return holder;
     }
     @Override
-    public void onBindViewHolder(RvAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(RvAdapterHaber.MyViewHolder holder, int position) {
 
         Picasso.get().load("https://"+this.haberModelArrayList.get(position).getUrl() ).into(holder.pic);
         holder.title.setText(this.haberModelArrayList.get(position).getTitle() );
         holder.summary.setText(this.haberModelArrayList.get(position).getSummary() );
         holder.btn_view.setText(this.haberModelArrayList.get(position).getView() +" Kez Görüntülendi" );
         holder.setHaberID(this.haberModelArrayList.get(position).id);
-        System.out.println("-->>>>>>>"+this.haberModelArrayList.get(position).id);
+
+        Log.d(TAG,"-->>>>>>>"+this.haberModelArrayList.get(position).id);
     }
+
     @Override
     public int getItemCount() {
         return this.haberModelArrayList.size();
     }
-
     public void setItems(ArrayList<haberModel> haberModelArrayList){
         this.haberModelArrayList=haberModelArrayList;
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView title, summary;
         ImageView pic;

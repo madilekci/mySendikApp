@@ -29,6 +29,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mysendikapp.etkinlik.etkinlikFeed;
 import com.example.mysendikapp.optionMenuActivities.ActivityAboutUs;
 import com.example.mysendikapp.optionMenuActivities.ActivityBoardMembers;
 import com.example.mysendikapp.optionMenuActivities.ActivityBranches;
@@ -252,6 +253,16 @@ public class ActivityDashboard extends AppCompatActivity  {
             }
         });
         //Haberler\\
+
+        //Etkinlikler
+        findViewById(R.id.btnEtkinlikleriGor).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ActivityDashboard.this, etkinlikFeed.class);
+                startActivity(i);
+            }
+        });
+        //Etkinlikler\\
 
         //ClaimComplaint
         findViewById(R.id.ivTalep).setOnClickListener(new View.OnClickListener() {

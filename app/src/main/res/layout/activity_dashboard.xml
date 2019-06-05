@@ -10,21 +10,22 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="315dp"
+        android:layout_height="150dp"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
         android:paddingRight="16dp"
         android:paddingBottom="16dp">
 
         <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="395dp"
+            android:layout_height="290dp">
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/pager"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
+                android:layout_marginTop="0dp"
                 android:onClick="ImageOnClick" />
         </RelativeLayout>
 
@@ -46,9 +47,17 @@
         android:id="@+id/btnHaberleriGor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Tüm haberleri gör" />
+
+    <Button
+        android:id="@+id/btnEtkinlikleriGor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:background="@color/colorPrimaryDark"
-        android:text="@string/btnHaberleriGor" />
+        android:text="Tüm etkinlikleri gör"/>
 
     <ScrollView
         android:id="@+id/dashboard_sv"
@@ -56,11 +65,12 @@
         android:layout_height="match_parent">
 
         <android.support.v7.widget.GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:numColumns="2"
-            app:rowCount="2">
+            android:numColumns="3"
+            app:columnCount="3"
+            app:rowCount="3">
 
             <ImageView
                 android:id="@+id/ivTwitter"
@@ -119,10 +129,10 @@
                 android:padding="5dp"
                 android:src="@drawable/menurequest"
 
-                app:layout_column="1"
+                app:layout_column="2"
                 app:layout_columnWeight="1"
                 app:layout_gravity="fill"
-                app:layout_row="1"
+                app:layout_row="0"
                 app:layout_rowWeight="1" />
 
 

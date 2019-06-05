@@ -4,6 +4,6 @@
     <dimen name="dim_rv_one_Imagesize">150dp</dimen>
     <dimen name="dim_rv_one_BlankHeight">50dp</dimen>
 
-    <dimen name="div_dashboard_menuIconSize">100dp</dimen>
+    <dimen name="div_dashboard_menuIconSize">36pt</dimen>
 
 </resources>

@@ -25,12 +25,6 @@ public class haberModel {
 
     public haberModel(){ }
 
-    //This function should get data from web service and then put that data into object's variables
-    public void initAttr(final String haber_id){
-
-
-    }
-
     public String getId() {
         return id;
     }

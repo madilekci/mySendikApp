@@ -1,4 +1,4 @@
-package com.example.mysendikapp.haberler;
+package com.example.mysendikapp.etkinlik;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -15,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.R;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,30 +31,29 @@ import es.dmoral.toasty.Toasty;
 
 import static android.nfc.tech.MifareUltralight.PAGE_SIZE;
 
-public class newsFeed extends AppCompatActivity {
-
+public class etkinlikFeed extends AppCompatActivity {
     private static ProgressDialog mProgressDialog;
-    ArrayList<haberModel> haberModelArrayList;
+    ArrayList<etkinlikModel> etkinlikModelArrayList;
     LinearLayoutManager lManager;
 
-    private RvAdapterHaber rvAdapter;
+    private rvAdapterEtkinlik rvAdapter;
     private RecyclerView recyclerView;
     int postCount, postPage;
     public boolean isLoading = false;
+    public String TAG = "etkinlikFeed";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news_feed);
+        setContentView(R.layout.activity_etkinlik_);
 
         this.postCount = 5;
         this.postPage = 0;
-        this.haberModelArrayList = new ArrayList<>();
-        recyclerView = (RecyclerView) findViewById(R.id.rv_newsFeed);
+        this.etkinlikModelArrayList = new ArrayList<>();
+        recyclerView = (RecyclerView) findViewById(R.id.rv_etkinlikFeed);
         recyclerView.getAdapter();
         fetchingJSON();
         initScrollListener();
-
     }
 
     public void initScrollListener() {
@@ -68,10 +69,11 @@ public class newsFeed extends AppCompatActivity {
 
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                         && firstVisibleItemPosition >= 0
-                        && totalItemCount >PAGE_SIZE && !isLoading) {
+                        && totalItemCount >= PAGE_SIZE && !isLoading) {
 
-                    newsFeed.this.postPage++;
+                    etkinlikFeed.this.postPage++;
                     fetchingJSON();
+
                 }
             }
         });
@@ -81,56 +83,6 @@ public class newsFeed extends AppCompatActivity {
     protected void onDestroy() {
         deleteCache(this);
         super.onDestroy();
-    }
-
-    private void setupRecycler() {
-        lManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(lManager);
-        rvAdapter = new RvAdapterHaber(this, haberModelArrayList);
-        recyclerView.setAdapter(rvAdapter);
-        isLoading = false;
-    }
-
-
-
-
-    public static void showSimpleProgressDialog(Context context, String title,
-                                                String msg, boolean isCancelable) {
-        try {
-            if (mProgressDialog == null) {
-                mProgressDialog = ProgressDialog.show(context, title, msg);
-                mProgressDialog.setCancelable(isCancelable);
-            }
-
-            if (!mProgressDialog.isShowing()) {
-                mProgressDialog.show();
-            }
-
-        } catch (IllegalArgumentException ie) {
-            ie.printStackTrace();
-        } catch (RuntimeException re) {
-            re.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public static void removeSimpleProgressDialog() {
-        try {
-            if (mProgressDialog != null) {
-                if (mProgressDialog.isShowing()) {
-                    mProgressDialog.dismiss();
-                    mProgressDialog = null;
-                }
-            }
-        } catch (IllegalArgumentException ie) {
-            ie.printStackTrace();
-
-        } catch (RuntimeException re) {
-            re.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 
     public static void deleteCache(Context context) {
@@ -158,23 +110,68 @@ public class newsFeed extends AppCompatActivity {
             return false;
         }
     }
+    
+    private void setupRecycler() {
+        lManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(lManager);
+        rvAdapter = new rvAdapterEtkinlik(this, etkinlikModelArrayList);
+        recyclerView.setAdapter(rvAdapter);
+        isLoading = false;
+    }
+
+    public static void showSimpleProgressDialog(Context context, String title,
+                                                String msg, boolean isCancelable) {
+        try {
+            if (mProgressDialog == null) {
+                mProgressDialog = ProgressDialog.show(context, title, msg);
+                mProgressDialog.setCancelable(isCancelable);
+            }
+
+            if (!mProgressDialog.isShowing()) {
+                mProgressDialog.show();
+            }
+
+        } catch (IllegalArgumentException ie) {
+            ie.printStackTrace();
+        } catch (RuntimeException re) {
+            re.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void removeSimpleProgressDialog() {
+        try {
+            if (mProgressDialog != null) {
+                if (mProgressDialog.isShowing()) {
+                    mProgressDialog.dismiss();
+                    mProgressDialog = null;
+                }
+            }
+        } catch (IllegalArgumentException ie) {
+            ie.printStackTrace();
+
+        } catch (RuntimeException re) {
+            re.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     private void fetchingJSON() {
         isLoading = true;
-        System.out.println("postpage : " + postPage);
-        System.out.println("count : " + postCount);
-//        showSimpleProgressDialog(this, "Loading...", "Fetching Json", false);
+        Log.d(TAG, "postpage : " + postPage);
+        Log.d(TAG, "count : " + postCount);
+        showSimpleProgressDialog(this, "Loading...", "Fetching Json", false);
 
-        String url = getResources().getString(R.string.haberListeleUrl);    // Post atılan adres.
+        String url = getResources().getString(R.string.etkinlikListeleUrl);    // Post atılan adres.
         StringRequest jsonStringRequest = new StringRequest(
                 Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
-                        System.out.println("***********************************************");
-                        System.out.println("Response to newsFeed >> " + response);
-                        System.out.println("***********************************************");
+                        Log.d(TAG, "Response to etkinlikFeed >> " + response);
                         parseJSONData(response);
                     }
 
@@ -183,7 +180,7 @@ public class newsFeed extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
-                        Toast.makeText(newsFeed.this, error.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(etkinlikFeed.this, error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }
         ) {
@@ -204,33 +201,37 @@ public class newsFeed extends AppCompatActivity {
     }       //getAllNews
 
     public void parseJSONData(String response) {
-        isLoading = false;
+        isLoading=false;
         try {
-//            removeSimpleProgressDialog();
+            removeSimpleProgressDialog();
 //                            JSONObject obj = new JSONObject(response);
             JSONObject obj = new JSONObject(response);
             JSONArray dataArray = obj.getJSONArray("data");
-            System.out.println("Gelen haber sayısı : " + dataArray.length());
-            if (!(dataArray.length()>0) ) {
-                Toasty.warning(newsFeed.this, "Bütün haberler listelendi", Toasty.LENGTH_SHORT).show();
+            Log.d(TAG, "Gelen etkinlik sayısı : " + dataArray.length());
+            if (!(dataArray.length() > 0)) {
+                Toasty.warning(etkinlikFeed.this, "Bütün etkinlikler listelendi", Toasty.LENGTH_SHORT).show();
                 return;
             }
 
             for (int i = 0; i < dataArray.length(); i++) {
-                haberModel haberModel1 = new haberModel();
+                etkinlikModel etkinlikModel1 = new etkinlikModel();
                 JSONObject dataobj = dataArray.getJSONObject(i);
-                haberModel1.setTitle(dataobj.getString("header"));
-                haberModel1.setSummary(dataobj.getString("summary"));
-                haberModel1.setUrl(dataobj.getString("picture"));
-                haberModel1.setView(dataobj.getString("readed"));
-                haberModel1.setId(dataobj.getString("id"));
-                haberModelArrayList.add(haberModel1);
+
+                etkinlikModel1.setTitle(dataobj.getString("header"));
+                etkinlikModel1.setSummary(dataobj.getString("summary"));
+                etkinlikModel1.setUrl(dataobj.getString("picture"));
+                etkinlikModel1.setDate(dataobj.getString("date"));
+                etkinlikModel1.setId(dataobj.getString("id"));
+
+                etkinlikModelArrayList.add(etkinlikModel1);
             }
-            if(rvAdapter==null){
+            if (rvAdapter == null) {
                 setupRecycler();
-            }else {
-                rvAdapter.setItems(haberModelArrayList);
-                rvAdapter.notifyItemRangeInserted(rvAdapter.getItemCount(), dataArray.length());
+            } else {
+                int itemCount = rvAdapter.getItemCount();
+                // TODO: add method setItems() to your adapter
+                rvAdapter.setItems(etkinlikModelArrayList);
+                rvAdapter.notifyItemRangeInserted(itemCount, dataArray.length());
             }
 
         } catch (JSONException e) {
