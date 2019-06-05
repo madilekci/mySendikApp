@@ -31,7 +31,7 @@ import es.dmoral.toasty.Toasty;
 
 import static android.nfc.tech.MifareUltralight.PAGE_SIZE;
 
-public class etkinlikFeed extends AppCompatActivity {
+public class etkinlikAkisi extends AppCompatActivity {
     private static ProgressDialog mProgressDialog;
     ArrayList<etkinlikModel> etkinlikModelArrayList;
     LinearLayoutManager lManager;
@@ -40,7 +40,7 @@ public class etkinlikFeed extends AppCompatActivity {
     private RecyclerView recyclerView;
     int postCount, postPage;
     public boolean isLoading = false;
-    public String TAG = "etkinlikFeed";
+    public String TAG = "etkinlikAkisi";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class etkinlikFeed extends AppCompatActivity {
                         && firstVisibleItemPosition >= 0
                         && totalItemCount >= PAGE_SIZE && !isLoading) {
 
-                    etkinlikFeed.this.postPage++;
+                    etkinlikAkisi.this.postPage++;
                     fetchingJSON();
 
                 }
@@ -171,7 +171,7 @@ public class etkinlikFeed extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d(TAG, "Response to etkinlikFeed >> " + response);
+                        Log.d(TAG, "Response to etkinlikAkisi >> " + response);
                         parseJSONData(response);
                     }
 
@@ -180,7 +180,7 @@ public class etkinlikFeed extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
-                        Toast.makeText(etkinlikFeed.this, error.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(etkinlikAkisi.this, error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }
         ) {
@@ -209,7 +209,7 @@ public class etkinlikFeed extends AppCompatActivity {
             JSONArray dataArray = obj.getJSONArray("data");
             Log.d(TAG, "Gelen etkinlik sayısı : " + dataArray.length());
             if (!(dataArray.length() > 0)) {
-                Toasty.warning(etkinlikFeed.this, "Bütün etkinlikler listelendi", Toasty.LENGTH_SHORT).show();
+                Toasty.warning(etkinlikAkisi.this, "Bütün etkinlikler listelendi", Toasty.LENGTH_SHORT).show();
                 return;
             }
 

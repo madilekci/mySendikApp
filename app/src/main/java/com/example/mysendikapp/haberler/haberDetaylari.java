@@ -35,7 +35,7 @@ public class haberDetaylari extends AppCompatActivity {
     }
 
     public  void getNewDetails (final String haber_id, final  haberModel haberModel_neHaber) {
-        newsFeed.showSimpleProgressDialog(this, "Loading...", "Fetching Json", false);
+        haberAkisi.showSimpleProgressDialog(this, "Loading...", "Fetching Json", false);
 
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = getResources().getString(R.string.haberDetayUrl);    // Post atılan adres.
@@ -70,7 +70,7 @@ public class haberDetaylari extends AppCompatActivity {
     public void parseJson(String response , haberModel haberModel_neHaber){
 
         try {
-            newsFeed.removeSimpleProgressDialog();
+            haberAkisi.removeSimpleProgressDialog();
             JSONObject obj = new JSONObject(response);
             JSONObject dataobj = obj.getJSONObject("data");
 

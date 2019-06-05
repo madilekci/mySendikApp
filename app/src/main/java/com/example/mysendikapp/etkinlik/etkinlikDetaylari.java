@@ -14,7 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.R;
-import com.example.mysendikapp.haberler.newsFeed;
+import com.example.mysendikapp.haberler.haberAkisi;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -36,7 +36,7 @@ public class etkinlikDetaylari extends AppCompatActivity {
     }
 
     public void getEtkinlikDetails(final String etkinlik_id, final etkinlikModel etkinlikModel_ne_etkinlik) {
-        newsFeed.showSimpleProgressDialog(this, "Loading...", "Fetching Json", false);
+        haberAkisi.showSimpleProgressDialog(this, "Loading...", "Fetching Json", false);
 
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = getResources().getString(R.string.etkinlikDetayUrl);    // Post atılan adres.
@@ -72,7 +72,7 @@ public class etkinlikDetaylari extends AppCompatActivity {
     public void parseJson(String response, etkinlikModel etkinlikModel_ne_etkinlik) {
 
         try {
-            newsFeed.removeSimpleProgressDialog();
+            haberAkisi.removeSimpleProgressDialog();
             JSONObject obj = new JSONObject(response);
             JSONObject dataobj = obj.getJSONObject("data");
 

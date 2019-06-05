@@ -29,7 +29,7 @@ import es.dmoral.toasty.Toasty;
 
 import static android.nfc.tech.MifareUltralight.PAGE_SIZE;
 
-public class newsFeed extends AppCompatActivity {
+public class haberAkisi extends AppCompatActivity {
 
     private static ProgressDialog mProgressDialog;
     ArrayList<haberModel> haberModelArrayList;
@@ -70,7 +70,7 @@ public class newsFeed extends AppCompatActivity {
                         && firstVisibleItemPosition >= 0
                         && totalItemCount >PAGE_SIZE && !isLoading) {
 
-                    newsFeed.this.postPage++;
+                    haberAkisi.this.postPage++;
                     fetchingJSON();
                 }
             }
@@ -173,7 +173,7 @@ public class newsFeed extends AppCompatActivity {
                     public void onResponse(String response) {
 
                         System.out.println("***********************************************");
-                        System.out.println("Response to newsFeed >> " + response);
+                        System.out.println("Response to haberAkisi >> " + response);
                         System.out.println("***********************************************");
                         parseJSONData(response);
                     }
@@ -183,7 +183,7 @@ public class newsFeed extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
-                        Toast.makeText(newsFeed.this, error.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(haberAkisi.this, error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }
         ) {
@@ -212,7 +212,7 @@ public class newsFeed extends AppCompatActivity {
             JSONArray dataArray = obj.getJSONArray("data");
             System.out.println("Gelen haber sayısı : " + dataArray.length());
             if (!(dataArray.length()>0) ) {
-                Toasty.warning(newsFeed.this, "Bütün haberler listelendi", Toasty.LENGTH_SHORT).show();
+                Toasty.warning(haberAkisi.this, "Bütün haberler listelendi", Toasty.LENGTH_SHORT).show();
                 return;
             }
 

@@ -26,11 +26,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.mysendikapp.etkinlik.etkinlikFeed;
+import com.example.mysendikapp.etkinlik.etkinlikAkisi;
 import com.example.mysendikapp.optionMenuActivities.ActivityAboutUs;
 import com.example.mysendikapp.optionMenuActivities.ActivityBoardMembers;
 import com.example.mysendikapp.optionMenuActivities.ActivityBranches;
-import com.example.mysendikapp.ActivityClaimComplaint;
+import com.example.mysendikapp.activityTalepSikayet;
 import com.example.mysendikapp.optionMenuActivities.ActivityContactUs;
 import com.example.mysendikapp.R;
 import com.example.mysendikapp.haberler.*;
@@ -245,7 +245,7 @@ public class ActivityDashboard extends AppCompatActivity  {
         findViewById(R.id.btn_butunHaberleriGor).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ActivityDashboard.this, newsFeed.class);
+                Intent i = new Intent(ActivityDashboard.this, haberAkisi.class);
                 startActivity(i);
             }
         });
@@ -255,7 +255,7 @@ public class ActivityDashboard extends AppCompatActivity  {
         findViewById(R.id.btn_butunEtkinlikleriGor).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ActivityDashboard.this, etkinlikFeed.class);
+                Intent i = new Intent(ActivityDashboard.this, etkinlikAkisi.class);
                 startActivity(i);
             }
         });
@@ -265,7 +265,7 @@ public class ActivityDashboard extends AppCompatActivity  {
         findViewById(R.id.ivTalep).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ActivityDashboard.this, ActivityClaimComplaint.class);
+                Intent i = new Intent(ActivityDashboard.this, activityTalepSikayet.class);
                 startActivity(i);
             }
         });
