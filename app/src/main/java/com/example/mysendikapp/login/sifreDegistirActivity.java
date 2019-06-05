@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -37,8 +36,8 @@ String TAG= "sifreDegistirActivity";
     }
 
     public void btnSifreDegistirOnclick(View v){
-        EditText sifretxt= (EditText) findViewById(R.id.tvYeniSifre_sifreDegistir);
-        EditText sifreTekrartxt= (EditText) findViewById(R.id.tvSifreTekrar_sifreDegistir);
+        EditText sifretxt= (EditText) findViewById(R.id.tv_yeniSifre_sifreDegistir);
+        EditText sifreTekrartxt= (EditText) findViewById(R.id.tv_sifreTekrar_sifreDegistir);
 
         String sifre= ""+sifretxt.getText().toString();
         String sifreTekrar= ""+sifreTekrartxt.getText().toString();

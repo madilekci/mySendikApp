@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mysendikapp.R;
-import com.example.mysendikapp.haberler.RvAdapterHaber;
 import com.squareup.picasso.Picasso;
 
 
@@ -68,9 +67,9 @@ public class rvAdapterEtkinlik extends RecyclerView.Adapter<rvAdapterEtkinlik.My
             super(itemView);
 
             itemView.setOnClickListener(this);
-            title = (TextView) itemView.findViewById(R.id.tv_rv_two_title);
-            summary = (TextView) itemView.findViewById(R.id.tv_rv_two_summary);
-            pic = (ImageView) itemView.findViewById(R.id.etkinlikFeedPic);
+            title = (TextView) itemView.findViewById(R.id.tv_title_rv_two);
+            summary = (TextView) itemView.findViewById(R.id.tv_summary_rv_two);
+            pic = (ImageView) itemView.findViewById(R.id.iv_rv_two);
             btn_date = (Button) itemView.findViewById(R.id.btn_date_rv_two);
             itemView.setOnClickListener(this);
 

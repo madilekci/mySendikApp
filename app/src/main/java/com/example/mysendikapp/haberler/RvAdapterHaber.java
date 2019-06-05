@@ -64,10 +64,10 @@ public class RvAdapterHaber extends RecyclerView.Adapter<RvAdapterHaber.MyViewHo
             super(itemView);
 
             itemView.setOnClickListener(this);
-            title = (TextView) itemView.findViewById(R.id.tv_rv_one_title);
-            summary = (TextView) itemView.findViewById(R.id.tv_rv_one_summary);
-            pic = (ImageView) itemView.findViewById(R.id.NewsFeedPic);
-            btn_view = (Button) itemView.findViewById(R.id.rv_one_btn_view);
+            title = (TextView) itemView.findViewById(R.id.tv_title_rv_one);
+            summary = (TextView) itemView.findViewById(R.id.tv_summary_rv_one);
+            pic = (ImageView) itemView.findViewById(R.id.iv_rv_one);
+            btn_view = (Button) itemView.findViewById(R.id.btn_view_rv_one);
             itemView.setOnClickListener(this);
 
         }

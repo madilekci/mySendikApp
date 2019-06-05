@@ -31,7 +31,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/etkinlikFeedPic"
+                    android:id="@+id/iv_rv_two"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
@@ -46,13 +46,11 @@
                     android:layout_marginLeft="2dp"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
-                    android:autoSizeTextType="uniform"
-
                     android:background="@color/colorAccent"
                     android:maxLines="1"
-
                     android:text="12.02.1998"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:layout_marginStart="2dp" />
 
             </LinearLayout>
 
@@ -63,7 +61,7 @@
                 android:orientation="vertical"
                 >
                 <TextView
-                    android:id="@+id/tv_rv_two_title"
+                    android:id="@+id/tv_title_rv_two"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:ellipsize="end"
@@ -75,7 +73,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/tv_rv_two_summary"
+                    android:id="@+id/tv_summary_rv_two"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"

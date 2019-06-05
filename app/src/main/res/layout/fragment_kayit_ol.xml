@@ -20,6 +20,7 @@
         android:layout_height="50dp"
         android:background="@android:color/background_light"
         android:padding="10dp"
+        android:inputType="textPersonName"
         android:textColor="#111111" />
 
     <TextView
@@ -33,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@android:color/background_light"
+        android:inputType="textPersonName"
         android:padding="10dp"
         android:textColor="#111111" />
 
@@ -47,6 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@android:color/background_light"
+        android:inputType="textPersonName"
         android:padding="10dp"
         android:textColor="#111111" />
 
@@ -76,6 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@android:color/background_light"
+        android:inputType="textEmailAddress"
         android:padding="10dp"
         android:textColor="#111111" />
 

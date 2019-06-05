@@ -59,7 +59,7 @@ public class fragmentGirisYap extends Fragment {
             editor.apply();
         }
 
-        view.findViewById(R.id.btnGirisYap).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.btn_girisYap).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 girisYap(v);
@@ -70,8 +70,8 @@ public class fragmentGirisYap extends Fragment {
     }
 
     public void girisYap(View v) {
-        final TextView txtUsername = (TextView) getView().findViewById(R.id.tvUsernameGirisYap);
-        final TextView txtPassword = (TextView) getView().findViewById(R.id.tvPasswordGirisYap);
+        final TextView txtUsername = (TextView) getView().findViewById(R.id.tv_username_girisYap);
+        final TextView txtPassword = (TextView) getView().findViewById(R.id.tv_password_girisYap);
 
         final String username = "" + txtUsername.getText().toString();
         final String password = "" + txtPassword.getText().toString();
