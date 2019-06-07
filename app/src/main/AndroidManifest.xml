@@ -3,7 +3,7 @@
     package="com.example.mysendikapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -13,12 +13,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".etkinlik.etkinlikDetaylari"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".etkinlik.etkinlikAkisi"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".login.sifreDegistirActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".htmlContentDeneme"></activity>
+        <activity android:name=".etkinlik.etkinlikOlustur" />
+        <activity
+            android:name=".etkinlik.etkinlikDetaylari"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".etkinlik.etkinlikAkisi"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login.sifreDegistirActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".haberler.haberDetaylari"
             android:screenOrientation="portrait" />

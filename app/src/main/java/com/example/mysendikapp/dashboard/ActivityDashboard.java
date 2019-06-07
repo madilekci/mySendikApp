@@ -27,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.etkinlik.etkinlikAkisi;
+import com.example.mysendikapp.htmlContentDeneme;
 import com.example.mysendikapp.optionMenuActivities.ActivityAboutUs;
 import com.example.mysendikapp.optionMenuActivities.ActivityBoardMembers;
 import com.example.mysendikapp.optionMenuActivities.ActivityBranches;
@@ -93,8 +94,6 @@ public class ActivityDashboard extends AppCompatActivity  {
 
         this.setOptionMenuBMB(leftBmb);
         this.setOptionMenuBMB(rightBmb);
-
-
 
         setMenuActivites();
 
@@ -216,9 +215,6 @@ public class ActivityDashboard extends AppCompatActivity  {
     //Main menu
     public void setMenuActivites() {
 
-
-
-
         //Facebook
         findViewById(R.id.ivFacebook).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -255,7 +251,7 @@ public class ActivityDashboard extends AppCompatActivity  {
         findViewById(R.id.btn_butunEtkinlikleriGor).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ActivityDashboard.this, etkinlikAkisi.class);
+                Intent i = new Intent(ActivityDashboard.this, htmlContentDeneme.class);
                 startActivity(i);
             }
         });

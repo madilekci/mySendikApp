@@ -2,6 +2,8 @@
     <string name="app_name">e-Sendika</string>
     <string name="tablayoutAppName">e-Sendika</string>
 
+
+    <!--URL LER-->
     <string name="signInUrl">https://www.yucelyavuz.com/muhammed/login/kaydol.php</string>
     <string name="talepSikayetUrl">https://www.yucelyavuz.com/muhammed/talepSikayetDeneme.php</string>
 
@@ -11,25 +13,22 @@
 
     <string name="etkinlikListeleUrl">https://www.dogruweb.com/api/getAllEvents</string>
     <string name="etkinlikDetayUrl">https://www.dogruweb.com/api/getEventDetails</string>
+    <string name="etkinlikTipleriUrl">https://www.dogruweb.com/api/etkinlik_tipleri</string>
 
     <string name="haberListeleUrl">https://www.dogruweb.com/api/getAllNews</string>
     <string name="haberDetayUrl">https://www.dogruweb.com/api/getNewsDetail</string>
     <string name="haberSlideUrl">https://www.dogruweb.com/api/getLastNews</string>
 
+    <string name="htmlContentDenemeUrl">https://www.dogruweb.com/Test</string>
 
     <string name="webViewBoardMembersUrl">https://www.apple.com/tr/leadership/</string>
     <string name="webViewFacebookUrl">http://touch.facebook.com/HARBISSENDIKASI</string>
-
+    <!--URL LER-->
 
     <string name="defUserName">19054181122</string>
     <string name="defUserPass">416419rd</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="claimComplaintHint">Görüşleriniz bizim için çok değerli.\nLütfen bize yazmaktan çekinmeyin.</string>
 
-    <string-array name="claimComplaint">
-        <item>Talep Oluştur</item>
-        <item>Şikayet Oluştur</item>
-        <item>Diğer</item>
-    </string-array>
 
 </resources>
