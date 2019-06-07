@@ -1,4 +1,4 @@
-package com.example.mysendikapp.optionMenuActivities;
+package com.example.mysendikapp.icerikSayfalari;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.webkit.WebView;
 
 import com.example.mysendikapp.R;
 
-public class ActivityBoardMembers extends AppCompatActivity {
+public class ActivityYonetim extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

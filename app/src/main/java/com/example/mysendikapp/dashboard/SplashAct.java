@@ -39,8 +39,6 @@ public class SplashAct extends AppCompatActivity {
         startActivity(i);
 
     }
-
-
     public void updateNotificationToken() {
         SharedPreferences xd = this.getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
         final String userToken = xd.getString("userToken", "noTokens");

@@ -13,11 +13,9 @@ import com.squareup.picasso.Picasso;
 
 public class SlidingImage_Adapter extends PagerAdapter {
 
-
     private String[] urls;
     private LayoutInflater inflater;
     private Context context;
-
 
     public SlidingImage_Adapter(Context context, String[] urls) {
         this.context = context;

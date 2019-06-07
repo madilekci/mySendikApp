@@ -48,7 +48,6 @@ public class htmlContentDeneme extends AppCompatActivity implements Html.ImageGe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_html_content_deneme);
-
         fetchingJSON();
 
     }
@@ -134,7 +133,6 @@ public class htmlContentDeneme extends AppCompatActivity implements Html.ImageGe
 
 
     }       //getAllNews
-
 
     public void parseJSONData(String response){
 

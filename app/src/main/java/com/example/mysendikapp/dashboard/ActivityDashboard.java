@@ -3,20 +3,14 @@ package com.example.mysendikapp.dashboard;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.Rect;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -26,20 +20,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mysendikapp.bildirimler.bildirimAkisi;
 import com.example.mysendikapp.etkinlik.etkinlikAkisi;
 import com.example.mysendikapp.htmlContentDeneme;
-import com.example.mysendikapp.optionMenuActivities.ActivityAboutUs;
-import com.example.mysendikapp.optionMenuActivities.ActivityBoardMembers;
-import com.example.mysendikapp.optionMenuActivities.ActivityBranches;
-import com.example.mysendikapp.activityTalepSikayet;
-import com.example.mysendikapp.optionMenuActivities.ActivityContactUs;
+import com.example.mysendikapp.icerikSayfalari.ActivityHakkinda;
+import com.example.mysendikapp.icerikSayfalari.ActivityYonetim;
+import com.example.mysendikapp.icerikSayfalari.ActivitySubeler;
+import com.example.mysendikapp.ActivityTalepSikayet;
 import com.example.mysendikapp.R;
 import com.example.mysendikapp.haberler.*;
 import com.example.mysendikapp.sosyal.*;
-import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
-import com.nightonke.boommenu.BoomButtons.TextOutsideCircleButton;
-import com.nightonke.boommenu.BoomMenuButton;
-import com.nightonke.boommenu.Util;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import org.json.JSONArray;
@@ -50,9 +40,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import es.dmoral.toasty.Toasty;
-
 
 public class ActivityDashboard extends AppCompatActivity  {
 
@@ -73,145 +60,10 @@ public class ActivityDashboard extends AppCompatActivity  {
 
         //SlidingImages
         fetchingJSON();
-
-//TopBar
-        ActionBar mActionBar = getSupportActionBar();
-        assert mActionBar != null;
-        mActionBar.setDisplayShowHomeEnabled(false);
-        mActionBar.setDisplayShowTitleEnabled(false);
-        LayoutInflater mInflater = LayoutInflater.from(this);
-
-        View actionBar = mInflater.inflate(R.layout.actionbar_act, null);
-        TextView mTitleTextView = (TextView) actionBar.findViewById(R.id.title_text);
-        mTitleTextView.setText(R.string.app_name);
-        mActionBar.setCustomView(actionBar);
-        mActionBar.setDisplayShowCustomEnabled(true);
-        ((Toolbar) actionBar.getParent()).setContentInsetsAbsolute(0, 0);
-
-        //OptionMenu
-        BoomMenuButton leftBmb = (BoomMenuButton) actionBar.findViewById(R.id.action_bar_left_bmb);
-        BoomMenuButton rightBmb = (BoomMenuButton) actionBar.findViewById(R.id.action_bar_right_bmb);
-
-        this.setOptionMenuBMB(leftBmb);
-        this.setOptionMenuBMB(rightBmb);
-
         setMenuActivites();
 
     }
 
-
-    //Options menu
-    public void setOptionMenuBMB(BoomMenuButton bmb) {
-        for (int i = 0; i < bmb.getPiecePlaceEnum().pieceNumber(); i++) {
-
-            String buttonNormalText = "", buttonHighlightedText = "";
-            int bgID = R.drawable.ic_launcher_background;
-
-
-            switch (i) {
-                case 0:
-                    buttonNormalText = "Hakkında";
-                    buttonHighlightedText = "Hakkında";
-                    bgID = R.drawable.optionaboutus;
-                    break;
-                case 1:
-                    buttonNormalText = "Yönetim";
-                    buttonHighlightedText = "Yönetim";
-                    bgID = R.drawable.optionboardmembers;
-                    break;
-                case 2:
-                    buttonNormalText = "Bize ulaşın";
-                    buttonHighlightedText = "Bize ulaşın";
-                    bgID = R.drawable.optioncontact;
-                    break;
-                case 3:
-                    buttonNormalText = "Şubelerimiz";
-                    buttonHighlightedText = "Şubelerimiz";
-                    bgID = R.drawable.optionbranches;
-                    break;
-
-            }
-            TextOutsideCircleButton.Builder builder = new TextOutsideCircleButton.Builder()
-                    .listener(new OnBMClickListener() {
-                        @Override
-                        public void onBoomButtonClick(int index) {
-                            // When the boom-button corresponding this builder is clicked.
-
-                            switch (index) {
-                                case 0: //Hakkında
-                                    Toasty.info(ActivityDashboard.this, "Hakkında", Toast.LENGTH_SHORT).show();
-                                    Intent i0 = new Intent(ActivityDashboard.this, ActivityAboutUs.class);
-                                    startActivity(i0);
-                                    break;
-                                case 1: //Yönetim
-                                    Toasty.info(ActivityDashboard.this, "Yönetim" + index, Toast.LENGTH_SHORT).show();
-                                    Intent i1 = new Intent(ActivityDashboard.this, ActivityBoardMembers.class);
-                                    startActivity(i1);
-                                    break;
-                                case 2: //Bize ulaşın
-                                    Toasty.info(ActivityDashboard.this, "Bize ulaşın " + index, Toast.LENGTH_SHORT).show();
-                                    Intent i2 = new Intent(ActivityDashboard.this, ActivityContactUs.class);
-                                    startActivity(i2);
-                                    break;
-                                case 3: //Şubelerimiz
-                                    Toasty.info(ActivityDashboard.this, "Şubelerimiz " + index, Toast.LENGTH_SHORT).show();
-                                    Intent i3 = new Intent(ActivityDashboard.this, ActivityBranches.class);
-                                    startActivity(i3);
-                                    break;
-                            }
-                        }
-                    })
-                    .shadowOffsetX(40)
-                    .shadowOffsetY(40)
-
-
-                    // Set the image resource when boom-button is at normal-state.
-                    .normalImageRes(bgID)
-                    // Set the image resource when boom-button is at highlighted-state.
-                    .highlightedImageRes(R.drawable.piece_dot)
-                    // Set the image resource when boom-button is at unable-state.
-                    .unableImageRes(R.drawable.piece)
-                    // Set the padding of image.
-                    // By this method, you can control the padding in the image-view.
-                    // For instance, builder.imagePadding(new Rect(10, 10, 10, 10)) will make the
-                    // image-view content 10-pixel padding to itself.
-                    .imagePadding(new Rect(2, 2, 2, 2))
-
-
-                    // Set the text when boom-button is at normal-state.
-                    .normalText(buttonNormalText)
-                    // Set the text when boom-button is at highlighted-state.
-                    .highlightedText(buttonHighlightedText)
-                    // Set the text when boom-button is at unable-state.
-                    .unableText("Unable!")
-                    // Set the color of text when boom-button is at normal-state.
-                    .normalTextColor(Color.WHITE)
-                    // Set the color of text when boom-button is at highlighted-state.
-                    .highlightedTextColor(Color.BLUE)
-                    // Set the color of text when boom-button is at unable-state.
-                    .unableTextColor(Color.RED)
-                    // Set the padding of text.
-                    // By this method, you can control the padding in the text-view.
-                    // For instance, builder.textPadding(new Rect(10, 10, 10, 10)) will make the
-                    // text-view content 10-pixel padding to itself.
-                    .textPadding(new Rect(0, 0, 0, 0))
-                    // Set the gravity of text-view.
-                    // Set the text size of the text-view.
-                    .textSize(15)
-                    // The color of boom-button when it is at normal-state.
-                    .normalColor(Color.WHITE)
-                    // The color of boom-button when it is at highlighted-state.
-                    .highlightedColor(Color.BLUE)
-                    // The color of boom-button when it is at unable-state.
-                    .unableColor(Color.BLACK)
-
-                    // The radius of boom-button, in pixel.
-                    .buttonRadius(Util.dp2px(40))
-                    // Whether the button is a circle shape.
-                    .isRound(true);
-            bmb.addBuilder(builder);
-        }
-    }
     //Main menu
     public void setMenuActivites() {
 
@@ -236,6 +88,77 @@ public class ActivityDashboard extends AppCompatActivity  {
         });
         //Twitter\\
 
+        //Etkinlikler
+        findViewById(R.id.ivEtkinlikler).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ActivityDashboard.this, etkinlikAkisi.class);
+                startActivity(i);
+            }
+        });
+        //Etkinlikler\\
+
+        //Talep Şikayet
+        findViewById(R.id.ivTalep).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ActivityDashboard.this, ActivityTalepSikayet.class);
+                startActivity(i);
+            }
+        });
+        //Talep Şikayet\\
+
+        //Hakkında
+        findViewById(R.id.ivHakkinda).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ActivityDashboard.this, ActivityHakkinda.class);
+                startActivity(i);
+            }
+        });
+        //Hakkında\\
+
+        //Yönetim
+        findViewById(R.id.ivYonetim).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ActivityDashboard.this, ActivityYonetim.class);
+                startActivity(i);
+            }
+        });
+        //Yönetim\\
+
+        //Şubeler
+        findViewById(R.id.ivSubeler).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ActivityDashboard.this, ActivitySubeler.class);
+                startActivity(i);
+            }
+        });
+        //Şubeler\\
+
+        //Bildirimler
+        findViewById(R.id.ivBildirimler).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ActivityDashboard.this, bildirimAkisi.class);
+                startActivity(i);
+            }
+        });
+        //Bildirimler\\
+
+
+
+        //BUTONLAR
+        //Deneme
+        findViewById(R.id.btn_denemeHtml).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ActivityDashboard.this, htmlContentDeneme.class);
+                startActivity(i);
+            }
+        });
 
         //Haberler
         findViewById(R.id.btn_butunHaberleriGor).setOnClickListener(new View.OnClickListener() {
@@ -245,27 +168,7 @@ public class ActivityDashboard extends AppCompatActivity  {
                 startActivity(i);
             }
         });
-        //Haberler\\
 
-        //Etkinlikler
-        findViewById(R.id.btn_butunEtkinlikleriGor).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ActivityDashboard.this, htmlContentDeneme.class);
-                startActivity(i);
-            }
-        });
-        //Etkinlikler\\
-
-        //ClaimComplaint
-        findViewById(R.id.ivTalep).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ActivityDashboard.this, activityTalepSikayet.class);
-                startActivity(i);
-            }
-        });
-        //ClaimComplaint\\
 
 
     }
@@ -287,7 +190,6 @@ public class ActivityDashboard extends AppCompatActivity  {
         }
         return true;
     }
-
 
     //Initialize the slider images
     private void initImages() {
@@ -414,17 +316,6 @@ public class ActivityDashboard extends AppCompatActivity  {
         Intent i = new Intent(this, com.example.mysendikapp.login.loginActivity.class);
         startActivity(i);
     }
-
-
-
-
-
-
-    //  OVERRIDE METHODS NOT USED \\
-    //  OVERRIDE METHODS NOT USED \\
-    //  OVERRIDE METHODS NOT USED \\
-
-
 
 }
 

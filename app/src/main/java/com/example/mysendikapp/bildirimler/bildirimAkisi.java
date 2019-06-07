@@ -1,15 +1,15 @@
-package com.example.mysendikapp.optionMenuActivities;
+package com.example.mysendikapp.bildirimler;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.mysendikapp.R;
 
-public class ActivityAboutUs extends AppCompatActivity {
+public class bildirimAkisi extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_us);
+        setContentView(R.layout.activity_bildirim_akisi);
     }
 }

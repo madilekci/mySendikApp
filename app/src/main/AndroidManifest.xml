@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".htmlContentDeneme"></activity>
+        <activity android:name=".bildirimler.bildirimAkisi"></activity>
+        <activity android:name=".htmlContentDeneme" />
         <activity android:name=".etkinlik.etkinlikOlustur" />
         <activity
             android:name=".etkinlik.etkinlikDetaylari"
@@ -28,10 +29,7 @@
             android:name=".haberler.haberDetaylari"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".optionMenuActivities.ActivityAboutUs"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".optionMenuActivities.ActivityContactUs"
+            android:name=".icerikSayfalari.ActivityHakkinda"
             android:screenOrientation="portrait" />
         <activity
             android:name=".haberler.haberAkisi"
@@ -46,13 +44,13 @@
             android:name=".login.loginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".optionMenuActivities.ActivityBranches"
+            android:name=".icerikSayfalari.ActivitySubeler"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activityTalepSikayet"
+            android:name=".ActivityTalepSikayet"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".optionMenuActivities.ActivityBoardMembers"
+            android:name=".icerikSayfalari.ActivityYonetim"
             android:screenOrientation="portrait" />
         <activity
             android:name=".sosyal.ActivityTwitter"
@@ -70,7 +68,7 @@
             </intent-filter>
         </activity> <!-- IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII; -->
         <service
-            android:name=".MyFirebaseMessagingService"
+            android:name=".bildirimler.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

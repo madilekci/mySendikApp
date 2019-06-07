@@ -36,8 +36,8 @@ import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
-public class activityTalepSikayet extends AppCompatActivity {
-    String TAG = "activityTalepSikayet";
+public class ActivityTalepSikayet extends AppCompatActivity {
+    String TAG = "ActivityTalepSikayet";
     Button sendButton,btnGallery;
     ImageView iv;
     private static final int PICK_IMAGE_REQUEST=100;
@@ -60,8 +60,8 @@ public class activityTalepSikayet extends AppCompatActivity {
             }
         });
 
-        iv = (ImageView) (findViewById(R.id.iv_deneme_talep) );
-        //  bmp = BitmapFactory.decodeResource(getResources(), R.id.iv_deneme_talep);
+        iv = (ImageView) (findViewById(R.id.iv_talep) );
+        //  bmp = BitmapFactory.decodeResource(getResources(), R.id.iv_talep);
 
         btnGallery = (Button) findViewById(R.id.btn_fotografEkle_talep);
         btnGallery.setOnClickListener(new View.OnClickListener() {
@@ -83,14 +83,14 @@ public class activityTalepSikayet extends AppCompatActivity {
 }
 
     private void requestPermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(activityTalepSikayet.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            Toast.makeText(activityTalepSikayet.this, " Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
+        if (ActivityCompat.shouldShowRequestPermissionRationale(ActivityTalepSikayet.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            Toast.makeText(ActivityTalepSikayet.this, " Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
         } else {
-            ActivityCompat.requestPermissions(activityTalepSikayet.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+            ActivityCompat.requestPermissions(ActivityTalepSikayet.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
         }
     }
     private boolean checkPermission() {
-        int result = ContextCompat.checkSelfPermission(activityTalepSikayet.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int result = ContextCompat.checkSelfPermission(ActivityTalepSikayet.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (result == PackageManager.PERMISSION_GRANTED) {
             return true;
         } else {
@@ -102,9 +102,9 @@ public class activityTalepSikayet extends AppCompatActivity {
         switch (requestCode) {
             case PERMISSION_REQUEST_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(activityTalepSikayet.this, "Permission Granted Successfully! ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ActivityTalepSikayet.this, "Permission Granted Successfully! ", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(activityTalepSikayet.this, "Permission Denied 🙁 ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ActivityTalepSikayet.this, "Permission Denied 🙁 ", Toast.LENGTH_LONG).show();
                 }
                 break;
         }
@@ -121,6 +121,7 @@ public class activityTalepSikayet extends AppCompatActivity {
                 Log.d(TAG, "bmp ->>"+bmp);
                 //Setting the Bitmap to ImageView
                 iv.setImageBitmap(bmp);
+                iv.animate().rotation(90).setDuration(0);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -129,9 +130,7 @@ public class activityTalepSikayet extends AppCompatActivity {
 
     public void openGallery(View v){
         if (Build.VERSION.SDK_INT >= 23) {
-            if (checkPermission()) {
-
-            } else {
+            if (!checkPermission()) {
                 requestPermission();
             }
         }
@@ -146,7 +145,7 @@ public class activityTalepSikayet extends AppCompatActivity {
     }
 
     public void makeRequest(final String userToken, final String images,  final String talep){
-        RequestQueue queue = Volley.newRequestQueue(activityTalepSikayet.this);
+        RequestQueue queue = Volley.newRequestQueue(ActivityTalepSikayet.this);
 
         String url = getResources().getString(R.string.talepSikayetUrl);    // Post atılan adres.
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
@@ -154,13 +153,13 @@ public class activityTalepSikayet extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Log.d(TAG,"Response to updateDataSet ->>"+response);
-                        Toasty.success(activityTalepSikayet.this, response, Toast.LENGTH_SHORT, true).show();
+                        Toasty.success(ActivityTalepSikayet.this, response, Toast.LENGTH_SHORT, true).show();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toasty.error(activityTalepSikayet.this, "Error :" + error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toasty.error(ActivityTalepSikayet.this, "Error :" + error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
         ) {
@@ -179,8 +178,8 @@ public class activityTalepSikayet extends AppCompatActivity {
 
 
     }
-    public void uploadDataSet(View v) {
 
+    public void uploadDataSet(View v) {
         EditText txt_1 = (EditText) findViewById(R.id.tv_claimComplaint);
         final String talep = txt_1.getText().toString();
         final String userToken=getUserToken();
@@ -194,7 +193,6 @@ public class activityTalepSikayet extends AppCompatActivity {
     }
 
     public String getStringImage(Bitmap bitmap){
-        Log.i("MyHitesh",""+bitmap);
         ByteArrayOutputStream baos=new  ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
         byte [] b=baos.toByteArray();
