@@ -13,8 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".bildirimler.bildirimAkisi"></activity>
-        <activity android:name=".htmlContentDeneme" />
+        <activity android:name=".etkinlik.denemeActivity"></activity>
+        <activity android:name=".bildirimler.bildirimAkisi" />
         <activity android:name=".etkinlik.etkinlikOlustur" />
         <activity
             android:name=".etkinlik.etkinlikDetaylari"

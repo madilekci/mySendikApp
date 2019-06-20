@@ -36,7 +36,7 @@ public class RvAdapterHaber extends RecyclerView.Adapter<RvAdapterHaber.MyViewHo
     @Override
     public void onBindViewHolder(RvAdapterHaber.MyViewHolder holder, int position) {
 
-        Picasso.get().load("https://"+this.haberModelArrayList.get(position).getUrl() ).into(holder.pic);
+        Picasso.get().load(this.haberModelArrayList.get(position).getUrl() ).into(holder.pic);
         holder.title.setText(this.haberModelArrayList.get(position).getTitle() );
         holder.summary.setText(this.haberModelArrayList.get(position).getSummary() );
         holder.btn_view.setText(this.haberModelArrayList.get(position).getView() +" Kez Görüntülendi" );

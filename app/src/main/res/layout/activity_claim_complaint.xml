@@ -9,73 +9,63 @@
     tools:context=".sosyal.ActivityTwitter">
 
 
-    <ScrollView
+    <EditText
+        android:id="@+id/tv_claimComplaint"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.3">
+        android:layout_weight="100"
+        android:ems="10"
+        android:gravity="start"
+        android:hint="@string/talepSikayetHint"
+        android:inputType="text"
+        android:padding="15dp"
+        android:textColor="@color/colorPrimary" />
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/sp_talep"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@color/color11"
+            android:spinnerMode="dropdown">
 
-            <EditText
-                android:id="@+id/tv_claimComplaint"
-                android:layout_width="match_parent"
-                android:layout_height="387dp"
-                android:layout_weight="0.05"
-                android:ems="10"
-                android:gravity="start"
-                android:hint="@string/claimComplaintHint"
-                android:inputType="text"
-                android:padding="15dp"
-                android:textColor="@color/colorPrimary" />
+        </Spinner>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_fotografEkle_talep"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Fotoğraf ekle" />
+    </LinearLayout>
 
-                <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.5"
-                    android:background="@color/color11"
-                    android:spinnerMode="dropdown" />
+    <Button
+        android:id="@+id/btn_talepGonder"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        android:text="GÖNDER"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:typeface="serif"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
-                <Button
-                    android:id="@+id/btn_fotografEkle_talep"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Fotoğraf ekle" />
-            </LinearLayout>
+    <ImageView
+        android:id="@+id/iv_talep"
+        android:layout_width="match_parent"
+        android:layout_height="100pt"
+        android:layout_weight="1"
+        tools:srcCompat="@tools:sample/backgrounds/scenic[0]" />
 
-            <Button
-                android:id="@+id/btn_talepGonder"
-                android:layout_width="match_parent"
-                android:layout_height="53dp"
-                android:layout_marginBottom="8dp"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="GÖNDER"
-                android:textColor="@android:color/white"
-                android:textSize="30sp"
-                android:typeface="serif"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:layout_editor_absoluteX="0dp" />
-
-            <ImageView
-                android:id="@+id/iv_talep"
-                android:layout_width="match_parent"
-                android:layout_height="100pt"
-                tools:srcCompat="@tools:sample/backgrounds/scenic[0]" />
-        </LinearLayout>
-
-    </ScrollView>
 
 </LinearLayout>

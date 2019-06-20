@@ -39,7 +39,7 @@ public class rvAdapterEtkinlik extends RecyclerView.Adapter<rvAdapterEtkinlik.My
     }
     @Override
     public void onBindViewHolder(@NonNull rvAdapterEtkinlik.MyViewHolder holder, int position) {
-        Picasso.get().load("https://"+this.etkinlikModelArrayList.get(position).getUrl() ).into(holder.pic);
+        Picasso.get().load(this.etkinlikModelArrayList.get(position).getUrl() ).into(holder.pic);
         holder.title.setText(this.etkinlikModelArrayList.get(position).getTitle() );
         holder.summary.setText(this.etkinlikModelArrayList.get(position).getSummary() );
         holder.btn_date.setText(this.etkinlikModelArrayList.get(position).getDate() );

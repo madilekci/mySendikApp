@@ -39,7 +39,7 @@ public class SlidingImage_Adapter extends PagerAdapter {
         final ImageView imageView = (ImageView) imageLayout.findViewById(R.id.sliding_image);
 
 
-        Picasso.get().load("https://"+ urls[position] ).into(imageView);
+        Picasso.get().load(""+urls[position] ).into(imageView);
         view.addView(imageLayout, 0);
 
         return imageLayout;

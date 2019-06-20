@@ -1,10 +1,20 @@
 package com.example.mysendikapp.etkinlik;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LevelListDrawable;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -15,17 +25,26 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.R;
 import com.example.mysendikapp.haberler.haberAkisi;
+import com.example.mysendikapp.haberler.haberDetaylari;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class etkinlikDetaylari extends AppCompatActivity {
+public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGetter{
     etkinlikModel ne_etkinlik;
 
+    String TAG ="etkinlikDetaylari";
+    TextView mTv;
+    LinearLayout ll_root;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +52,9 @@ public class etkinlikDetaylari extends AppCompatActivity {
         setContentView(R.layout.activity_etkinlik_detaylari);
         this.ne_etkinlik = new etkinlikModel();
         this.getEtkinlikDetails(getIntent().getExtras().getString("etkinlik_id"), this.ne_etkinlik);
+
+        ll_root=(LinearLayout) findViewById(R.id.ll_root_etkinlikDetay);
+        ll_root.setVisibility(View.INVISIBLE);
     }
 
     public void getEtkinlikDetails(final String etkinlik_id, final etkinlikModel etkinlikModel_ne_etkinlik) {
@@ -109,9 +131,64 @@ public class etkinlikDetaylari extends AppCompatActivity {
         tv_baslik.setText(this.ne_etkinlik.getTitle());
 
         ImageView iv = (ImageView) findViewById(R.id.iv_etkinlikDetaylari);
-        Picasso.get().load("https://" + this.ne_etkinlik.getUrl()).into(iv);
+        Picasso.get().load(""+this.ne_etkinlik.getUrl()).into(iv);
 
-        TextView tv_content = (TextView) findViewById(R.id.tv_content_etkinlikDetaylari);
-        tv_content.setText(this.ne_etkinlik.getContent());
+        Spanned spanned = Html.fromHtml(this.ne_etkinlik.getContent(), this, null);
+        mTv = (TextView) findViewById(R.id.tv_content_etkinlikDetaylari);
+        mTv.setText(spanned);
+        ll_root.setVisibility(View.VISIBLE);
     }
+
+
+    @Override
+    public Drawable getDrawable(String source) {
+        LevelListDrawable d = new LevelListDrawable();
+        Drawable empty = getResources().getDrawable(R.drawable.logo);
+        d.addLevel(0, 0, empty);
+        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
+
+        new etkinlikDetaylari.LoadImage().execute(source, d);
+
+        return d;
+    }
+    class LoadImage extends AsyncTask<Object, Void, Bitmap> {
+
+        private LevelListDrawable mDrawable;
+
+        @Override
+        protected Bitmap doInBackground(Object... params) {
+            String source = (String) params[0];
+            mDrawable = (LevelListDrawable) params[1];
+            Log.d(TAG, "doInBackground " + source);
+            try {
+                InputStream is = new URL(source).openStream();
+                return BitmapFactory.decodeStream(is);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            Log.d(TAG, "onPostExecute drawable " + mDrawable);
+            Log.d(TAG, "onPostExecute bitmap " + bitmap);
+            if (bitmap != null) {
+                BitmapDrawable d = new BitmapDrawable(bitmap);
+                mDrawable.addLevel(1, 1, d);
+                mDrawable.setBounds(0, 0, bitmap.getWidth(), bitmap.getHeight());
+                mDrawable.setLevel(1);
+                // i don't know yet a better way to refresh TextView
+                // mTv.invalidate() doesn't work as expected
+                CharSequence t = mTv.getText();
+                mTv.setText(t);
+            }
+        }
+    }
+
+
 }

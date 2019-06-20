@@ -36,6 +36,7 @@ import es.dmoral.toasty.Toasty;
 public class fragmentGirisYap extends Fragment {
 
     SharedPreferences sp = null;
+    String TAG = "login_Fragment";
 
 
     public fragmentGirisYap() {
@@ -134,6 +135,7 @@ public class fragmentGirisYap extends Fragment {
 
         editor.remove("userToken");
         editor.putString("userToken",userToken);
+        Log.d(TAG,"user_token ->>"+userToken);
         editor.apply();
 
     }
@@ -164,6 +166,8 @@ public class fragmentGirisYap extends Fragment {
                         goToMenuActivity();
                         break;
                     }else if(isActive==0){      //Kullanıcı ilk kez giriş yapıyorsa
+                        Log.d("frGirisYap","giden UserToken :"+userToken[0]);
+                        saveUserInfo(userToken[0]);
                         Intent i= new Intent(getContext(),sifreDegistirActivity.class);
                         startActivity(i);
                         break;

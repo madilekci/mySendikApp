@@ -7,11 +7,11 @@
     tools:context=".etkinlik.etkinlikDetaylari">
 
     <LinearLayout
+        android:id="@+id/ll_root_etkinlikDetay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:gravity="center"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_baslik_etkinlikDetaylari"

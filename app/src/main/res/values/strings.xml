@@ -4,31 +4,43 @@
 
 
     <!--URL LER-->
+    <!--URL LER-->
+
     <string name="signInUrl">https://www.yucelyavuz.com/muhammed/login/kaydol.php</string>
     <string name="talepSikayetUrl">https://www.yucelyavuz.com/muhammed/talepSikayetDeneme.php</string>
 
-    <string name="loginUrl">https://www.dogruweb.com/api/Login</string>
-    <string name="notificationTokenGuncelleUrl">https://www.dogruweb.com/api/updateNotificationToken</string>
-    <string name="sifreGuncelleUrl">https://www.dogruweb.com/api/updatePassword</string>
 
-    <string name="etkinlikListeleUrl">https://www.dogruweb.com/api/getAllEvents</string>
-    <string name="etkinlikDetayUrl">https://www.dogruweb.com/api/getEventDetails</string>
-    <string name="etkinlikTipleriUrl">https://www.dogruweb.com/api/etkinlik_tipleri</string>
+    <!--LOGİN-->
+    <string name="loginUrl">https://www.e-gorus.org/Api/Login</string>
+    <string name="notificationTokenGuncelleUrl">https://www.e-gorus.org/Api/updateNotificationToken</string>
+    <string name="sifreGuncelleUrl">https://www.e-gorus.org/Api/updatePassword</string>
 
-    <string name="haberListeleUrl">https://www.dogruweb.com/api/getAllNews</string>
-    <string name="haberDetayUrl">https://www.dogruweb.com/api/getNewsDetail</string>
-    <string name="haberSlideUrl">https://www.dogruweb.com/api/getLastNews</string>
+    <!--ETKİNLİKLER-->
+    <string name="etkinlikListeleUrl">https://www.e-gorus.org/Api/getAllEvents</string>
+    <string name="etkinlikDetayUrl">https://www.e-gorus.org/Api/getEventDetails</string>
+    <string name="etkinlikTipleriUrl">https://www.e-gorus.org/Api/getEventType</string>
+    <string name="etkinlikOlusturUrl">https://www.e-gorus.org/Api/getEventInsert</string>
 
-    <string name="htmlContentDenemeUrl">https://www.dogruweb.com/Test</string>
+    <!--HABERLER-->
+    <string name="haberListeleUrl">https://www.e-gorus.org/Api/getAllNews</string>
+    <string name="haberDetayUrl">https://www.e-gorus.org/Api/getNewsDetail</string>
+    <string name="haberSlideUrl">https://www.e-gorus.org/Api/getLastNews</string>
 
+    <!--WebView-->
     <string name="webViewBoardMembersUrl">https://www.apple.com/tr/leadership/</string>
     <string name="webViewFacebookUrl">http://touch.facebook.com/HARBISSENDIKASI</string>
+    <!--URL LER-->
     <!--URL LER-->
 
     <string name="defUserName">19054181122</string>
     <string name="defUserPass">416419rd</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="claimComplaintHint">Görüşleriniz bizim için çok değerli.\nLütfen bize yazmaktan çekinmeyin.</string>
+
+    <string name="talepSikayetHint">Görüşleriniz bizim için çok değerli.\nLütfen bize yazmaktan çekinmeyin.</string>
+    <string-array name="talepSikayetItems">
+        <item>ŞUBEYE GÖNDER</item>
+        <item>GENEL MERKEZE GÖNDER</item>
+    </string-array>
 
 
 </resources>

@@ -119,51 +119,12 @@ public class etkinlikAkisi extends AppCompatActivity {
         isLoading = false;
     }
 
-    public static void showSimpleProgressDialog(Context context, String title,
-                                                String msg, boolean isCancelable) {
-        try {
-            if (mProgressDialog == null) {
-                mProgressDialog = ProgressDialog.show(context, title, msg);
-                mProgressDialog.setCancelable(isCancelable);
-            }
 
-            if (!mProgressDialog.isShowing()) {
-                mProgressDialog.show();
-            }
-
-        } catch (IllegalArgumentException ie) {
-            ie.printStackTrace();
-        } catch (RuntimeException re) {
-            re.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void removeSimpleProgressDialog() {
-        try {
-            if (mProgressDialog != null) {
-                if (mProgressDialog.isShowing()) {
-                    mProgressDialog.dismiss();
-                    mProgressDialog = null;
-                }
-            }
-        } catch (IllegalArgumentException ie) {
-            ie.printStackTrace();
-
-        } catch (RuntimeException re) {
-            re.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 
     private void fetchingJSON() {
         isLoading = true;
         Log.d(TAG, "postpage : " + postPage);
         Log.d(TAG, "count : " + postCount);
-        showSimpleProgressDialog(this, "Loading...", "Fetching Json", false);
 
         String url = getResources().getString(R.string.etkinlikListeleUrl);    // Post atılan adres.
         StringRequest jsonStringRequest = new StringRequest(
@@ -198,12 +159,11 @@ public class etkinlikAkisi extends AppCompatActivity {
         jsonStringRequest.setShouldCache(false);        // "CacheTutulmasıDurumu=false"
         queue.add(jsonStringRequest);
 
-    }       //getAllNews
+    }       //getAllEvents
 
     public void parseJSONData(String response) {
         isLoading=false;
         try {
-            removeSimpleProgressDialog();
 //                            JSONObject obj = new JSONObject(response);
             JSONObject obj = new JSONObject(response);
             JSONArray dataArray = obj.getJSONArray("data");

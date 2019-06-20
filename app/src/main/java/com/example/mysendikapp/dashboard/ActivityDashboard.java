@@ -22,7 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.bildirimler.bildirimAkisi;
 import com.example.mysendikapp.etkinlik.etkinlikAkisi;
-import com.example.mysendikapp.htmlContentDeneme;
+import com.example.mysendikapp.etkinlik.etkinlikOlustur;
 import com.example.mysendikapp.icerikSayfalari.ActivityHakkinda;
 import com.example.mysendikapp.icerikSayfalari.ActivityYonetim;
 import com.example.mysendikapp.icerikSayfalari.ActivitySubeler;
@@ -151,20 +151,19 @@ public class ActivityDashboard extends AppCompatActivity  {
 
 
         //BUTONLAR
-        //Deneme
-        findViewById(R.id.btn_denemeHtml).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ActivityDashboard.this, htmlContentDeneme.class);
-                startActivity(i);
-            }
-        });
-
         //Haberler
         findViewById(R.id.btn_butunHaberleriGor).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ActivityDashboard.this, haberAkisi.class);
+                startActivity(i);
+            }
+        });
+
+        findViewById(R.id.btn_etkinlikOlusturabilirMiyim).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ActivityDashboard.this, etkinlikOlustur.class);
                 startActivity(i);
             }
         });

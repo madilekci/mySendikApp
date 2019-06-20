@@ -57,13 +57,15 @@
             android:text="Tüm haberleri gör" />
 
         <Button
-            android:id="@+id/btn_denemeHtml"
+            android:id="@+id/btn_etkinlikOlusturabilirMiyim"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="1dp"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDark"
-            android:text="HTML DENEME " />
+            android:text="btn_etkinlikOlusturabilirMiyim" />
+
     </LinearLayout>
 
     <LinearLayout
