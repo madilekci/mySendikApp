@@ -45,7 +45,7 @@ public class etkinlikAkisi extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_etkinlik_);
+        setContentView(R.layout.activity_etkinlik_akisi);
 
         this.postCount = 5;
         this.postPage = 0;

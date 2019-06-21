@@ -43,7 +43,7 @@ public class haberAkisi extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news_feed);
+        setContentView(R.layout.activity_haber_akisi);
 
         this.postCount = 5;
         this.postPage = 0;

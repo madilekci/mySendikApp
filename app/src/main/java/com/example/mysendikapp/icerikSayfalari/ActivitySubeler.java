@@ -10,6 +10,6 @@ public class ActivitySubeler extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_branches);
+        setContentView(R.layout.activity_subeler);
     }
 }

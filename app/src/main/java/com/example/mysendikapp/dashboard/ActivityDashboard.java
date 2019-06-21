@@ -60,15 +60,15 @@ public class ActivityDashboard extends AppCompatActivity  {
 
         //SlidingImages
         fetchingJSON();
-        setMenuActivites();
+        initMenuButtons();
 
     }
 
     //Main menu
-    public void setMenuActivites() {
+    public void initMenuButtons() {
 
         //Facebook
-        findViewById(R.id.ivFacebook).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_facebook_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ActivityDashboard.this, ActivityFacebook.class);
@@ -79,7 +79,7 @@ public class ActivityDashboard extends AppCompatActivity  {
 
 
         //Twitter
-        findViewById(R.id.ivTwitter).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_twitter_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ActivityDashboard.this, ActivityTwitter.class);
@@ -89,17 +89,25 @@ public class ActivityDashboard extends AppCompatActivity  {
         //Twitter\\
 
         //Etkinlikler
-        findViewById(R.id.ivEtkinlikler).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_etkinlikListele_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ActivityDashboard.this, etkinlikAkisi.class);
                 startActivity(i);
             }
         });
+
+        findViewById(R.id.iv_etkinlikOlustur).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ActivityDashboard.this, etkinlikOlustur.class);
+                startActivity(i);
+            }
+        });
         //Etkinlikler\\
 
         //Talep Şikayet
-        findViewById(R.id.ivTalep).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_talepSikayet_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ActivityDashboard.this, ActivityTalepSikayet.class);
@@ -109,7 +117,7 @@ public class ActivityDashboard extends AppCompatActivity  {
         //Talep Şikayet\\
 
         //Hakkında
-        findViewById(R.id.ivHakkinda).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_hakkinda_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ActivityDashboard.this, ActivityHakkinda.class);
@@ -119,7 +127,7 @@ public class ActivityDashboard extends AppCompatActivity  {
         //Hakkında\\
 
         //Yönetim
-        findViewById(R.id.ivYonetim).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_yonetim_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ActivityDashboard.this, ActivityYonetim.class);
@@ -129,7 +137,7 @@ public class ActivityDashboard extends AppCompatActivity  {
         //Yönetim\\
 
         //Şubeler
-        findViewById(R.id.ivSubeler).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_subeler_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ActivityDashboard.this, ActivitySubeler.class);
@@ -139,7 +147,7 @@ public class ActivityDashboard extends AppCompatActivity  {
         //Şubeler\\
 
         //Bildirimler
-        findViewById(R.id.ivBildirimler).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_bildirimler_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ActivityDashboard.this, bildirimAkisi.class);
@@ -152,7 +160,7 @@ public class ActivityDashboard extends AppCompatActivity  {
 
         //BUTONLAR
         //Haberler
-        findViewById(R.id.btn_butunHaberleriGor).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_butunHaberleriGor_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ActivityDashboard.this, haberAkisi.class);
@@ -160,13 +168,9 @@ public class ActivityDashboard extends AppCompatActivity  {
             }
         });
 
-        findViewById(R.id.btn_etkinlikOlusturabilirMiyim).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ActivityDashboard.this, etkinlikOlustur.class);
-                startActivity(i);
-            }
-        });
+
+
+
 
 
 

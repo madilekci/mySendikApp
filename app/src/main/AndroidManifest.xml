@@ -13,9 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".etkinlik.denemeActivity"></activity>
-        <activity android:name=".bildirimler.bildirimAkisi" />
-        <activity android:name=".etkinlik.etkinlikOlustur" />
+        <activity android:name=".bildirimler.bildirimAkisi"
+            android:screenOrientation="portrait" />
+        <activity android:name=".etkinlik.etkinlikOlustur"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".etkinlik.etkinlikDetaylari"
             android:screenOrientation="portrait" />
@@ -26,19 +27,19 @@
             android:name=".login.sifreDegistirActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".haberler.haberDetaylari"
+            android:name=".ActivityTalepSikayet"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".icerikSayfalari.ActivityHakkinda"
+            android:name=".haberler.haberDetaylari"
             android:screenOrientation="portrait" />
         <activity
             android:name=".haberler.haberAkisi"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".dashboard.SplashAct"
+            android:name=".dashboard.ActivityDashboard"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".dashboard.ActivityDashboard"
+            android:name=".dashboard.SplashAct"
             android:screenOrientation="portrait" />
         <activity
             android:name=".login.loginActivity"
@@ -47,7 +48,7 @@
             android:name=".icerikSayfalari.ActivitySubeler"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityTalepSikayet"
+            android:name=".icerikSayfalari.ActivityHakkinda"
             android:screenOrientation="portrait" />
         <activity
             android:name=".icerikSayfalari.ActivityYonetim"
@@ -67,6 +68,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII; -->
+
         <service
             android:name=".bildirimler.MyFirebaseMessagingService"
             android:exported="false">
@@ -91,6 +93,7 @@
         <meta-data
             android:name="firebase_messaging_auto_init_enabled"
             android:value="false" />
+
     </application>
 
 </manifest>

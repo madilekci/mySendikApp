@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -63,6 +64,9 @@ public class etkinlikOlustur extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_etkinlik_olustur);
 
+
+        iv = (ImageView) (findViewById(R.id.iv_etkinlikOlustur) );
+
         sendButton = (Button) findViewById(R.id.btn_Olustur_etkinlik);
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,9 +75,6 @@ public class etkinlikOlustur extends AppCompatActivity {
             }
         });
 
-
-
-        iv = (ImageView) (findViewById(R.id.iv_etkinlikOlustur) );
         btnGallery = (Button) findViewById(R.id.btn_fotografEkle_etkinlik);
         btnGallery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +102,8 @@ public class etkinlikOlustur extends AppCompatActivity {
         titlePost   = txt_1.getText().toString();
         contentPost = txt_2.getText().toString();
 
-        if (!(titlePost.equals("") ) && !(contentPost.equals("") && !(image64Post.equals("") ) ) ) {      //Baslik veya icerik bos degilse
+        if (!(titlePost.equals("")) && !(contentPost.equals("")) && !(image64Post.equals("")) && !isLoading  ) {      //Baslik veya icerik bos degilse
+            isLoading=true;
             fetchingJSON();
         } else {
             Toast.makeText(this, "Lütfen Gerekli Alanları Doldurun", Toast.LENGTH_LONG).show();
@@ -109,8 +111,7 @@ public class etkinlikOlustur extends AppCompatActivity {
     }
 
     private void fetchingJSON() {
-        sendButton.setClickable(false);
-        isLoading = true;
+        sendButton.setText("Etkinlik talebiniz oluşturuluyor. Lütfen bekleyin ...");
         Log.d(TAG,"Fetching JSON ....");
 
         Log.d(TAG,"Image --> "+image64Post);
@@ -150,15 +151,27 @@ public class etkinlikOlustur extends AppCompatActivity {
 
         // request queue
         RequestQueue queue = Volley.newRequestQueue(this);
+
+        jsonStringRequest.setRetryPolicy(new DefaultRetryPolicy(0,-1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));    // Yeniden istek gönderebilmek için uyulması gereken kurallar
+
         jsonStringRequest.setShouldCache(false);        // "CacheTutulmasıDurumu=false"
         queue.add(jsonStringRequest);
 
     }
     private void parseJSONData(String response){
-        sendButton.setClickable(true);
+        this.eventUploadedSuccessfully();
+    }
+    private void eventUploadedSuccessfully(){
+        sendButton.setText("Etkinlik talebiniz olusturuldu ☺");
         isLoading=false;
         Log.d(TAG,"--- Etkinlik oluşturuldu ---");
-        Toasty.success(this,"Etkinlik talebiniz olusturuldu ☺",Toasty.LENGTH_SHORT).show();
+        Toasty.success(this,"Etkinlik talebiniz olusturuldu ☺",Toasty.LENGTH_LONG).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                etkinlikOlustur.this.onBackPressed();
+            }
+        }, 1000);
     }
 
 
@@ -242,7 +255,7 @@ public class etkinlikOlustur extends AppCompatActivity {
     }
     public String getStringImage(Bitmap bitmap){
         ByteArrayOutputStream baos=new  ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,50, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG,75, baos);
         byte [] b=baos.toByteArray();
         String temp= Base64.encodeToString(b, Base64.DEFAULT);
 

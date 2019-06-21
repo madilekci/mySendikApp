@@ -11,7 +11,7 @@ public class ActivityYonetim extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_board_members);
+        setContentView(R.layout.activity_yonetim);
 
         WebView webview = (WebView) findViewById(R.id.webviewBoardMembers);
         webview.getSettings().setJavaScriptEnabled(true);
