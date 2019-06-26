@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mysendikapp.anketler.anketDoldur;
 import com.example.mysendikapp.bildirimler.bildirimAkisi;
 import com.example.mysendikapp.etkinlik.etkinlikAkisi;
 import com.example.mysendikapp.etkinlik.etkinlikOlustur;
@@ -30,13 +31,17 @@ import com.example.mysendikapp.ActivityTalepSikayet;
 import com.example.mysendikapp.R;
 import com.example.mysendikapp.haberler.*;
 import com.example.mysendikapp.sosyal.*;
+import com.fangxu.allangleexpandablebutton.AllAngleExpandableButton;
+import com.fangxu.allangleexpandablebutton.ButtonData;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -61,32 +66,35 @@ public class ActivityDashboard extends AppCompatActivity  {
         //SlidingImages
         fetchingJSON();
         initMenuButtons();
+        initOptionMenu();
+
+    }
+
+
+    public void initOptionMenu(){
 
     }
 
     //Main menu
     public void initMenuButtons() {
 
-        //Facebook
-        findViewById(R.id.iv_facebook_menu).setOnClickListener(new View.OnClickListener() {
+        //Anket Doldur
+        findViewById(R.id.iv_anketdoldur_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ActivityDashboard.this, ActivityFacebook.class);
+                Intent i = new Intent(ActivityDashboard.this, anketDoldur.class);
                 startActivity(i);
             }
         });
-        //Facebook\\
-
-
-        //Twitter
-        findViewById(R.id.iv_twitter_menu).setOnClickListener(new View.OnClickListener() {
+        //sosyal
+        findViewById(R.id.iv_sosyalmedya_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ActivityDashboard.this, ActivityTwitter.class);
+                Intent i = new Intent(ActivityDashboard.this, hangiSosyalActivity.class);
                 startActivity(i);
             }
         });
-        //Twitter\\
+        //sosyal\\
 
         //Etkinlikler
         findViewById(R.id.iv_etkinlikListele_menu).setOnClickListener(new View.OnClickListener() {
@@ -97,7 +105,7 @@ public class ActivityDashboard extends AppCompatActivity  {
             }
         });
 
-        findViewById(R.id.iv_etkinlikOlustur).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_etkinlikOlustur_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ActivityDashboard.this, etkinlikOlustur.class);
@@ -116,35 +124,6 @@ public class ActivityDashboard extends AppCompatActivity  {
         });
         //Talep Şikayet\\
 
-        //Hakkında
-        findViewById(R.id.iv_hakkinda_menu).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ActivityDashboard.this, ActivityHakkinda.class);
-                startActivity(i);
-            }
-        });
-        //Hakkında\\
-
-        //Yönetim
-        findViewById(R.id.iv_yonetim_menu).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ActivityDashboard.this, ActivityYonetim.class);
-                startActivity(i);
-            }
-        });
-        //Yönetim\\
-
-        //Şubeler
-        findViewById(R.id.iv_subeler_menu).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ActivityDashboard.this, ActivitySubeler.class);
-                startActivity(i);
-            }
-        });
-        //Şubeler\\
 
         //Bildirimler
         findViewById(R.id.iv_bildirimler_menu).setOnClickListener(new View.OnClickListener() {
@@ -169,11 +148,6 @@ public class ActivityDashboard extends AppCompatActivity  {
         });
 
 
-
-
-
-
-
     }
 
     @Override
@@ -181,6 +155,7 @@ public class ActivityDashboard extends AppCompatActivity  {
     } //Do Nothing
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         //Inflate the menu; this adds items to the action bar if it is presents
         getMenuInflater().inflate(R.menu.menu_topmenu, menu);
         return true;
@@ -188,8 +163,18 @@ public class ActivityDashboard extends AppCompatActivity  {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.logout_icon:
+            case R.id.opMenuLogout:
                 this.logout();
+                break;
+            case R.id.opMenuHakkinda:
+                break;
+            case R.id.opMenuYonetim:
+                break;
+            case R.id.opMenuSubeler:
+                break;
+            case R.id.opMenuAyarlar:
+                break;
+
         }
         return true;
     }
@@ -224,7 +209,7 @@ public class ActivityDashboard extends AppCompatActivity  {
             public void run() {
                 handler.post(Update);
             }
-        }, 1500, 1500);
+        }, 3000, 3000);
         // Pager listener over indicator
         indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 

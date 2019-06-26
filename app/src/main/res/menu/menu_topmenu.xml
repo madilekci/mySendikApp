@@ -1,21 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-        <com.nightonke.boommenu.BoomMenuButton
-            android:id="@+id/action_bar_right_bmb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:bmb_buttonEnum="textOutsideCircle"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            app:bmb_piecePlaceEnum="piecePlace_dot_3_1"
-            app:bmb_buttonPlaceEnum="buttonPlace_sc_3_1"
-            app:bmb_backgroundEffect="false"
-            />
     <item
-        android:id="@+id/logout_icon"
+        android:id="@+id/opMenuLogout"
         android:icon="@drawable/optioncikisyap"
         android:title="Çıkış Yap"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_more"
+        android:icon="@drawable/opmenuicon"
+        android:title=""
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/opMenuHakkinda"
+                android:icon="@drawable/opmenuhakkinda"
+                android:title="Hakkımızda"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/opMenuSubeler"
+                android:icon="@drawable/opmenusubeler"
+                android:title="Şubelerimiz"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/opMenuYonetim"
+                android:icon="@drawable/opmenuyonetim"
+                android:title="Yönetim Kurulumuz"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/opMenuAyarlar"
+                android:icon="@drawable/opmenuayarlar"
+                android:title="Ayarlar"
+                app:showAsAction="ifRoom" />
+        </menu>
+    </item>
 
 </menu>

@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -23,12 +25,14 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mysendikapp.etkinlik.etkinlikOlustur;
 
 
 import java.io.ByteArrayOutputStream;
@@ -40,12 +44,14 @@ import es.dmoral.toasty.Toasty;
 
 public class ActivityTalepSikayet extends AppCompatActivity  {
     String TAG = "ActivityTalepSikayet";
+
+    String konuPost, aciklamaPost, userTokenPost, image64Post;
+
+    private static final int PICK_IMAGE_REQUEST=100, PERMISSION_REQUEST_CODE = 101;;
     Button sendButton,btnGallery;
     ImageView iv;
-    private static final int PICK_IMAGE_REQUEST=100;
     Spinner sp;
-
-    private static final int PERMISSION_REQUEST_CODE = 101;
+    public boolean isLoading = false;
     Bitmap bmp;
 
     @Override
@@ -90,6 +96,8 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
 
 }
 
+    ///////////////////////////////////
+    ///////////////////////////////////
 
     private void requestPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(ActivityTalepSikayet.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
@@ -118,40 +126,35 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
                 break;
         }
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri filePath = data.getData();
-            try {
-                //Getting the Bitmap from Gallery
-                bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                Log.d(TAG, "bmp ->>"+bmp);
-                //Setting the Bitmap to ImageView
-                iv.setImageBitmap(bmp);
-                iv.animate().rotation(90).setDuration(0);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
+    ///////////////////////////////////
+    ///////////////////////////////////
 
     public void uploadDataSet(View v) {
-        EditText txt_1 = (EditText) findViewById(R.id.tv_claimComplaint);
-        final String talep = txt_1.getText().toString();
-        final String userToken=getUserToken();
-        String images = getStringImage(bmp);
-        if (!(talep.equals(""))) {
-            makeRequest(userToken,images,talep);
+
+        EditText txt_0 = (EditText) findViewById(R.id.tv_konu_claimComplaint);
+        EditText txt_1 = (EditText) findViewById(R.id.tv_aciklama_claimComplaint);
+
+        konuPost = txt_0.getText().toString();
+        aciklamaPost = txt_1.getText().toString();
+
+        if (!(konuPost.equals("")) && !(aciklamaPost.equals("")) && !isLoading ) {
+            isLoading=true;
+            makeRequest();
         } else {
             Toast.makeText(this, "Lütfen Gerekli Alanları Doldurun", Toast.LENGTH_LONG).show();
         }
     }
-    public void makeRequest(final String userToken, final String images,  final String talep){
+    public void makeRequest(){
+        sendButton.setClickable(false);
+        sendButton.setText("Lütfen bekleyin...");
         RequestQueue queue = Volley.newRequestQueue(ActivityTalepSikayet.this);
+        Log.d(TAG,"--- makeRequest ---");
+        Log.d(TAG,"params : ");
+        Log.d(TAG,"--> "+konuPost);
+        Log.d(TAG,"--> "+aciklamaPost);
+        Log.d(TAG,"--> "+image64Post);
+        Log.d(TAG,"--> "+userTokenPost);
         Log.d(TAG,"--- makeRequest ---");
         String url = getResources().getString(R.string.talepSikayetUrl);    // Post atılan adres.
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
@@ -159,12 +162,13 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
                     @Override
                     public void onResponse(String response) {
                         Log.d(TAG,"Response to updateDataSet ->>"+response);
-                        Toasty.success(ActivityTalepSikayet.this, response, Toast.LENGTH_SHORT, true).show();
+                        demandUploadedSuccessfully(response);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG,"An error occured  ->>"+error.getMessage());
                         Toasty.error(ActivityTalepSikayet.this, "Error :" + error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
@@ -172,19 +176,58 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("talep", talep);
-                params.put("user_token", userToken);
-                params.put("image", images);
+                params.put("konu", konuPost);
+                params.put("aciklama", aciklamaPost);
+                params.put("UyeToken", userTokenPost);
+                params.put("base64", image64Post);
                 return params;
             }
         };
         postRequest.setShouldCache(false);
+        postRequest.setRetryPolicy(new DefaultRetryPolicy(0,-1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));    // Yeniden istek gönderebilmek için uyulması gereken kurallar
         queue.add(postRequest);
-        Toast.makeText(this, "Talebiniz yetkili birimlere iletildi.", Toast.LENGTH_LONG).show();
-
 
     }
+    public void demandUploadedSuccessfully(String response){
+        isLoading=false;
+        sendButton.setText("Talebiniz iletildi ☺");
+        Toast.makeText(this, "Talebiniz yetkili birimlere iletildi. En kısa sürede size dönüş yapılacağından emin olabilirsiniz.", Toast.LENGTH_LONG).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ActivityTalepSikayet.this.onBackPressed();
+            }
+        }, 1000);
+    }
 
+    ///////////////////////////////////
+    ///////////////////////////////////
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri filePath = data.getData();
+            try {
+
+                //Getting the Bitmap from Gallery
+                bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                bmp = rotateBitmap(bmp,90);
+                Log.d(TAG, "bmp ->>"+bmp);
+                //Setting the Bitmap to ImageView
+                iv.setImageBitmap(bmp);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ActivityTalepSikayet.this.activateUploadButton();
+            }
+        }, 250);
+    }
     public void openGallery(View v){
         if (Build.VERSION.SDK_INT >= 23) {
             if (!checkPermission()) {
@@ -192,6 +235,8 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
             }
         }
 
+        sendButton.setText("Lütfen bekleyin");
+        sendButton.setClickable(false);
         Intent glr = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(glr,PICK_IMAGE_REQUEST);
     }
@@ -202,10 +247,23 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
     }
     public String getStringImage(Bitmap bitmap){
         ByteArrayOutputStream baos=new  ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG,75, baos);
         byte [] b=baos.toByteArray();
         String temp= Base64.encodeToString(b, Base64.DEFAULT);
+
         return temp;
+    }
+    public static Bitmap rotateBitmap(Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
+    }
+    public void activateUploadButton(){
+        image64Post = getStringImage(bmp);
+        userTokenPost=getUserToken();
+        sendButton.setClickable(true);
+        sendButton.setText("GÖNDER");
+        Log.d(TAG,"sendButton activated");
     }
 
 

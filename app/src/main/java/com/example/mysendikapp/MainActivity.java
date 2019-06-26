@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
 
         Intent i = new Intent(MainActivity.this , com.example.mysendikapp.login.loginActivity.class);
         startActivity(i);
-
     }
 
 }

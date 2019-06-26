@@ -17,7 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.R;
-import com.example.mysendikapp.dashboard.SplashAct;
+import com.example.mysendikapp.dashboard.splashDashboard;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -117,7 +117,7 @@ String TAG= "sifreDegistirActivity";
         editor.apply();
         Toasty.success(this, "Giriş başarılı.", Toast.LENGTH_SHORT, true).show();
 
-        Intent i = new Intent(this, SplashAct.class);
+        Intent i = new Intent(this, splashDashboard.class);
         startActivity(i);
 
     }

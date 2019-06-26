@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.R;
+import com.example.mysendikapp.login.loginActivity;
 
 
 import org.json.JSONArray;
@@ -54,6 +55,8 @@ public class etkinlikAkisi extends AppCompatActivity {
         recyclerView.getAdapter();
         fetchingJSON();
         initScrollListener();
+
+        loginActivity.checkConditions(etkinlikAkisi.this);
     }
 
     public void initScrollListener() {
@@ -118,8 +121,6 @@ public class etkinlikAkisi extends AppCompatActivity {
         recyclerView.setAdapter(rvAdapter);
         isLoading = false;
     }
-
-
 
     private void fetchingJSON() {
         isLoading = true;

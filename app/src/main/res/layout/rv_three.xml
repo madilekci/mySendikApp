@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_marginBottom="10dp"
+    android:background="@color/colorPrimary">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_rv_three"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color10"
+        app:cardBackgroundColor="@color/color10"
+        app:cardCornerRadius="10dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.75"
+            android:background="@color/color11"
+
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.8"
+                android:background="@color/color11"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_title_rv_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/color10"
+                    android:ellipsize="end"
+
+                    android:maxLines="2"
+                    android:padding="5sp"
+
+                    android:text="Bildirim başlığı"
+                    android:textAllCaps="true"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_date_rv_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+
+                    android:layout_weight="2"
+                    android:background="@color/color10"
+
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:padding="5sp"
+                    android:text="12.02.1998"
+                    android:textAllCaps="true"
+                    android:textSize="8sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_content_rv_three"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color10"
+                android:ellipsize="end"
+                android:maxLines="6"
+                android:padding="5sp"
+                android:text="Supposedly android:maxLines= and android:singleLine= should do basically android:maxLines= and android:singleLine= should do basicalthe same thing and since singleLine is apparently deprecated I would prefer not to use it, but when I take it out, the marquee doesn't scroll anymore. Taking maxLines out doesn't affect it, Supposedly android:maxLiand android:singleLine=should do basically the same thing and since singleLine is apparently deprecated I would prefer not to use it, but when I take it out, the marquee doesn't scroll anymore. Taking maxLines out doesn't affect it, though.  Related:though.  Related:" />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

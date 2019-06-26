@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="horizontal"
+    tools:context=".sosyal.hangiSosyalActivity">
+
+    <ImageView
+        android:id="@+id/iv_facebook_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_margin="2dp"
+        android:layout_weight="1"
+
+        android:background="@android:color/white"
+        android:foregroundGravity="center_vertical"
+        android:padding="10dp"
+        android:src="@drawable/menufacebook"
+        app:layout_column="1"
+        app:layout_gravity="fill"
+        app:layout_row="0" />
+
+    <ImageView
+        android:id="@+id/iv_twitter_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_margin="2dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:foregroundGravity="center_vertical"
+        android:padding="10dp"
+        android:src="@drawable/menutwitterlogo"
+        app:layout_column="0"
+        app:layout_gravity="fill"
+        app:layout_row="0" />
+</LinearLayout>

@@ -13,9 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".bildirimler.bildirimAkisi"
+        <activity android:name=".sosyal.hangiSosyalActivity"></activity>
+        <activity android:name=".anketler.anketDoldur" />
+        <activity android:name=".anketler.anketAkisi" />
+        <activity
+            android:name=".bildirimler.bildirimAkisi"
             android:screenOrientation="portrait" />
-        <activity android:name=".etkinlik.etkinlikOlustur"
+        <activity
+            android:name=".etkinlik.etkinlikOlustur"
             android:screenOrientation="portrait" />
         <activity
             android:name=".etkinlik.etkinlikDetaylari"
@@ -39,7 +44,7 @@
             android:name=".dashboard.ActivityDashboard"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".dashboard.SplashAct"
+            android:name=".dashboard.splashDashboard"
             android:screenOrientation="portrait" />
         <activity
             android:name=".login.loginActivity"
@@ -61,14 +66,17 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".SplashActivityMain"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII; -->
-
         <service
             android:name=".bildirimler.MyFirebaseMessagingService"
             android:exported="false">
@@ -93,7 +101,6 @@
         <meta-data
             android:name="firebase_messaging_auto_init_enabled"
             android:value="false" />
-
     </application>
 
 </manifest>

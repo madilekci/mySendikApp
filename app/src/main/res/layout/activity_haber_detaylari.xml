@@ -39,7 +39,8 @@
                 android:layout_weight="0.75"
                 android:background="@color/colorAccent"
                 android:maxLines="1"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textColor="@color/color10" />
 
             <Button
                 android:id="@+id/btn_view_haberDetaylari"
@@ -50,7 +51,8 @@
                 android:background="@color/colorPrimaryDark"
                 android:maxLines="1"
 
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textColor="@color/color10" />
 
         </LinearLayout>
 

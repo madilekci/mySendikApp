@@ -7,7 +7,7 @@
     <!--URL LER-->
 
     <string name="signInUrl">https://www.yucelyavuz.com/muhammed/login/kaydol.php</string>
-    <string name="talepSikayetUrl">https://www.yucelyavuz.com/muhammed/talepSikayetDeneme.php</string>
+    <string name="talepSikayetUrl">https://www.e-gorus.org/Api/getRequestComplaintInsert</string>
 
 
     <!--LOGİN-->
@@ -36,11 +36,13 @@
     <string name="defUserPass">416419rd</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
     <string name="talepSikayetHint">Görüşleriniz bizim için çok değerli.\nLütfen bize yazmaktan çekinmeyin.</string>
     <string-array name="talepSikayetItems">
         <item>ŞUBEYE GÖNDER</item>
         <item>GENEL MERKEZE GÖNDER</item>
     </string-array>
+    <string name="spinnerHint">Seçiniz</string>
 
 
 </resources>

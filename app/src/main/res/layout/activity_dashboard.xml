@@ -11,7 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="20">
+        android:layout_weight="1">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -40,39 +40,22 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/btn_butunHaberleriGor_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="28"
+        android:layout_marginTop="2dp"
+        android:layout_weight="2"
+        android:background="@color/colorPrimaryDark"
+        android:text="Tüm haberleri gör"
+        android:textColor="@color/color10" />
+
+    <LinearLayout
+        android:id="@+id/ll_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.2"
         android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btn_butunHaberleriGor_menu"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="1dp"
-            android:layout_weight="1"
-            android:background="@color/colorPrimaryDark"
-            android:text="Tüm haberleri gör" />
-
-        <Button
-            android:id="@+id/btn_etkinlikOlusturabilirMiyim"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="1dp"
-            android:layout_weight="1"
-            android:background="@color/colorPrimaryDark"
-            android:text="btn_etkinlikOlusturabilirMiyim" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/sv_dashboard"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="15">
 
         <android.support.v7.widget.GridLayout
             android:layout_width="match_parent"
@@ -82,18 +65,18 @@
             app:columnCount="3"
             app:rowCount="3">
 
+
             <ImageView
-                android:id="@+id/iv_twitter_menu"
+                android:id="@+id/iv_anketdoldur_menu"
                 android:layout_width="@dimen/div_dashboard_menuIconSize"
                 android:layout_height="@dimen/div_dashboard_menuIconSize"
-                android:layout_margin="1dp"
 
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginBottom="1dp"
                 android:background="@android:color/white"
-
-                android:foregroundGravity="center_vertical"
-                android:padding="15dp"
-
-                android:src="@drawable/menutwitterlogo"
+                android:padding="10dp"
+                android:src="@drawable/menuanketler"
                 app:layout_column="0"
                 app:layout_columnWeight="1"
                 app:layout_gravity="fill"
@@ -101,18 +84,17 @@
                 app:layout_rowWeight="0" />
 
             <ImageView
-                android:id="@+id/iv_facebook_menu"
+                android:id="@+id/iv_sosyalmedya_menu"
                 android:layout_width="@dimen/div_dashboard_menuIconSize"
                 android:layout_height="@dimen/div_dashboard_menuIconSize"
-                android:layout_margin="1dp"
 
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginBottom="1dp"
                 android:background="@android:color/white"
-
-                android:foregroundGravity="center_vertical"
-                android:padding="15dp"
-                android:src="@drawable/menufacebook"
+                android:padding="10dp"
+                android:src="@drawable/menusosyalmedya"
                 app:layout_column="1"
-
                 app:layout_columnWeight="1"
                 app:layout_gravity="fill"
                 app:layout_row="0"
@@ -123,10 +105,11 @@
                 android:layout_width="@dimen/div_dashboard_menuIconSize"
                 android:layout_height="@dimen/div_dashboard_menuIconSize"
 
-                android:layout_margin="1dp"
-
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginBottom="1dp"
                 android:background="@android:color/white"
-                android:padding="15dp"
+                android:padding="10dp"
                 android:src="@drawable/menuetkinlikler"
                 app:layout_column="2"
                 app:layout_columnWeight="1"
@@ -143,63 +126,12 @@
                 android:background="@android:color/white"
 
                 android:foregroundGravity="center_vertical"
-                android:padding="15dp"
+                android:padding="10dp"
                 android:src="@drawable/menutalepsikayet"
                 app:layout_column="0"
                 app:layout_columnWeight="1"
                 app:layout_gravity="fill"
                 app:layout_row="1"
-                app:layout_rowWeight="1" />
-
-            <ImageView
-                android:id="@+id/iv_hakkinda_menu"
-                android:layout_width="@dimen/div_dashboard_menuIconSize"
-                android:layout_height="@dimen/div_dashboard_menuIconSize"
-                android:layout_margin="1dp"
-
-                android:background="@android:color/white"
-
-                android:foregroundGravity="center_vertical"
-                android:padding="15dp"
-                android:src="@drawable/menuhakkinda"
-                app:layout_column="1"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                app:layout_row="1"
-                app:layout_rowWeight="1" />
-
-            <ImageView
-                android:id="@+id/iv_yonetim_menu"
-                android:layout_width="@dimen/div_dashboard_menuIconSize"
-                android:layout_height="@dimen/div_dashboard_menuIconSize"
-                android:layout_margin="1dp"
-
-                android:background="@android:color/white"
-
-                android:foregroundGravity="center_vertical"
-                android:padding="15dp"
-                android:src="@drawable/menuyonetim"
-                app:layout_column="2"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                app:layout_row="1"
-                app:layout_rowWeight="1" />
-
-            <ImageView
-                android:id="@+id/iv_subeler_menu"
-                android:layout_width="@dimen/div_dashboard_menuIconSize"
-                android:layout_height="@dimen/div_dashboard_menuIconSize"
-                android:layout_margin="1dp"
-
-                android:background="@android:color/white"
-
-                android:foregroundGravity="center_vertical"
-                android:padding="15dp"
-                android:src="@drawable/menusubeler"
-                app:layout_column="0"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                app:layout_row="2"
                 app:layout_rowWeight="1" />
 
             <ImageView
@@ -211,13 +143,14 @@
                 android:background="@android:color/white"
 
                 android:foregroundGravity="center_vertical"
-                android:padding="15dp"
+                android:padding="10dp"
                 android:src="@drawable/menubildirimler"
                 app:layout_column="1"
                 app:layout_columnWeight="1"
                 app:layout_gravity="fill"
-                app:layout_row="2"
+                app:layout_row="1"
                 app:layout_rowWeight="1" />
+
             <ImageView
                 android:id="@+id/iv_etkinlikOlustur_menu"
                 android:layout_width="@dimen/div_dashboard_menuIconSize"
@@ -225,8 +158,57 @@
                 android:layout_margin="1dp"
                 android:background="@android:color/white"
                 android:foregroundGravity="center_vertical"
-                android:padding="15dp"
+                android:padding="10dp"
                 android:src="@drawable/menuetkinlikolustur"
+                app:layout_column="2"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill"
+                app:layout_row="1"
+                app:layout_rowWeight="1" />
+
+            <ImageView
+                android:id="@+id/iv_sozlesmem_menu"
+                android:layout_width="@dimen/div_dashboard_menuIconSize"
+                android:layout_height="@dimen/div_dashboard_menuIconSize"
+                android:layout_margin="1dp"
+
+                android:background="@android:color/white"
+
+                android:foregroundGravity="center_vertical"
+                android:padding="10dp"
+                android:src="@drawable/menusozlesme"
+                app:layout_column="0"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill"
+                app:layout_row="2"
+                app:layout_rowWeight="1" />
+
+            <ImageView
+                android:id="@+id/iv_galeri_menu"
+                android:layout_width="@dimen/div_dashboard_menuIconSize"
+                android:layout_height="@dimen/div_dashboard_menuIconSize"
+                android:layout_margin="1dp"
+
+                android:background="@android:color/white"
+
+                android:foregroundGravity="center_vertical"
+                android:padding="10dp"
+                android:src="@drawable/menugallery"
+                app:layout_column="1"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill"
+                app:layout_row="2"
+                app:layout_rowWeight="1" />
+
+            <ImageView
+                android:id="@+id/iv_videolar_menu"
+                android:layout_width="@dimen/div_dashboard_menuIconSize"
+                android:layout_height="@dimen/div_dashboard_menuIconSize"
+                android:layout_margin="1dp"
+                android:background="@android:color/white"
+                android:foregroundGravity="center_vertical"
+                android:padding="10dp"
+                android:src="@drawable/menuvideoplayer"
                 app:layout_column="2"
                 app:layout_columnWeight="1"
                 app:layout_gravity="fill"

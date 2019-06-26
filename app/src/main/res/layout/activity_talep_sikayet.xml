@@ -10,7 +10,19 @@
 
 
     <EditText
-        android:id="@+id/tv_claimComplaint"
+        android:id="@+id/tv_konu_claimComplaint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="170"
+        android:ems="10"
+        android:gravity="top"
+        android:maxLines="1"
+        android:hint="Konu"
+        android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
+        android:padding="15dp"
+        android:textColor="@color/colorPrimary" />
+    <EditText
+        android:id="@+id/tv_aciklama_claimComplaint"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="100"
@@ -24,6 +36,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -31,7 +44,6 @@
             android:id="@+id/sp_talep"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
             android:layout_weight="1"
             android:background="@color/color11"
             android:spinnerMode="dropdown">
@@ -44,8 +56,17 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDark"
-            android:text="Fotoğraf ekle" />
+            android:text="Fotoğraf ekle"
+            android:textColor="@color/color10"
+            android:textSize="10sp" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_talep"
+        android:layout_width="match_parent"
+        android:layout_height="100pt"
+        android:layout_weight="1"
+        tools:srcCompat="@tools:sample/backgrounds/scenic[0]" />
 
     <Button
         android:id="@+id/btn_talepGonder"
@@ -55,18 +76,11 @@
         android:layout_weight="1"
         android:background="@color/colorPrimary"
         android:text="GÖNDER"
-        android:textColor="@android:color/white"
-        android:textSize="30sp"
+        android:textSize="15sp"
+        android:textStyle="bold"
         android:typeface="serif"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="0dp" />
-
-    <ImageView
-        android:id="@+id/iv_talep"
-        android:layout_width="match_parent"
-        android:layout_height="100pt"
-        android:layout_weight="1"
-        tools:srcCompat="@tools:sample/backgrounds/scenic[0]" />
 
 
 </LinearLayout>

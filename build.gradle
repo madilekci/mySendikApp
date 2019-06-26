@@ -19,7 +19,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url "https://jitpack.io" }      // for ToastyLibrary
+        maven { url "https://jitpack.io" }
         
     }
 }

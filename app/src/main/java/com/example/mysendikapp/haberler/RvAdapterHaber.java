@@ -84,5 +84,6 @@ public class RvAdapterHaber extends RecyclerView.Adapter<RvAdapterHaber.MyViewHo
             this.haberID=gelenID;
         }
     }
+
 }
 

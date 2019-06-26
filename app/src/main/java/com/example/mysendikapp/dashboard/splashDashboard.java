@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Space;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,20 +18,14 @@ import com.example.mysendikapp.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import es.dmoral.toasty.Toasty;
-
-public class SplashAct extends AppCompatActivity {
+public class splashDashboard extends AppCompatActivity {
     String TAG="splashAct";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
         updateNotificationToken();
         Intent i = new Intent(this, ActivityDashboard.class);
         startActivity(i);
@@ -92,6 +84,7 @@ public class SplashAct extends AppCompatActivity {
 
         return false;
     }
+
 
 
 }
