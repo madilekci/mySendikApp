@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/opMenuLogout"
-        android:icon="@drawable/optioncikisyap"
-        android:title="Çıkış Yap"
-        app:showAsAction="always" />
 
     <item
         android:id="@+id/action_more"
         android:icon="@drawable/opmenuicon"
         android:title=""
-        app:showAsAction="always">
+        app:showAsAction="always"
+        android:orderInCategory="0">
         <menu>
             <item
                 android:id="@+id/opMenuHakkinda"
@@ -35,5 +31,11 @@
                 app:showAsAction="ifRoom" />
         </menu>
     </item>
+    <item
+        android:id="@+id/opMenuLogout"
+        android:icon="@drawable/optioncikisyap"
+        android:title="Çıkış Yap"
+        app:showAsAction="always" />
+
 
 </menu>

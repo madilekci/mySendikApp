@@ -3,6 +3,7 @@ package com.example.mysendikapp.etkinlik;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -14,16 +15,18 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -34,6 +37,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mysendikapp.ActivityTalepSikayet;
 import com.example.mysendikapp.R;
 
 import java.io.ByteArrayOutputStream;
@@ -50,12 +54,11 @@ public class etkinlikOlustur extends AppCompatActivity {
     ImageView iv;
     Bitmap bmp;
     public boolean isLoading = false;
-    private static final int PICK_IMAGE_REQUEST = 100;
-    private static final int PERMISSION_REQUEST_CODE = 101;
+    private static final int PICK_IMAGE_CAMERA_REQUEST = 99,PICK_IMAGE_REQUEST = 100,PERMISSION_REQUEST_CODE = 101;
 
     String image64Post, userTokenPost, titlePost, contentPost;
     String selectedDate, selectedTime;
-
+    Spinner sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,13 @@ public class etkinlikOlustur extends AppCompatActivity {
         setContentView(R.layout.activity_etkinlik_olustur);
 
         iv = (ImageView) (findViewById(R.id.iv_etkinlikOlustur));
+
+        ///
+        sp = (Spinner) findViewById(R.id.sp_etkinlikOlustur);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.etkinlikOlusturItems,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp.setAdapter(adapter);
+        ///
 
         sendButton = (Button) findViewById(R.id.btn_Olustur_etkinlik);
         sendButton.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +86,7 @@ public class etkinlikOlustur extends AppCompatActivity {
         btnGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openGallery(v);
+                fotografEkleOnClick(v);
             }
         });
 
@@ -271,15 +281,78 @@ public class etkinlikOlustur extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    etkinlikOlustur.this.activateUploadButton();
+                }
+            }, 250);
         }
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                etkinlikOlustur.this.activateUploadButton();
-            }
-        }, 250);
+
+        if (requestCode == PICK_IMAGE_CAMERA_REQUEST && resultCode == RESULT_OK && data != null && data.getExtras()!=null ){
+            //Getting the Bitmap from Gallery
+            Log.d(TAG,"onActivityResul PickImageFromCamera");
+            Log.d(TAG,"data.getExtras --> "+data);
+
+            bmp = (Bitmap) data.getExtras().get("data");
+//            bmp = rotateBitmap(bmp, 90);
+
+
+            //Setting the Bitmap to ImageView
+            iv.setImageBitmap(bmp);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    etkinlikOlustur.this.activateUploadButton();
+                }
+            }, 250);
+
+
+
+        }
     }
 
+    public void fotografEkleOnClick(View v){
+        final CharSequence[] items = {"Fotoğraf çek","Galeriden bir fotoğraf seç","İptal"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(etkinlikOlustur.this);
+        builder.setTitle("Fotoğraf Ekle");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(items[which].equals("Fotoğraf çek")){
+                    openCamera();
+                }else if (items[which].equals("Galeriden bir fotoğraf seç")){
+                    openGallery();
+                }else if(items[which].equals("İptal")){
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+    public void openCamera(){
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (!checkPermission()) {
+                requestPermission();
+            }
+        }
+
+        sendButton.setText("Lütfen bekleyin");
+        sendButton.setClickable(false);
+        Intent cmr = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cmr, PICK_IMAGE_CAMERA_REQUEST);
+    }
+    public void openGallery() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (!checkPermission()) {
+                requestPermission();
+            }
+        }
+
+        Intent glr = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(glr, PICK_IMAGE_REQUEST);
+
+    }
     public void activateUploadButton() {
         image64Post = getStringImage(bmp);
         userTokenPost = getUserToken();
@@ -287,7 +360,6 @@ public class etkinlikOlustur extends AppCompatActivity {
         sendButton.setText("Etkinlik Oluştur");
         Log.d(TAG, "sendButton activated");
     }
-
     public void uploadDataSet(View v) {
         EditText txt_1 = (EditText) findViewById(R.id.tv_baslik_etkinlikOlustur);
         EditText txt_2 = (EditText) findViewById(R.id.tv_content_etkinlikOlustur);
@@ -302,25 +374,11 @@ public class etkinlikOlustur extends AppCompatActivity {
             Toast.makeText(this, "Lütfen Gerekli Alanları Doldurun", Toast.LENGTH_LONG).show();
         }
     }
-
-    public void openGallery(View v) {
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (!checkPermission()) {
-                requestPermission();
-            }
-        }
-
-        Intent glr = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(glr, PICK_IMAGE_REQUEST);
-
-    }
-
     public String getUserToken() {
         SharedPreferences xd = getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = xd.edit();
         return xd.getString("userToken", "noTokens");
     }
-
     public String getStringImage(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 75, baos);
@@ -329,7 +387,6 @@ public class etkinlikOlustur extends AppCompatActivity {
 
         return temp;
     }
-
     public static Bitmap rotateBitmap(Bitmap source, float angle) {
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);

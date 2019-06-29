@@ -1,6 +1,7 @@
 package com.example.mysendikapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -12,6 +13,7 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -32,8 +34,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.mysendikapp.etkinlik.etkinlikOlustur;
-
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -47,7 +47,7 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
 
     String konuPost, aciklamaPost, userTokenPost, image64Post;
 
-    private static final int PICK_IMAGE_REQUEST=100, PERMISSION_REQUEST_CODE = 101;;
+    private static final int PICK_IMAGE_CAMERA_REQUEST = 99,PICK_IMAGE_GALLERY_REQUEST =100, PERMISSION_REQUEST_CODE = 101;;
     Button sendButton,btnGallery;
     ImageView iv;
     Spinner sp;
@@ -81,7 +81,7 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
         btnGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openGallery(v);
+                fotografEkleOnClick(v);
             }
         });
 
@@ -119,9 +119,9 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
         switch (requestCode) {
             case PERMISSION_REQUEST_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(ActivityTalepSikayet.this, "Permission Granted Successfully! ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ActivityTalepSikayet.this, "Gerekli izinleri sağladığınız için teşekkürler", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(ActivityTalepSikayet.this, "Permission Denied 🙁 ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ActivityTalepSikayet.this, "İzin reddedildi. Fotoğraf ekleyemeyeceksiniz. 🙁 ", Toast.LENGTH_LONG).show();
                 }
                 break;
         }
@@ -206,29 +206,85 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+        if (requestCode == PICK_IMAGE_GALLERY_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri filePath = data.getData();
             try {
 
                 //Getting the Bitmap from Gallery
                 bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                bmp = rotateBitmap(bmp,90);
-                Log.d(TAG, "bmp ->>"+bmp);
+                bmp = rotateBitmap(bmp, 90);
+                Log.d(TAG, "bmp ->>" + bmp);
                 //Setting the Bitmap to ImageView
                 iv.setImageBitmap(bmp);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        ActivityTalepSikayet.this.activateUploadButton();
+                    }
+                }, 250);
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ActivityTalepSikayet.this.activateUploadButton();
-            }
-        }, 250);
+
+
+        if (requestCode == PICK_IMAGE_CAMERA_REQUEST && resultCode == RESULT_OK && data != null && data.getExtras()!=null ){
+                //Getting the Bitmap from Gallery
+            Log.d(TAG,"onActivityResul PickImageFromCamera");
+            Log.d(TAG,"data.getExtras --> "+data);
+
+                bmp = (Bitmap) data.getExtras().get("data");
+//                bmp = rotateBitmap(bmp, 90);
+
+
+                //Setting the Bitmap to ImageView
+                iv.setImageBitmap(bmp);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        ActivityTalepSikayet.this.activateUploadButton();
+                    }
+                }, 250);
+
+
+
+        }
     }
-    public void openGallery(View v){
+
+    public void fotografEkleOnClick(View v){
+        final CharSequence[] items = {"Fotoğraf çek","Galeriden bir fotoğraf seç","İptal"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(ActivityTalepSikayet.this);
+        builder.setTitle("Fotoğraf Ekle");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(items[which].equals("Fotoğraf çek")){
+                    openCamera();
+                }else if (items[which].equals("Galeriden bir fotoğraf seç")){
+                    openGallery();
+                }else if(items[which].equals("İptal")){
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+
+    public void openCamera(){
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (!checkPermission()) {
+                requestPermission();
+            }
+        }
+
+        sendButton.setText("Lütfen bekleyin");
+        sendButton.setClickable(false);
+        Intent cmr = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cmr, PICK_IMAGE_CAMERA_REQUEST);
+    }
+    public void openGallery(){
         if (Build.VERSION.SDK_INT >= 23) {
             if (!checkPermission()) {
                 requestPermission();
@@ -238,7 +294,7 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
         sendButton.setText("Lütfen bekleyin");
         sendButton.setClickable(false);
         Intent glr = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(glr,PICK_IMAGE_REQUEST);
+        startActivityForResult(glr, PICK_IMAGE_GALLERY_REQUEST);
     }
     public String getUserToken(){
         SharedPreferences xd = getSharedPreferences("sharedPref",Context.MODE_PRIVATE);

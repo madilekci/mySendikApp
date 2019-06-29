@@ -12,8 +12,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".sosyal.hangiSosyalActivity"></activity>
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".anketler.anketWebViev"></activity>
+        <activity android:name=".sosyal.hangiSosyalActivity" />
         <activity android:name=".anketler.anketDoldur" />
         <activity android:name=".anketler.anketAkisi" />
         <activity

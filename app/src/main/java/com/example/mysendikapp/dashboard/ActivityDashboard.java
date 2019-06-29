@@ -7,8 +7,10 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -21,27 +23,25 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.anketler.anketDoldur;
+import com.example.mysendikapp.anketler.anketWebViev;
 import com.example.mysendikapp.bildirimler.bildirimAkisi;
 import com.example.mysendikapp.etkinlik.etkinlikAkisi;
 import com.example.mysendikapp.etkinlik.etkinlikOlustur;
-import com.example.mysendikapp.icerikSayfalari.ActivityHakkinda;
-import com.example.mysendikapp.icerikSayfalari.ActivityYonetim;
-import com.example.mysendikapp.icerikSayfalari.ActivitySubeler;
 import com.example.mysendikapp.ActivityTalepSikayet;
 import com.example.mysendikapp.R;
 import com.example.mysendikapp.haberler.*;
+import com.example.mysendikapp.icerikSayfalari.ActivityHakkinda;
+import com.example.mysendikapp.icerikSayfalari.ActivitySubeler;
+import com.example.mysendikapp.icerikSayfalari.ActivityYonetim;
 import com.example.mysendikapp.sosyal.*;
-import com.fangxu.allangleexpandablebutton.AllAngleExpandableButton;
-import com.fangxu.allangleexpandablebutton.ButtonData;
+
 import com.viewpagerindicator.CirclePageIndicator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -72,7 +72,8 @@ public class ActivityDashboard extends AppCompatActivity  {
 
 
     public void initOptionMenu(){
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.custom_app_bar);
+        setSupportActionBar(toolbar);
     }
 
     //Main menu
@@ -82,7 +83,7 @@ public class ActivityDashboard extends AppCompatActivity  {
         findViewById(R.id.iv_anketdoldur_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ActivityDashboard.this, anketDoldur.class);
+                Intent i = new Intent(ActivityDashboard.this, anketWebViev.class);
                 startActivity(i);
             }
         });
@@ -149,33 +150,39 @@ public class ActivityDashboard extends AppCompatActivity  {
 
 
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_topmenu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
     @Override
     public void onBackPressed() {
     } //Do Nothing
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        //Inflate the menu; this adds items to the action bar if it is presents
-        getMenuInflater().inflate(R.menu.menu_topmenu, menu);
-        return true;
-    }
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent i = new Intent();
         switch (item.getItemId()) {
             case R.id.opMenuLogout:
                 this.logout();
+                startActivity(i);
                 break;
             case R.id.opMenuHakkinda:
+                i = new Intent(ActivityDashboard.this,ActivityHakkinda.class);
+                startActivity(i);
                 break;
             case R.id.opMenuYonetim:
+                i = new Intent(ActivityDashboard.this, ActivityYonetim.class);
+                startActivity(i);
                 break;
             case R.id.opMenuSubeler:
+                i = new Intent(ActivityDashboard.this, ActivitySubeler.class);
+                startActivity(i);
                 break;
             case R.id.opMenuAyarlar:
                 break;
-
         }
+
         return true;
     }
 

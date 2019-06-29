@@ -6,12 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".icerikSayfalari.ActivityHakkinda">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="Hello World from aboutUsActivity"
-        tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="16dp" />
+    <WebView
+        android:id="@+id/webViewHakkinda"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

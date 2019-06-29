@@ -18,7 +18,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.R;
 
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;

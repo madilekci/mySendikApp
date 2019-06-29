@@ -39,7 +39,8 @@
             android:ems="10"
             android:gravity="top"
             android:hint="Etkinlik açıklamasını girin"
-            android:inputType="textCapSentences|textNoSuggestions|textMultiLine" />
+            android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
+            android:textColor="@android:color/black" />
     </LinearLayout>
 
     <LinearLayout

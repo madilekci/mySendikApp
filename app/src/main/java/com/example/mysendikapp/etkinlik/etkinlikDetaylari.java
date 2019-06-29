@@ -25,7 +25,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.R;
 import com.example.mysendikapp.haberler.haberAkisi;
-import com.example.mysendikapp.haberler.haberDetaylari;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
