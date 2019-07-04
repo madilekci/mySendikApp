@@ -2,6 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <item
         android:id="@+id/action_more"
         android:icon="@drawable/opmenuicon"
@@ -11,31 +12,33 @@
         <menu>
             <item
                 android:id="@+id/opMenuHakkinda"
-                android:icon="@drawable/opmenuhakkinda"
+                android:icon="@drawable/opmenu_hakkinda"
                 android:title="Hakkımızda"
                 app:showAsAction="ifRoom" />
             <item
                 android:id="@+id/opMenuSubeler"
-                android:icon="@drawable/opmenusubeler"
+                android:icon="@drawable/opmenu_subeler"
                 android:title="Şubelerimiz"
                 app:showAsAction="ifRoom" />
             <item
                 android:id="@+id/opMenuYonetim"
-                android:icon="@drawable/opmenuyonetim"
+                android:icon="@drawable/opmenu_yonetim"
                 android:title="Yönetim Kurulumuz"
                 app:showAsAction="ifRoom" />
             <item
                 android:id="@+id/opMenuAyarlar"
-                android:icon="@drawable/opmenuayarlar"
+                android:icon="@drawable/opmenu_ayarlar"
                 android:title="Ayarlar"
                 app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/opMenuLogout"
+                android:icon="@drawable/opmenu_cikisyap"
+                android:title="Çıkış Yap"
+                app:showAsAction="always" />
+
         </menu>
     </item>
-    <item
-        android:id="@+id/opMenuLogout"
-        android:icon="@drawable/optioncikisyap"
-        android:title="Çıkış Yap"
-        app:showAsAction="always" />
+
 
 
 </menu>

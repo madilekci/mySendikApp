@@ -22,8 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.mysendikapp.anketler.anketDoldur;
 import com.example.mysendikapp.anketler.anketWebViev;
+import com.example.mysendikapp.ayarlarActivity;
 import com.example.mysendikapp.bildirimler.bildirimAkisi;
 import com.example.mysendikapp.etkinlik.etkinlikAkisi;
 import com.example.mysendikapp.etkinlik.etkinlikOlustur;
@@ -31,8 +31,11 @@ import com.example.mysendikapp.ActivityTalepSikayet;
 import com.example.mysendikapp.R;
 import com.example.mysendikapp.haberler.*;
 import com.example.mysendikapp.icerikSayfalari.ActivityHakkinda;
+import com.example.mysendikapp.icerikSayfalari.ActivitySozlesme;
 import com.example.mysendikapp.icerikSayfalari.ActivitySubeler;
+import com.example.mysendikapp.icerikSayfalari.ActivityVideolar;
 import com.example.mysendikapp.icerikSayfalari.ActivityYonetim;
+import com.example.mysendikapp.icerikSayfalari.ActivityGallery;
 import com.example.mysendikapp.sosyal.*;
 
 import com.viewpagerindicator.CirclePageIndicator;
@@ -95,7 +98,37 @@ public class ActivityDashboard extends AppCompatActivity  {
                 startActivity(i);
             }
         });
-        //sosyal\\
+
+
+        //Videolar
+        findViewById(R.id.iv_videolar_menu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ActivityDashboard.this, ActivityVideolar.class);
+                startActivity(i);
+            }
+        });
+        //Videolar\\
+
+        //Galeri
+        findViewById(R.id.iv_galeri_menu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ActivityDashboard.this, ActivityGallery.class);
+                startActivity(i);
+            }
+        });
+        //Galeri\\
+
+        //Sozlesme
+        findViewById(R.id.iv_sozlesmem_menu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ActivityDashboard.this, ActivitySozlesme.class);
+                startActivity(i);
+            }
+        });
+        //Sozlesme\\
 
         //Etkinlikler
         findViewById(R.id.iv_etkinlikListele_menu).setOnClickListener(new View.OnClickListener() {
@@ -165,7 +198,6 @@ public class ActivityDashboard extends AppCompatActivity  {
         switch (item.getItemId()) {
             case R.id.opMenuLogout:
                 this.logout();
-                startActivity(i);
                 break;
             case R.id.opMenuHakkinda:
                 i = new Intent(ActivityDashboard.this,ActivityHakkinda.class);
@@ -180,6 +212,8 @@ public class ActivityDashboard extends AppCompatActivity  {
                 startActivity(i);
                 break;
             case R.id.opMenuAyarlar:
+                i = new Intent(ActivityDashboard.this, ayarlarActivity.class);
+                startActivity(i);
                 break;
         }
 

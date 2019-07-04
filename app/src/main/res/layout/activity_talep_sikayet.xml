@@ -9,79 +9,91 @@
     tools:context=".sosyal.ActivityTwitter">
 
 
-    <EditText
-        android:id="@+id/tv_konu_claimComplaint"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="170"
-        android:ems="10"
-        android:gravity="top"
-        android:hint="Konu"
-        android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
-        android:maxLines="1"
-        android:padding="15dp"
-        android:textColor="@android:color/black" />
-
-    <EditText
-        android:id="@+id/tv_aciklama_claimComplaint"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="100"
-        android:ems="10"
-        android:gravity="top"
-        android:hint="@string/talepSikayetHint"
-        android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
-        android:padding="15dp"
-        android:textColor="@android:color/black" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_weight="5"
+        android:orientation="vertical">
 
         <Spinner
             android:id="@+id/sp_talep"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:background="@color/color11"
             android:spinnerMode="dropdown">
 
         </Spinner>
 
-        <Button
-            android:id="@+id/btn_fotografEkle_talep"
+        <EditText
+            android:id="@+id/tv_konu_claimComplaint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_weight="2.5"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="Konu"
+            android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
+            android:maxLines="1"
+            android:padding="15dp"
+            android:textColor="@android:color/black" />
+
+        <EditText
+            android:id="@+id/tv_aciklama_claimComplaint"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/colorPrimaryDark"
-            android:text="Fotoğraf ekle"
-            android:textColor="@color/color10"
-            android:textSize="10sp" />
+            android:ems="10"
+            android:gravity="top"
+            android:hint="@string/talepSikayetHint"
+            android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
+            android:padding="15dp"
+            android:textColor="@android:color/black" />
+
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/iv_talep"
-        android:layout_width="match_parent"
-        android:layout_height="100pt"
-        android:layout_weight="1"
-        tools:srcCompat="@tools:sample/backgrounds/scenic[0]" />
-
     <Button
-        android:id="@+id/btn_talepGonder"
+        android:id="@+id/btn_fotografEkle_talep"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:layout_weight="11"
+        android:background="@color/colorPrimaryDark"
+        android:drawableEnd="@drawable/photo_camera_icon"
+        android:paddingLeft="20dp"
+        android:paddingRight="5dp"
+        android:text="Fotoğraf ekle  "
+        android:textColor="@color/color10"
+        android:textSize="10sp" />
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="53dp"
-        android:layout_marginBottom="8dp"
-        android:layout_weight="1"
-        android:background="@color/colorPrimary"
-        android:text="GÖNDER"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:typeface="serif"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_height="match_parent"
+        android:layout_weight="8"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_talep"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:srcCompat="@tools:sample/backgrounds/scenic[0]" />
+
+        <Button
+            android:id="@+id/btn_talepGonder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="3.6"
+            android:background="@color/colorPrimary"
+            android:text="GÖNDER"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:typeface="serif"
+            tools:layout_editor_absoluteX="0dp" />
+    </LinearLayout>
 
 
 </LinearLayout>

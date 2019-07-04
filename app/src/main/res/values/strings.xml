@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">e-Sendika</string>
+    <string name="app_name">e-STK</string>
 
     <!--URL LER-->
     <!--URL LER-->
@@ -8,6 +8,9 @@
 
 
     <string name="talepSikayetUrl">https://www.e-stk.com/Api/getRequestComplaintInsert</string>
+
+    <!-- token=userTokenPost-->
+    <string name="sozlesmeUrl">https://www.e-stk.com/Api/Sozlesme</string>
 
     <!--LOGİN-->
     <string name="loginUrl">https://www.e-stk.com/Api/Login</string>
@@ -32,6 +35,8 @@
     <string name="webVievHakkimizdaUrl">https://www.e-stk.com/mobil/Hakkimizda</string>
     <string name="webViewBoardMembersUrl">https://www.e-stk.com/mobil/YonetimKurulu</string>
     <string name="webVievSubelerUrl">https://www.e-stk.com/mobil/Subeler</string>
+    <string name="webVievVideolarUrl">https://www.e-stk.com/Mobil/TV</string>
+    <string name="webVievGaleriUrl">https://www.e-stk.com/Mobil/Galeri</string>
     <!--URL LER-->
     <!--URL LER-->
 
@@ -56,7 +61,7 @@
         <item>Emeklilik</item>
         <item>Diğer</item>
     </string-array>
-    <string name="spinnerHint">Seçiniz</string>
+    <string name="spinnerHint">Etkinlik türünü seçiniz</string>
 
 
 </resources>

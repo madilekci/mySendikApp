@@ -37,7 +37,7 @@ public class fragmentGirisYap extends Fragment {
 
     SharedPreferences sp = null;
     String TAG = "login_Fragment";
-
+    String username,password;
 
     public fragmentGirisYap() {
         // Required empty public constructor
@@ -56,7 +56,7 @@ public class fragmentGirisYap extends Fragment {
             }
         });
 
-        if (loginActivity.checkConditions(getActivity())) {      //No Internet Connection
+        if (loginActivity.checkConditions(getActivity() ) ) {      //No Internet Connection
 
             sp = this.getActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
             if (sp.getBoolean("isLogged", false)) {
@@ -75,8 +75,8 @@ public class fragmentGirisYap extends Fragment {
         final TextView txtUsername = (TextView) getView().findViewById(R.id.tv_username_girisYap);
         final TextView txtPassword = (TextView) getView().findViewById(R.id.tv_password_girisYap);
 
-        final String username = "" + txtUsername.getText().toString();
-        final String password = "" + txtPassword.getText().toString();
+        username = "" + txtUsername.getText().toString();
+        password = "" + txtPassword.getText().toString();
         Log.d("login", "username: " + username);
         Log.d("login", "password: " + password);
 
@@ -139,6 +139,11 @@ public class fragmentGirisYap extends Fragment {
         editor.remove("userToken");
         editor.putString("userToken", userToken);
         Log.d(TAG, "user_token ->>" + userToken);
+
+        editor.remove("username");
+        editor.putString("username",username);
+        editor.remove("password");
+        editor.putString("password",password);
         editor.apply();
 
     }

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ import es.dmoral.toasty.Toasty;
 
 public class sifreDegistirActivity extends AppCompatActivity {
 String TAG= "sifreDegistirActivity";
+    String password,username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +52,17 @@ String TAG= "sifreDegistirActivity";
             Toasty.info(this,"Girilen şifreler uyuşmuyor",Toasty.LENGTH_SHORT).show();
         }else {
             changePassword(sifre);
+        }
+    }
+
+    public void btnSifreAyniKalsinOnclick(View v){
+        SharedPreferences sp = this.getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
+        password=sp.getString("password","");
+        Log.d(TAG,"password --> "+password);
+        if(password.equals("")){
+            Toasty.warning(this,"Bilinmeyen bir hata oluştu. Lütfen geliştirici ekibe danışın.",Toasty.LENGTH_SHORT);
+        }else {
+            changePassword(password);
         }
     }
 
@@ -104,7 +117,6 @@ String TAG= "sifreDegistirActivity";
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         return false;
     }
 

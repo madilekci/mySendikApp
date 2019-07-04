@@ -11,16 +11,32 @@
     <!-- Custom Toolbar style. -->
     <style name="CustomToolbarStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:background">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
 
     <!-- Custom Toolbar style. -->
     <style name="CustomOptionStyle" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:background">@color/color10</item>
+
     </style>
 
     <!-- SplashScreen theme. -->
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/backgroundsplash</item>
+    </style>
+
+    <!-- Switch Buttons Style-->
+    <style name="switchButtonStyle" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <!--<item name="colorControlActivated">@color/enable_thumb</item>-->
+        <item name="colorControlActivated">@color/colorPrimaryDark</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">@color/disable_foreground</item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">@color/disable_thumb</item>
+        <!-- Switch Buttons Style-->
     </style>
 
 </resources>

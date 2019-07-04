@@ -19,7 +19,7 @@
         android:background="@android:color/white"
         android:foregroundGravity="center_vertical"
         android:padding="10dp"
-        android:src="@drawable/menufacebook"
+        android:src="@drawable/menu_facebook"
         app:layout_column="1"
         app:layout_gravity="fill"
         app:layout_row="0" />
@@ -35,7 +35,7 @@
         android:background="@android:color/white"
         android:foregroundGravity="center_vertical"
         android:padding="10dp"
-        android:src="@drawable/menutwitterlogo"
+        android:src="@drawable/menu_twitterlogo"
         app:layout_column="0"
         app:layout_gravity="fill"
         app:layout_row="0" />

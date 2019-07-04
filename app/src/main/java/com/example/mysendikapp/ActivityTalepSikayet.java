@@ -45,7 +45,7 @@ import es.dmoral.toasty.Toasty;
 public class ActivityTalepSikayet extends AppCompatActivity  {
     String TAG = "ActivityTalepSikayet";
 
-    String konuPost, aciklamaPost, userTokenPost, image64Post;
+    String konuPost="", aciklamaPost="", userTokenPost="", image64Post="";
 
     private static final int PICK_IMAGE_CAMERA_REQUEST = 99,PICK_IMAGE_GALLERY_REQUEST =100, PERMISSION_REQUEST_CODE = 101;;
     Button sendButton,btnGallery;
@@ -56,6 +56,7 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        userTokenPost=getUserToken();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_talep_sikayet);
 
@@ -126,7 +127,6 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
                 break;
         }
     }
-
     ///////////////////////////////////
     ///////////////////////////////////
 
@@ -138,7 +138,7 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
         konuPost = txt_0.getText().toString();
         aciklamaPost = txt_1.getText().toString();
 
-        if (!(konuPost.equals("")) && !(aciklamaPost.equals("")) && !isLoading ) {
+        if (!konuPost.equals("") && !aciklamaPost.equals("") && !isLoading ) {
             isLoading=true;
             makeRequest();
         } else {
@@ -209,7 +209,6 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
         if (requestCode == PICK_IMAGE_GALLERY_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri filePath = data.getData();
             try {
-
                 //Getting the Bitmap from Gallery
                 bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 bmp = rotateBitmap(bmp, 90);
@@ -219,6 +218,7 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        image64Post = getStringImage(bmp);
                         ActivityTalepSikayet.this.activateUploadButton();
                     }
                 }, 250);
@@ -226,13 +226,13 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else {
+            ActivityTalepSikayet.this.activateUploadButton();
         }
-
 
         if (requestCode == PICK_IMAGE_CAMERA_REQUEST && resultCode == RESULT_OK && data != null && data.getExtras()!=null ){
                 //Getting the Bitmap from Gallery
-            Log.d(TAG,"onActivityResul PickImageFromCamera");
-            Log.d(TAG,"data.getExtras --> "+data);
+            Log.d(TAG,"onActivityResult PickImageFromCamera");
 
                 bmp = (Bitmap) data.getExtras().get("data");
 //                bmp = rotateBitmap(bmp, 90);
@@ -243,13 +243,15 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        image64Post = getStringImage(bmp);
                         ActivityTalepSikayet.this.activateUploadButton();
                     }
                 }, 250);
 
 
 
-        }
+        }else {
+            ActivityTalepSikayet.this.activateUploadButton(); }
     }
 
     public void fotografEkleOnClick(View v){
@@ -270,8 +272,6 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
         });
         builder.show();
     }
-
-
     public void openCamera(){
         if (Build.VERSION.SDK_INT >= 23) {
             if (!checkPermission()) {
@@ -296,11 +296,6 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
         Intent glr = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(glr, PICK_IMAGE_GALLERY_REQUEST);
     }
-    public String getUserToken(){
-        SharedPreferences xd = getSharedPreferences("sharedPref",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = xd.edit();
-        return xd.getString("userToken","noTokens");
-    }
     public String getStringImage(Bitmap bitmap){
         ByteArrayOutputStream baos=new  ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG,75, baos);
@@ -309,17 +304,21 @@ public class ActivityTalepSikayet extends AppCompatActivity  {
 
         return temp;
     }
+
     public static Bitmap rotateBitmap(Bitmap source, float angle) {
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
         return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
     public void activateUploadButton(){
-        image64Post = getStringImage(bmp);
-        userTokenPost=getUserToken();
         sendButton.setClickable(true);
         sendButton.setText("GÖNDER");
         Log.d(TAG,"sendButton activated");
+    }
+    public String getUserToken(){
+        SharedPreferences xd = getSharedPreferences("sharedPref",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = xd.edit();
+        return xd.getString("userToken","noTokens");
     }
 
 

@@ -10,17 +10,35 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2.75"
+        android:layout_weight="4"
         android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/sp_etkinlikOlustur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.5"
+            android:spinnerMode="dialog" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/color11" />
 
         <EditText
             android:id="@+id/tv_baslik_etkinlikOlustur"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.75"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.6"
             android:ems="10"
             android:hint="Etkinlik adını girin"
             android:inputType="textPersonName"
@@ -32,27 +50,28 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="15dp"
-            android:layout_weight="10"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="100"
             android:ems="10"
             android:gravity="top"
             android:hint="Etkinlik açıklamasını girin"
             android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
             android:textColor="@android:color/black" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="5.25"
+        android:layout_weight="6.3"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="30"
+            android:layout_weight="10"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -60,10 +79,13 @@
                 android:id="@+id/btn_fotografEkle_etkinlik"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
-                android:layout_weight="1"
+                android:layout_margin="15dp"
+                android:layout_weight="1.2"
                 android:background="@color/colorPrimaryDark"
-                android:text="Fotoğraf ekle"
+
+                android:drawableRight="@drawable/photo_camera_icon"
+                android:paddingRight="5dp"
+                android:text="Fotoğraf Ekle"
                 android:textColor="@color/color10"
                 android:textSize="10sp" />
 
@@ -73,11 +95,10 @@
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_marginTop="2dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginBottom="2dp"
+                android:layout_margin="15dp"
                 android:layout_weight="1"
                 android:background="@color/colorPrimaryDark"
+                android:drawableEnd="@drawable/datetime_icon"
                 android:padding="15dp"
                 android:text="Tarih ve Saat seçiniz"
                 android:textColor="@android:color/white"
@@ -85,37 +106,57 @@
 
         </LinearLayout>
 
-        <Spinner
-            android:id="@+id/sp_etkinlikOlustur"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:prompt="@string/spinnerHint"
-            android:spinnerMode="dialog" />
-
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_etkinlikOlustur"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="2dp"
+        android:layout_weight="5.5"
+        android:padding="2dp"
+        tools:srcCompat="@tools:sample/backgrounds/scenic[0]" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3.8"
+        android:layout_weight="5.5"
         android:gravity="center"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iv_etkinlikOlustur"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:padding="2dp"
-            tools:srcCompat="@tools:sample/backgrounds/scenic[0]" />
+            android:orientation="vertical">
+            s
+
+            <CheckBox
+                android:id="@+id/cb_firmaAdi_etkinlikOlustur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:text="Etkinlik metninin sonuna çalıştığım şirketin adını ekle" />
+
+            <CheckBox
+                android:id="@+id/cb_telefon_etkinlikOlustur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:text="Etkinlik metninin sonuna telefon Numaramı ekle" />
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/btn_Olustur_etkinlik"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="5"
+            android:layout_weight="2"
             android:background="@color/colorPrimary"
             android:text="Etkinlik Oluştur" />
     </LinearLayout>

@@ -42,8 +42,9 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
     etkinlikModel ne_etkinlik;
 
     String TAG ="etkinlikDetaylari";
-    TextView mTv;
+    TextView mTv,olusturanTv;
     LinearLayout ll_root;
+    String adSoyad,firma,telNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,8 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
         setContentView(R.layout.activity_etkinlik_detaylari);
         this.ne_etkinlik = new etkinlikModel();
         this.getEtkinlikDetails(getIntent().getExtras().getString("etkinlik_id"), this.ne_etkinlik);
+
+        olusturanTv= (TextView)findViewById(R.id.tv_olusturan_etkinlikDetaylari);
 
         ll_root=(LinearLayout) findViewById(R.id.ll_root_etkinlikDetay);
         ll_root.setVisibility(View.INVISIBLE);
@@ -67,7 +70,7 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d("Response to getDetail", etkinlik_id+">>" + response);
+                        Log.d("", "Response to getDetail "+etkinlik_id+" ->>" + response);
                         parseJson(response, etkinlikModel_ne_etkinlik);
                     }
                 },
@@ -89,8 +92,10 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
         jsonStringRequest.setShouldCache(false);        // "CacheTutulmasıDurumu=false"
         queue.add(jsonStringRequest);
     }
-
     public void parseJson(String response, etkinlikModel etkinlikModel_ne_etkinlik) {
+        adSoyad=new String("");
+        firma=new String("");
+        telNo=new String("");
 
         try {
             haberAkisi.removeSimpleProgressDialog();
@@ -101,6 +106,17 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
             etkinlikModel_ne_etkinlik.setContent(dataobj.getString("content"));
             etkinlikModel_ne_etkinlik.setUrl(dataobj.getString("picture"));
             etkinlikModel_ne_etkinlik.setDate(dataobj.getString("date"));
+            adSoyad=dataobj.getString("adi");
+            firma=dataobj.getString("firma");
+            telNo=dataobj.getString("telefon");
+
+            olusturanTv.setText(olusturanTv.getText()+"\n"+adSoyad);
+            if(!firma.equals("")){
+                olusturanTv.setText(olusturanTv.getText()+"\n"+firma);
+            }
+            if (!telNo.equals("")){
+                olusturanTv.setText(olusturanTv.getText()+"\n"+telNo);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -109,7 +125,6 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
 
 
     }
-
     public void etkinlikYazdirConsole() {
         System.out.println("*//--*------*-----*-------*-------//*");
         System.out.println("" + this.ne_etkinlik.getContent());
@@ -118,7 +133,6 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
         System.out.println("" + this.ne_etkinlik.getDate());
         System.out.println("*//--*------*-----*-------*-------//*");
     }
-
     public void etkinlikGoster() {
         if (this.ne_etkinlik.equals(null)) {
             return;
