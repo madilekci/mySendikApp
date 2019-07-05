@@ -68,10 +68,10 @@ public class rvAdapterBildirim extends RecyclerView.Adapter<rvAdapterBildirim.My
         @Override
         public void onClick(View v) {
             Log.d(TAG,"Clicked to rv item  --> "+ bildirimID);
-            Context ctx = v.getContext();
-            Intent i = new Intent(ctx, etkinlikDetaylari.class);
-            i.putExtra("etkinlik_id",""+bildirimID);
-            ctx.startActivity(i);
+//            Context ctx = v.getContext();
+//            Intent i = new Intent(ctx, etkinlikDetaylari.class);
+//            i.putExtra("etkinlik_id",""+bildirimID);
+//            ctx.startActivity(i);
         }
         public void setEtkinlikID(String gelenID){
             this.bildirimID=gelenID;

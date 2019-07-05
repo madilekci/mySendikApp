@@ -2,6 +2,7 @@ package com.example.mysendikapp.bildirimler;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -52,11 +53,11 @@ public class bildirimAkisi extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.rv_bildirimFeed);
         recyclerView.getAdapter();
         fetchingJSON();
-        initScrollListener();
+        //initScrollListener();
 
     }
 
-    public void initScrollListener() {
+    /*public void initScrollListener() {
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -77,7 +78,7 @@ public class bildirimAkisi extends AppCompatActivity {
                 }
             }
         });
-    }
+    }*/
 
     @Override
     protected void onDestroy() {
@@ -125,7 +126,7 @@ public class bildirimAkisi extends AppCompatActivity {
         Log.d(TAG, "postpage : " + postPage);
         Log.d(TAG, "count : " + postCount);
 
-        String url = getResources().getString(R.string.etkinlikListeleUrl);    // Post atılan adres.
+        String url = getResources().getString(R.string.bildirimListeleUrl);    // Post atılan adres.
         StringRequest jsonStringRequest = new StringRequest(
                 Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -147,8 +148,7 @@ public class bildirimAkisi extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("page", String.valueOf(postPage));
-                params.put("count", String.valueOf(postCount));
+                params.put("token", getUserToken());
                 return params;
             }
         };
@@ -176,8 +176,8 @@ public class bildirimAkisi extends AppCompatActivity {
                 bildirimModel bildirimModel1 = new bildirimModel();
                 JSONObject dataobj = dataArray.getJSONObject(i);
 
-                bildirimModel1.setTitle(dataobj.getString("header"));
-                bildirimModel1.setContent(dataobj.getString("content"));
+                bildirimModel1.setTitle(dataobj.getString("title"));
+                bildirimModel1.setContent(dataobj.getString("message"));
                 bildirimModel1.setDate(dataobj.getString("date"));
                 bildirimModel1.setId(dataobj.getString("id"));
 
@@ -195,5 +195,10 @@ public class bildirimAkisi extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+    public String getUserToken() {
+        SharedPreferences xd = getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = xd.edit();
+        return xd.getString("userToken", "noTokens");
     }
 }

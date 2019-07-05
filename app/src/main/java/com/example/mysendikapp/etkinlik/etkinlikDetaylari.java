@@ -1,5 +1,6 @@
 package com.example.mysendikapp.etkinlik;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -24,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.R;
+import com.example.mysendikapp.dashboard.ActivityDashboard;
 import com.example.mysendikapp.haberler.haberAkisi;
 import com.squareup.picasso.Picasso;
 
@@ -57,6 +59,11 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
 
         ll_root=(LinearLayout) findViewById(R.id.ll_root_etkinlikDetay);
         ll_root.setVisibility(View.INVISIBLE);
+    }
+    @Override
+    public void onBackPressed(){
+        Intent i = new Intent(etkinlikDetaylari.this, ActivityDashboard.class);
+        startActivity(i);
     }
 
     public void getEtkinlikDetails(final String etkinlik_id, final etkinlikModel etkinlikModel_ne_etkinlik) {

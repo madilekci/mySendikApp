@@ -1,5 +1,6 @@
 package com.example.mysendikapp.haberler;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -54,9 +55,15 @@ public class haberDetaylari extends AppCompatActivity implements Html.ImageGette
 
     }
 
+    @Override
+    public void onBackPressed(){
+        Intent i = new Intent(haberDetaylari.this , haberAkisi.class);
+        startActivity(i);
+    }
+
     public  void getNewDetails (final String haber_id, final  haberModel haberModel_neHaber) {
         haberAkisi.showSimpleProgressDialog(this, "Loading...", "Fetching Json", false);
-
+        Log.d(TAG,"getNewDetails haber_id - > "+haber_id);
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = getResources().getString(R.string.haberDetayUrl);    // Post atılan adres.
 
@@ -138,6 +145,7 @@ public class haberDetaylari extends AppCompatActivity implements Html.ImageGette
         mTv.setText(spanned);
         ll_root.setVisibility(View.VISIBLE);
     }
+
 
 
     @Override

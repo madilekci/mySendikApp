@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.net.Uri;
@@ -61,7 +62,7 @@ public class etkinlikOlustur extends AppCompatActivity {
     public boolean isLoading = false;   // volley.StringRequest 4-5 kez gitmesin, kendini tekrar etmesin diye kullanılıyor.
     private static final int PICK_IMAGE_CAMERA_REQUEST = 99, PICK_IMAGE_REQUEST = 100, PERMISSION_REQUEST_CODE = 101; //Request kodlari
 
-    String image64Post = "", userTokenPost = "", titlePost = "", contentPost = "", datePost = "",eventTypePost="", isPhonePost ="", isFirmaAdiPost ="";       //Post atilacak parametreler
+    String image64Post = "", userTokenPost = "", titlePost = "", contentPost = "", datePost = "", eventTypePost = "", isPhonePost = "", isFirmaAdiPost = "";       //Post atilacak parametreler
     String selectedDate = "", selectedTime = "";      //Secilen tarih ve saat degerleri
     Spinner sp;
     ArrayList<String> etkinlikTipleri;
@@ -76,7 +77,7 @@ public class etkinlikOlustur extends AppCompatActivity {
 
         ///
         this.etkinlikTipleri = new ArrayList<String>();
-        etkinlikTipleri.add(0,getResources().getString(R.string.spinnerHint));
+        etkinlikTipleri.add(0, getResources().getString(R.string.spinnerHint));
         getEventTypes();
         sp = (Spinner) findViewById(R.id.sp_etkinlikOlustur);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, etkinlikTipleri);
@@ -364,7 +365,7 @@ public class etkinlikOlustur extends AppCompatActivity {
         sendButton.setText("Lütfen bekleyin");
         sendButton.setClickable(false);
         Intent cmr = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if(cmr.resolveActivity(getPackageManager()) != null) {
+        if (cmr.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(cmr, PICK_IMAGE_CAMERA_REQUEST);
         }
     }
@@ -386,17 +387,16 @@ public class etkinlikOlustur extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         sendButton.setText("Lütfen bekleyin");
         sendButton.setClickable(false);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK ){
-            if( data != null && data.getData() != null) {
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
+            if (data != null && data.getData() != null) {
                 Uri filePath = data.getData();
                 try {
                     //Getting the Bitmap from Gallery
                     bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                    bmp = rotateBitmap(bmp, 90);
+//                    bmp = rotateBitmap(bmp, 90);
                     Log.d(TAG, "bmp ->>" + bmp);
                     //Setting the Bitmap to ImageView
                     iv.setImageBitmap(bmp);
-//                iv.animate().rotation(90).setDuration(0);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -407,7 +407,7 @@ public class etkinlikOlustur extends AppCompatActivity {
                         etkinlikOlustur.this.activateUploadButton();
                     }
                 }, 250);
-            }  else {
+            } else {
                 image64Post = "";
                 activateUploadButton();
             }
@@ -450,33 +450,35 @@ public class etkinlikOlustur extends AppCompatActivity {
         contentPost = txt_2.getText().toString();
 
 
-        if (!titlePost.equals("") && !contentPost.equals("") && !selectedDate.equals("") && !selectedTime.equals("") && !isLoading && sp.getSelectedItemPosition()!=0) {      //Baslik veya icerik null degilse
+        if (!titlePost.equals("") && !contentPost.equals("") && !selectedDate.equals("") && !selectedTime.equals("") && !isLoading && sp.getSelectedItemPosition() != 0) {      //Baslik veya icerik null degilse
             datePost = selectedDate + " " + selectedTime;
-            eventTypePost = String.valueOf(sp.getSelectedItemPosition() );
+            eventTypePost = String.valueOf(sp.getSelectedItemPosition());
 
-            CheckBox cbTel=  (CheckBox) findViewById(R.id.cb_telefon_etkinlikOlustur);
-            if(cbTel.isChecked()){
-                isPhonePost ="1";
-            }else {
-                isPhonePost ="0";
+            CheckBox cbTel = (CheckBox) findViewById(R.id.cb_telefon_etkinlikOlustur);
+            if (cbTel.isChecked()) {
+                isPhonePost = "1";
+            } else {
+                isPhonePost = "0";
             }
 
-            CheckBox cbFirma=  (CheckBox) findViewById(R.id.cb_firmaAdi_etkinlikOlustur);
-            if(cbFirma.isChecked()){
-                isFirmaAdiPost ="1";
-            }else {
-                isFirmaAdiPost ="0";
+            CheckBox cbFirma = (CheckBox) findViewById(R.id.cb_firmaAdi_etkinlikOlustur);
+            if (cbFirma.isChecked()) {
+                isFirmaAdiPost = "1";
+            } else {
+                isFirmaAdiPost = "0";
             }
             isLoading = true;
             fetchingJSON();
         } else {        //Kontrollerde sıkıntı varsa
-            if(sp.getSelectedItem().toString().equals("Seçiniz") ){
-                Toasty.warning(this,"Lütfen etkinlik tipini seçin.",Toasty.LENGTH_SHORT).show();
-            }
-            else if(selectedTime.equals("") || selectedDate.equals("")) {
+            if (sp.getSelectedItem().toString().equals(getResources().getString(R.string.spinnerHint))) {
+                Toasty.warning(this, "Lütfen etkinlik türünü seçin.", Toasty.LENGTH_SHORT).show();
+            } else if (titlePost.equals("")) {
+                Toast.makeText(this, "Lütfen etkinlik başlığını girin.", Toast.LENGTH_SHORT).show();
+            } else if (contentPost.equals("")) {
+                Toast.makeText(this, "Lütfen etkinlik açıklamasını girin.", Toast.LENGTH_SHORT).show();
+            } else if (selectedTime.equals("") || selectedDate.equals("")) {
                 Toast.makeText(this, "Lütfen tarih ve saat seçin.", Toast.LENGTH_SHORT).show();
-            } else
-                Toast.makeText(this, "Lütfen Gerekli Alanları Doldurun.", Toast.LENGTH_LONG).show();
+            }
         }
     }
 

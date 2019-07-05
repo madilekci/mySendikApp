@@ -1,6 +1,9 @@
 package com.example.mysendikapp.dashboard;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
@@ -23,7 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.anketler.anketWebViev;
-import com.example.mysendikapp.ayarlarActivity;
+import com.example.mysendikapp.ActivityAyarlar;
 import com.example.mysendikapp.bildirimler.bildirimAkisi;
 import com.example.mysendikapp.etkinlik.etkinlikAkisi;
 import com.example.mysendikapp.etkinlik.etkinlikOlustur;
@@ -191,7 +194,8 @@ public class ActivityDashboard extends AppCompatActivity  {
     }
     @Override
     public void onBackPressed() {
-    } //Do Nothing
+        moveTaskToBack(true);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent i = new Intent();
@@ -212,7 +216,7 @@ public class ActivityDashboard extends AppCompatActivity  {
                 startActivity(i);
                 break;
             case R.id.opMenuAyarlar:
-                i = new Intent(ActivityDashboard.this, ayarlarActivity.class);
+                i = new Intent(ActivityDashboard.this, ActivityAyarlar.class);
                 startActivity(i);
                 break;
         }
@@ -344,6 +348,28 @@ public class ActivityDashboard extends AppCompatActivity  {
 
         Intent i = new Intent(this, com.example.mysendikapp.login.loginActivity.class);
         startActivity(i);
+    }
+
+    public  void showAlertDialog(Context context, String title, String message) {
+        final AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+
+
+        alertDialog.setMessage("Uygulamadan çıkmak istiyor musunuz ?");
+
+        alertDialog.setButton(Dialog.BUTTON_POSITIVE,"Çıkış",new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                onBackPressed();
+            }
+        });
+        alertDialog.setButton(Dialog.BUTTON_NEGATIVE,"İptal",new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+            }
+        });
+        // Showing Alert Message
+        alertDialog.show();
     }
 
 }

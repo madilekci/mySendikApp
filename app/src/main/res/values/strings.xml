@@ -11,6 +11,7 @@
 
     <!-- token=userTokenPost-->
     <string name="sozlesmeUrl">https://www.e-stk.com/Api/Sozlesme</string>
+    <string name="bildirimListeleUrl">https://www.e-stk.com/Api/BildirimList</string>
 
     <!--LOGİN-->
     <string name="loginUrl">https://www.e-stk.com/Api/Login</string>
@@ -40,8 +41,8 @@
     <!--URL LER-->
     <!--URL LER-->
 
-    <string name="defUserName">19054181122</string>
-    <string name="defUserPass">416419rd</string>
+    <string name="defUserName">11111111111</string>
+    <string name="defUserPass">111111</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
@@ -63,5 +64,13 @@
     </string-array>
     <string name="spinnerHint">Etkinlik türünü seçiniz</string>
 
+
+    <!-- COMPANY INFORMATIONS-->
+    <string name="companyMail"> info@yeninova.com </string>
+    <string name="companyPhoneNumber"> +90 262 341 26 26 </string>
+    <string name="companyAdress">KOU Teknopark Yeniköy Merkez Mahallesi Vatan Caddesi, No:83 B-101 Başiskele/Kocaeli, Türkiye </string>
+    <string name="companyAdressCoordinates">40°42\'14.5"N 29°53'00.3"E</string>
+    <string name="companyWebSite">https://yeninova.com</string>
+    <!-- COMPANY INFORMATIONS-->
 
 </resources>

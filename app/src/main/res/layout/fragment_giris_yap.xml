@@ -4,48 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color11"
+    android:background="@drawable/login_background"
     android:orientation="vertical"
     tools:context=".login.fragmentGirisYap">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Kullanıcı adınız"
-        android:textColor="@android:color/black" />
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/tv_username_girisYap"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@android:color/background_light"
-        android:padding="10dp"
-        android:inputType="textPersonName"
-        android:text="@string/defUserName"
-        android:textColor="@android:color/black" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="64dp"
+            android:text="Kullanıcı adınız"
+            android:textColor="@color/color10"
+            android:textSize="18sp" />
 
-    <TextView
-        android:layout_width="94dp"
-        android:layout_height="wrap_content"
-        android:text="Şifreniz"
-        android:textColor="@android:color/black" />
+        <EditText
+            android:id="@+id/tv_username_girisYap"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/color10"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:text="@string/defUserName"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
 
-    <EditText
-        android:id="@+id/tv_password_girisYap"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@android:color/background_light"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        android:text="@string/defUserPass"
-        android:textColor="@android:color/black" />
+        <TextView
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="64dp"
+            android:text="Şifreniz"
+            android:textColor="@color/color10"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/tv_password_girisYap"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/color10"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:text="@string/defUserPass"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_girisYap"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorPrimary"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/color10"
         android:text="Giriş Yap"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
 
 </LinearLayout>

@@ -32,8 +32,8 @@ public class loginActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getPosition() == 0)
                     viewPager.setCurrentItem(0);
-                if (tab.getPosition() == 1)
-                    viewPager.setCurrentItem(1);
+//                if (tab.getPosition() == 1)
+//                    viewPager.setCurrentItem(1);
             }
             @Override
             public void onTabUnselected(TabLayout.Tab tab) { }
@@ -46,6 +46,7 @@ public class loginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        moveTaskToBack(true);
     }
 
 

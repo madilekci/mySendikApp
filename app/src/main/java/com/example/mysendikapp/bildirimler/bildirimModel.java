@@ -1,7 +1,7 @@
 package com.example.mysendikapp.bildirimler;
 
 public class bildirimModel {
-    public String id,title,content,date;
+    public String id="0",title,content,date,type;
 
     public bildirimModel(){}
 

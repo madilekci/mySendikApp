@@ -20,8 +20,8 @@ public class PageAdapter extends FragmentPagerAdapter {
         switch (i) {
             case 0:
                 return new fragmentGirisYap();
-            case 1:
-                return new fragmentKayitOL();
+//            case 1:
+//                return new fragmentKayitOL();
             default:
                 return null;
         }

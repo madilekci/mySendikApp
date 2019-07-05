@@ -4,50 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color11"
+    android:background="@color/color3"
     android:orientation="vertical"
-    tools:context=".ayarlarActivity">
+    tools:context=".ActivityAyarlar">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:layout_weight="2.5"
+        android:layout_weight="3"
         android:background="@color/color11"
         android:orientation="vertical">
 
+
         <LinearLayout
+            android:id="@+id/ll_sifreDegistir_ayarlar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="2dp"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:background="@color/color10"
+            android:gravity="left|center_vertical"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn_sifreDegistir_Ayarlar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1.5"
                 android:background="@color/color10"
-                android:gravity="center"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="8dp"
                 android:text="Şifremi değiştir"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp" />
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textAllCaps="false"/>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_bildirimKapat_ayarlar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:background="@color/color10"
+            android:gravity="left|center_vertical"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_ayar1_ayarlar"
+                android:id="@+id/tv_bildirimKapat_ayarlar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -55,71 +62,115 @@
                 android:gravity="left|center_vertical"
                 android:paddingLeft="8dp"
                 android:text="Bildirimleri Aç/Kapat"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <Switch
-                android:id="@+id/sw_bildirim_ayarlar"
+                android:id="@+id/sw_bildirimKapat_ayarlar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="1.75"
                 android:background="@color/color10"
                 android:checked="true"
+
                 android:textSize="12sp"
-                android:theme="@style/switchButtonStyle"
-
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="4dp"
-            android:layout_weight="2"
-            android:background="@color/color10"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/color10"
-                android:gravity="left|center_vertical"
-                android:paddingLeft="8dp"
-                android:text="Bildirim sesini Aç/Kapat"
-                android:textColor="@color/colorPrimaryDark" />
-
-            <Switch
-                android:id="@+id/sw_bSes_ayarlar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:background="@color/color10"
-                android:checked="true"
-                android:textSize="12sp"
-                android:theme="@style/switchButtonStyle"
-
-                />
+                android:theme="@style/switchButtonStyle" />
 
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_banner_ayarlar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="100dp">
+        android:gravity="center|center_horizontal"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/yeninova_logo" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color3"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/color3"
+                android:fontFamily="@font/libre_baskerville"
+                android:gravity="center"
+                android:text="Soru veya önerileriniz mi var ? \n Geliştirici ekibimiz  yardımcı olmaktan memnun olacaktır."
+                android:textColor="@color/color10"
+                android:textSize="24sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/tv_website_ayarlar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:background="@color/color9"
+                android:drawableLeft="@drawable/web_icon_ayarlar"
+                android:fontFamily="@font/libre_baskerville"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:autoLink="web"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_number_ayarlar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:background="@color/color9"
+                android:drawableLeft="@drawable/phone_icon_ayarlar"
+                android:fontFamily="@font/libre_baskerville"
+                android:gravity="center"
+                android:autoLink="phone"
+                android:paddingLeft="20dp"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_mail_ayarlar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:background="@color/color9"
+                android:drawableLeft="@drawable/mail_icon_ayarlar"
+                android:fontFamily="@font/libre_baskerville"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:textSize="14sp"
+                android:autoLink="email"
+                />
+
+            <TextView
+                android:id="@+id/tv_adress_ayarlar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:background="@color/color9"
+                android:drawableLeft="@drawable/adress_icon_ayarlar"
+                android:fontFamily="@font/libre_baskerville"
+                android:gravity="center"
+                android:onClick="onClickAdress"
+                android:paddingLeft="20dp"
+                android:textSize="14sp"
+                />
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
