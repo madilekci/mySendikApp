@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/disable_foreground"
     android:orientation="vertical"
     tools:context=".etkinlik.etkinlikOlustur">
 
@@ -21,7 +22,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:background="@color/color9"
+            android:background="@color/color10"
             android:spinnerMode="dialog" />
 
         <EditText
@@ -32,11 +33,12 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:background="@color/color9"
+            android:background="@color/color10"
             android:ems="10"
             android:hint="Etkinlik adını girin"
             android:inputType="textPersonName"
             android:paddingLeft="5dp"
+            android:textColor="@android:color/black"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="16dp" />
 
@@ -49,7 +51,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="0.3"
-            android:background="@color/color9"
+            android:background="@color/color10"
             android:ems="10"
             android:gravity="top"
             android:hint="Etkinlik açıklamasını girin"
@@ -128,7 +130,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:background="@color/color9"
+            android:background="@color/color10"
             android:orientation="vertical">
             s
 
@@ -138,8 +140,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@color/color9"
-                android:text="Etkinlik metninin sonuna çalıştığım şirketin adını ekle" />
+                android:background="@color/color10"
+                android:text="Çalıştığım firma adını göster"
+                android:textColor="@android:color/black" />
 
             <CheckBox
                 android:id="@+id/cb_telefon_etkinlikOlustur"
@@ -147,7 +150,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:text="Etkinlik metninin sonuna telefon Numaramı ekle" />
+                android:background="@color/color10"
+                android:text="Telefon numaramı göster"
+                android:textColor="@android:color/black" />
 
         </LinearLayout>
 

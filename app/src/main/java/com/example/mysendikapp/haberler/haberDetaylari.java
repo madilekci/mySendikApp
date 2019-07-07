@@ -132,7 +132,7 @@ public class haberDetaylari extends AppCompatActivity implements Html.ImageGette
         btnDate.setText(""+this.ne_haber.getDate() );
 
         Button btnView = (Button) findViewById(R.id.btn_view_haberDetaylari);
-        btnView.setText(""+this.ne_haber.getView()+" Kez görüntülendi" );
+        btnView.setText(""+this.ne_haber.getView()+" Görüntüleme" );
 
         TextView tv_baslik = (TextView) findViewById(R.id.tv_baslik_haberDetaylari);
         tv_baslik.setText(this.ne_haber.getTitle() );

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color9"
+    android:background="@color/disable_foreground"
     android:orientation="vertical"
     tools:context=".login.sifreDegistirActivity">
 
@@ -19,7 +19,7 @@
         android:layout_marginBottom="8dp"
         android:text="Şifreniz sıfırlandı. Aşağıdan yeni şifrenizi oluşturabilirsiniz.\n Lütfen daha sonra hatırlayabileceğiniz bir şifre seçmeye özen gösterin. ☺"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 
     <View
         android:id="@+id/divider2"
@@ -34,6 +34,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="64dp"
+        android:background="@android:drawable/edit_text"
         android:ems="10"
         android:hint="Yeni şifrenizi girin"
         android:inputType="textPassword"
@@ -46,6 +47,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="64dp"
+        android:background="@android:drawable/edit_text"
         android:ems="10"
         android:hint="Yeni şifrenizi tekrar girin"
         android:inputType="textPassword"

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/disable_foreground">
 
     <LinearLayout
         android:id="@+id/ll_root_haberDetaylari"
@@ -20,7 +21,7 @@
             android:padding="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="5dp"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="0dp"
@@ -36,18 +37,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                android:layout_weight="0.75"
+                android:layout_weight="1"
                 android:background="@color/colorAccent"
                 android:maxLines="1"
                 android:padding="10dp"
-                android:textColor="@color/color10" />
+                android:textColor="@color/color10"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/btn_view_haberDetaylari"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:background="@color/colorPrimaryDark"
                 android:maxLines="1"
 
@@ -68,14 +70,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:padding="10dp"
-                app:srcCompat="@drawable/yeninova_logo"
-                />
+                app:srcCompat="@drawable/yeninova_logo" />
 
             <TextView
                 android:id="@+id/tv_content_haberDetaylari"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:background="@color/color10"
                 android:padding="10dp"
                 android:textColor="@color/vpi__bright_foreground_holo_light"
                 android:textSize="18sp"

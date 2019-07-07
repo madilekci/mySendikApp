@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color3"
+    android:background="@color/disable_foreground"
     android:orientation="vertical"
     tools:context=".ActivityAyarlar">
 
@@ -36,10 +36,10 @@
                 android:gravity="left|center_vertical"
                 android:paddingLeft="8dp"
                 android:text="Şifremi değiştir"
+                android:textAllCaps="false"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:textAllCaps="false"/>
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -95,80 +95,84 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/yeninova_logo" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/libre_baskerville"
+            android:gravity="center"
+            android:text="Soru veya önerileriniz mi var ? \n Geliştirici ekibimiz  yardımcı olmaktan memnun olacaktır."
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/color3"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:gravity="bottom|center_vertical"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp"
-                android:background="@color/color3"
-                android:fontFamily="@font/libre_baskerville"
-                android:gravity="center"
-                android:text="Soru veya önerileriniz mi var ? \n Geliştirici ekibimiz  yardımcı olmaktan memnun olacaktır."
-                android:textColor="@color/color10"
-                android:textSize="24sp"
-                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/tv_website_ayarlar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
-                android:background="@color/color9"
+                android:autoLink="web"
+                android:background="@color/color10"
                 android:drawableLeft="@drawable/web_icon_ayarlar"
                 android:fontFamily="@font/libre_baskerville"
                 android:gravity="center"
                 android:paddingLeft="20dp"
-                android:autoLink="web"
-                android:textSize="14sp" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorLink="@color/colorPrimaryDark"
+                android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/tv_number_ayarlar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
-                android:background="@color/color9"
-                android:drawableLeft="@drawable/phone_icon_ayarlar"
-                android:fontFamily="@font/libre_baskerville"
-                android:gravity="center"
-                android:autoLink="phone"
-                android:paddingLeft="20dp"
-                android:textSize="14sp" />
+            <!--<TextView-->
+                <!--android:id="@+id/tv_number_ayarlar"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="6dp"-->
+                <!--android:autoLink="phone"-->
+                <!--android:background="@color/color10"-->
+                <!--android:drawableLeft="@drawable/phone_icon_ayarlar"-->
+                <!--android:fontFamily="@font/libre_baskerville"-->
+                <!--android:gravity="center"-->
+                <!--android:paddingLeft="20dp"-->
+                <!--android:textColor="@color/colorPrimaryDark"-->
+                <!--android:textColorLink="@color/colorPrimaryDark"-->
+                <!--android:textSize="18sp" />-->
 
             <TextView
                 android:id="@+id/tv_mail_ayarlar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
-                android:background="@color/color9"
+                android:autoLink="email"
+                android:background="@color/color10"
                 android:drawableLeft="@drawable/mail_icon_ayarlar"
                 android:fontFamily="@font/libre_baskerville"
                 android:gravity="center"
                 android:paddingLeft="20dp"
-                android:textSize="14sp"
-                android:autoLink="email"
-                />
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorLink="@color/colorPrimaryDark"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tv_adress_ayarlar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
-                android:background="@color/color9"
+                android:background="@color/color10"
                 android:drawableLeft="@drawable/adress_icon_ayarlar"
                 android:fontFamily="@font/libre_baskerville"
                 android:gravity="center"
                 android:onClick="onClickAdress"
                 android:paddingLeft="20dp"
-                android:textSize="14sp"
-                />
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorLink="@color/colorPrimaryDark"
+                android:textSize="18sp" />
         </LinearLayout>
 
     </LinearLayout>

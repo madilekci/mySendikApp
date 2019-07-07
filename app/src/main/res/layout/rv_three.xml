@@ -2,10 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="150dp"
     android:layout_marginBottom="3dp"
     android:background="@color/colorPrimary"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="1dp">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cv_rv_three"
@@ -18,50 +19,46 @@
 
 
         <LinearLayout
+            android:id="@+id/ll_holder_bildirimAkisi"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.75"
 
+            android:layout_weight="0.75"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:orientation="vertical">
+                android:layout_weight="3"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_title_rv_three"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="3dp"
                     android:layout_weight="1"
                     android:background="@color/color10"
                     android:ellipsize="end"
-                    android:maxLines="2"
+                    android:maxLines="1"
                     android:paddingLeft="5dp"
                     android:paddingTop="5dp"
                     android:text="Bildirim başlığı"
                     android:textAllCaps="true"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tv_date_rv_three"
+                <Button
+                    android:id="@+id/btn_okundu_bildirimAkisi"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-
-                    android:layout_weight="2"
-                    android:background="@color/color10"
-
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:padding="5sp"
-                    android:text="12.02.1998"
-                    android:textAllCaps="true"
-                    android:textSize="8sp"
-                    android:textStyle="bold" />
-
+                    android:layout_marginBottom="3dp"
+                    android:layout_weight="3"
+                    android:background="@color/color3"
+                    android:drawableRight="@drawable/okundu_logo"
+                    android:text="Okundu olarak işaretle"
+                    android:textSize="8sp" />
             </LinearLayout>
 
             <TextView
@@ -74,6 +71,7 @@
                 android:maxLines="6"
                 android:padding="5sp"
                 android:text="Supposedly android:maxLines= and android:singleLine= should do basically android:maxLines= and android:singleLine= should do basicalthe same thing and since singleLine is apparently deprecated I would prefer not to use it, but when I take it out Supposedly android:maxLines= and android:singleLine= should do basically android:maxLines= and android:singleLine= should do basicalthe same thing and since singleLine is apparently deprecated I would prefer not to use it, but when I take it out"
+                android:textColor="@android:color/black"
                 android:textSize="14sp" />
 
         </LinearLayout>

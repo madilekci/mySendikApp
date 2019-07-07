@@ -7,11 +7,17 @@
     <string name="signInUrl">https://www.yucelyavuz.com/muhammed/login/kaydol.php</string>
 
 
-    <string name="talepSikayetUrl">https://www.e-stk.com/Api/getRequestComplaintInsert</string>
 
-    <!-- token=userTokenPost-->
+    <!--            -->
+    <!--    POST    -->
+    <!--            -->
+    <string name="talepSikayetUrl">https://www.e-stk.com/Api/getRequestComplaintInsert</string>
     <string name="sozlesmeUrl">https://www.e-stk.com/Api/Sozlesme</string>
+
+    <!--BİLDİRİM-->
     <string name="bildirimListeleUrl">https://www.e-stk.com/Api/BildirimList</string>
+    <string name="bildirimOkunduUrl">https://www.e-stk.com/Api/BildirimOkundu</string>
+
 
     <!--LOGİN-->
     <string name="loginUrl">https://www.e-stk.com/Api/Login</string>
@@ -30,17 +36,19 @@
     <string name="haberSlideUrl">https://www.e-stk.com/Api/getLastNews</string>
 
     <!--WebView-->
-    <string name="webViewFacebookUrl">http://touch.facebook.com/HARBISSENDIKASI</string>
-
+    <string name="webViewFacebookUrl">http://touch.facebook.com/TCDD</string>
     <string name="webVievanketDoldurUrl">https://www.e-stk.com/mobil/AnketListe</string>
     <string name="webVievHakkimizdaUrl">https://www.e-stk.com/mobil/Hakkimizda</string>
     <string name="webViewBoardMembersUrl">https://www.e-stk.com/mobil/YonetimKurulu</string>
     <string name="webVievSubelerUrl">https://www.e-stk.com/mobil/Subeler</string>
     <string name="webVievVideolarUrl">https://www.e-stk.com/Mobil/TV</string>
     <string name="webVievGaleriUrl">https://www.e-stk.com/Mobil/Galeri</string>
+
     <!--URL LER-->
     <!--URL LER-->
 
+
+    <!-- INAPP STRINGS-->
     <string name="defUserName">11111111111</string>
     <string name="defUserPass">111111</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -63,6 +71,7 @@
         <item>Diğer</item>
     </string-array>
     <string name="spinnerHint">Etkinlik türünü seçiniz</string>
+    <!-- INAPP STRINGS-->
 
 
     <!-- COMPANY INFORMATIONS-->

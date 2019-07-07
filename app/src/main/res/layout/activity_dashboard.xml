@@ -5,11 +5,13 @@
     android:id="@+id/dashboard_llRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
     tools:context=".dashboard.ActivityDashboard">
 
-    <include layout="@layout/custom_app_bar"
-        android:id="@+id/custom_app_bar">
+    <include
+        android:id="@+id/custom_app_bar"
+        layout="@layout/custom_app_bar">
 
     </include>
 
@@ -66,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:background="@color/colorPrimaryDark"
+            android:background="@android:color/black"
             app:columnCount="3"
             app:rowCount="3">
 

@@ -178,8 +178,10 @@ public class bildirimAkisi extends AppCompatActivity {
 
                 bildirimModel1.setTitle(dataobj.getString("title"));
                 bildirimModel1.setContent(dataobj.getString("message"));
-                bildirimModel1.setDate(dataobj.getString("date"));
                 bildirimModel1.setId(dataobj.getString("id"));
+                bildirimModel1.setBid(dataobj.getString("bid"));
+                bildirimModel1.setType(dataobj.getString("type"));
+                bildirimModel1.setReaded(dataobj.getString("read"));
 
                 bildirimModelArrayList.add(bildirimModel1);
             }
@@ -196,6 +198,7 @@ public class bildirimAkisi extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     public String getUserToken() {
         SharedPreferences xd = getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = xd.edit();

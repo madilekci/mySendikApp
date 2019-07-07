@@ -21,8 +21,8 @@ public class ActivityAyarlar extends AppCompatActivity {
     private String TAG = "ActivityAyarlar";
     private Button sifreDegistir;
     private Switch bildirimKapat;
-    private CharSequence mail = "", phoneNumber = "", adress = "", website = "";
-    private TextView tv_mail, tv_number, tv_adress, tv_website;
+    private CharSequence mail = "", adress = "", website = "";
+    private TextView tv_mail, tv_adress, tv_website;
 
     private SharedPreferences xd;
     private SharedPreferences.Editor editor;
@@ -63,18 +63,15 @@ public class ActivityAyarlar extends AppCompatActivity {
 
     public void setupBanner() {
         mail = getResources().getString(R.string.companyMail);
-        phoneNumber = getResources().getString(R.string.companyPhoneNumber);
         adress = getResources().getString(R.string.companyAdress);
         website = getResources().getString(R.string.companyWebSite);
 
         tv_mail = findViewById(R.id.tv_mail_ayarlar);
         tv_adress = findViewById(R.id.tv_adress_ayarlar);
-        tv_number = findViewById(R.id.tv_number_ayarlar);
         tv_website = findViewById(R.id.tv_website_ayarlar);
 
         tv_mail.append(" " + mail);
         tv_adress.append(" " + adress);
-        tv_number.append(" " + phoneNumber);
         tv_website.append(" " + website);
     }
 

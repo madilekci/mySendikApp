@@ -12,6 +12,7 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -46,9 +47,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,6 +60,7 @@ import es.dmoral.toasty.Toasty;
 
 public class etkinlikOlustur extends AppCompatActivity {
     String TAG = "ActivityEtkinlikOluştur";
+    String mCurrentPhotoPath;
     Button sendButton, btnGallery, btnSelectDate;
     ImageView iv;
     Bitmap bmp;
@@ -257,7 +262,6 @@ public class etkinlikOlustur extends AppCompatActivity {
 
     private void requestPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(etkinlikOlustur.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            Toast.makeText(etkinlikOlustur.this, " Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
         } else {
             ActivityCompat.requestPermissions(etkinlikOlustur.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
         }
@@ -277,9 +281,9 @@ public class etkinlikOlustur extends AppCompatActivity {
         switch (requestCode) {
             case PERMISSION_REQUEST_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(etkinlikOlustur.this, "Permission Granted Successfully! ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(etkinlikOlustur.this, "Gerekli izinleri sağladığınız için teşekkür ederiz.! ", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(etkinlikOlustur.this, "Permission Denied 🙁 ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(etkinlikOlustur.this, "Gereken izinleri vermediğiniz için uygulama doğru çalışmayabilir. 🙁 ", Toast.LENGTH_LONG).show();
                 }
                 break;
         }
@@ -501,5 +505,21 @@ public class etkinlikOlustur extends AppCompatActivity {
         SharedPreferences xd = getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = xd.edit();
         return xd.getString("userToken", "noTokens");
+    }
+
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
     }
 }
