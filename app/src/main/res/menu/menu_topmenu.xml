@@ -11,6 +11,11 @@
         android:orderInCategory="0">
         <menu>
             <item
+                android:id="@+id/opMenuYonetim"
+                android:icon="@drawable/opmenu_yonetim"
+                android:title="Yönetim Kurulumuz"
+                app:showAsAction="ifRoom" />
+            <item
                 android:id="@+id/opMenuHakkinda"
                 android:icon="@drawable/opmenu_hakkinda"
                 android:title="Hakkımızda"
@@ -21,9 +26,14 @@
                 android:title="Şubelerimiz"
                 app:showAsAction="ifRoom" />
             <item
-                android:id="@+id/opMenuYonetim"
-                android:icon="@drawable/opmenu_yonetim"
-                android:title="Yönetim Kurulumuz"
+                android:id="@+id/opMenuSosyalTesisler"
+                android:icon="@drawable/opmenu_sosyaltesisler"
+                android:title="Sosyal Tesisler"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/opMenuDiscount"
+                android:icon="@drawable/opmenu_discount"
+                android:title="Anlaşmalı Firmalar"
                 app:showAsAction="ifRoom" />
             <item
                 android:id="@+id/opMenuAyarlar"

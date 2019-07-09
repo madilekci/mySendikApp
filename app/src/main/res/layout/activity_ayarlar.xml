@@ -89,24 +89,6 @@
         android:gravity="center|center_horizontal"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/yeninova_logo" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="@font/libre_baskerville"
-            android:gravity="center"
-            android:text="Soru veya önerileriniz mi var ? \n Geliştirici ekibimiz  yardımcı olmaktan memnun olacaktır."
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:textStyle="bold|italic" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -118,10 +100,9 @@
                 android:id="@+id/tv_website_ayarlar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
                 android:autoLink="web"
                 android:background="@color/color10"
-                android:drawableLeft="@drawable/web_icon_ayarlar"
+                android:drawableLeft="@drawable/icon_yeninova"
                 android:fontFamily="@font/libre_baskerville"
                 android:gravity="center"
                 android:paddingLeft="20dp"
@@ -129,26 +110,10 @@
                 android:textColorLink="@color/colorPrimaryDark"
                 android:textSize="18sp" />
 
-            <!--<TextView-->
-                <!--android:id="@+id/tv_number_ayarlar"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="6dp"-->
-                <!--android:autoLink="phone"-->
-                <!--android:background="@color/color10"-->
-                <!--android:drawableLeft="@drawable/phone_icon_ayarlar"-->
-                <!--android:fontFamily="@font/libre_baskerville"-->
-                <!--android:gravity="center"-->
-                <!--android:paddingLeft="20dp"-->
-                <!--android:textColor="@color/colorPrimaryDark"-->
-                <!--android:textColorLink="@color/colorPrimaryDark"-->
-                <!--android:textSize="18sp" />-->
-
             <TextView
                 android:id="@+id/tv_mail_ayarlar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
                 android:autoLink="email"
                 android:background="@color/color10"
                 android:drawableLeft="@drawable/mail_icon_ayarlar"
@@ -163,7 +128,6 @@
                 android:id="@+id/tv_adress_ayarlar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
                 android:background="@color/color10"
                 android:drawableLeft="@drawable/adress_icon_ayarlar"
                 android:fontFamily="@font/libre_baskerville"

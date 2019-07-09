@@ -21,7 +21,7 @@ public class ActivityTwitter extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_twitter);
 
-        String yourHTML = "<a class=\"twitter-timeline\" href=\"https://twitter.com/madilekci/lists/t-rk-harb-i\" data-tweet-limit=\"50\">A twitter List by Muhammed Ali</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>";
+        String yourHTML = "<a class=\"twitter-timeline\" data-theme=\"light\" data-link-color=\"#f67280\" href=\"https://twitter.com/madilekci/lists/e-stk?ref_src=twsrc%5Etfw\">A twitter list by e-STK</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>";
 
         webViewHeroes = (WebView) findViewById(R.id.webviewTwitter);
         webViewHeroes.getSettings().setJavaScriptEnabled(true);

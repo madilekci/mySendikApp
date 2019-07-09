@@ -1,6 +1,7 @@
 package com.example.mysendikapp.etkinlik;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,6 +18,7 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -77,12 +79,18 @@ public class etkinlikOlustur extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_etkinlik_olustur);
 
+        Log.d(TAG,"isSozlesme ---> "+getIsSozlesme() );
+        if (getIsSozlesme().equals("0") ){
+            Log.d(TAG,"Sozlesme kabul edilmemiş");
+            sozlesmeDialogAc("Kullanım Sözleşmesi",getResources().getString(R.string.kullanimSozlesmesiMetni));
+        }
+
         userTokenPost = getUserToken();
         iv = (ImageView) (findViewById(R.id.iv_etkinlikOlustur));
 
         ///
         this.etkinlikTipleri = new ArrayList<String>();
-        etkinlikTipleri.add(0, getResources().getString(R.string.spinnerHint));
+        etkinlikTipleri.add(0, getResources().getString(R.string.etkinlikTipleriSpinnerHint));
         getEventTypes();
         sp = (Spinner) findViewById(R.id.sp_etkinlikOlustur);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, etkinlikTipleri);
@@ -260,9 +268,13 @@ public class etkinlikOlustur extends AppCompatActivity {
     ///////////////////////////////////
     ///////////////////////////////////
 
+
     private void requestPermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(etkinlikOlustur.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-        } else {
+        Log.d(TAG,"ReqPermission ");
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(etkinlikOlustur.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            ActivityCompat.requestPermissions(etkinlikOlustur.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+        }
+        if(ContextCompat.checkSelfPermission(etkinlikOlustur.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE ) == PackageManager.PERMISSION_DENIED ) {
             ActivityCompat.requestPermissions(etkinlikOlustur.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
         }
     }
@@ -340,6 +352,12 @@ public class etkinlikOlustur extends AppCompatActivity {
 
     }
 
+
+
+    //Fotoğraf meseleleri
+    //Fotoğraf meseleleri
+    //Fotoğraf meseleleri
+
     public void fotografEkleOnClick(View v) {
         final CharSequence[] items = {"Fotoğraf çek", "Galeriden bir fotoğraf seç", "İptal"};
         AlertDialog.Builder builder = new AlertDialog.Builder(etkinlikOlustur.this);
@@ -370,9 +388,15 @@ public class etkinlikOlustur extends AppCompatActivity {
         sendButton.setClickable(false);
         Intent cmr = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (cmr.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(cmr, PICK_IMAGE_CAMERA_REQUEST);
+            File photoFile = null;
+            photoFile = createImageFile();
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this, "com.example.mysendikapp", photoFile);
+                cmr.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(cmr, PICK_IMAGE_CAMERA_REQUEST);
+            }
         }
-    }
+    }       //Kameradan fotoğraf çekip eklemek için
 
     public void openGallery() {
         if (Build.VERSION.SDK_INT >= 23) {
@@ -384,7 +408,7 @@ public class etkinlikOlustur extends AppCompatActivity {
         Intent glr = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(glr, PICK_IMAGE_REQUEST);
 
-    }
+    }       //Galeriden fotoğraf çekip eklemek için
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -416,29 +440,33 @@ public class etkinlikOlustur extends AppCompatActivity {
                 activateUploadButton();
             }
         }
-        if (requestCode == PICK_IMAGE_CAMERA_REQUEST && resultCode == RESULT_OK && data != null && data.getExtras() != null) {
-            //Getting the Bitmap from Gallery
-            Log.d(TAG, "onActivityResul PickImageFromCamera");
-            Log.d(TAG, "data.getExtras --> " + data);
-
-            bmp = (Bitmap) data.getExtras().get("data");
-//            bmp = rotateBitmap(bmp, 90);
-
-
-            //Setting the Bitmap to ImageView
-            iv.setImageBitmap(bmp);
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    image64Post = getStringImage(bmp);
-                    etkinlikOlustur.this.activateUploadButton();
+        if (requestCode == PICK_IMAGE_CAMERA_REQUEST && resultCode == RESULT_OK) {
+            try {
+                //Getting the Bitmap from Gallery
+                Log.d(TAG, "onActivityResul PickImageFromCamera");
+                File file = new File(mCurrentPhotoPath);
+                bmp = (Bitmap) MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.fromFile(file));
+                if (bmp != null) {
+                    bmp = rotateBitmap(bmp,90);
+                    iv.setImageBitmap(bmp);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            image64Post = getStringImage(bmp);
+                            etkinlikOlustur.this.activateUploadButton();
+                        }
+                    }, 250);
                 }
-            }, 250);
+            } catch (IOException e) {
+                image64Post = "";
+                activateUploadButton();
+                e.printStackTrace();
+            }
         } else {
             image64Post = "";
             activateUploadButton();
         }
-    }
+    }       //Çekilen fotoğrafı işlemek için
 
     public void activateUploadButton() {
         sendButton.setClickable(true);
@@ -474,7 +502,7 @@ public class etkinlikOlustur extends AppCompatActivity {
             isLoading = true;
             fetchingJSON();
         } else {        //Kontrollerde sıkıntı varsa
-            if (sp.getSelectedItem().toString().equals(getResources().getString(R.string.spinnerHint))) {
+            if (sp.getSelectedItem().toString().equals(getResources().getString(R.string.etkinlikTipleriSpinnerHint))) {
                 Toasty.warning(this, "Lütfen etkinlik türünü seçin.", Toasty.LENGTH_SHORT).show();
             } else if (titlePost.equals("")) {
                 Toast.makeText(this, "Lütfen etkinlik başlığını girin.", Toast.LENGTH_SHORT).show();
@@ -493,33 +521,120 @@ public class etkinlikOlustur extends AppCompatActivity {
         String temp = Base64.encodeToString(b, Base64.DEFAULT);
 
         return temp;
-    }
+    }       //Bitmap ten base64 encoded string almak için
 
     public static Bitmap rotateBitmap(Bitmap source, float angle) {
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
         return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
-    }
+    }       //Bitmap i verilen derece kadar döndürmek için
 
     public String getUserToken() {
         SharedPreferences xd = getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = xd.edit();
         return xd.getString("userToken", "noTokens");
-    }
+    }               //SharedPref den username gibi bilgiler almak için
 
-
-    private File createImageFile() throws IOException {
+    private File createImageFile() {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
+        File image = null;
+        try {
+            image = File.createTempFile(
+                    imageFileName,  /* prefix */
+                    ".jpg",         /* suffix */
+                    storageDir      /* directory */
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = image.getAbsolutePath();
         return image;
+    }           //Rastgele dosya yolu ve file oluşturmak için
+
+
+    // Sozlesme isleri
+    // Sozlesme isleri
+    public String getIsSozlesme() {
+        SharedPreferences xd = getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = xd.edit();
+        return xd.getString("isSozlesme", "isSozlesme");
+    }               //SharedPref den username gibi bilgiler almak için
+    public String setIsSozlesme(String isAccepted) {
+        SharedPreferences xd = getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = xd.edit();
+
+        editor.remove("isSozlesme");
+        editor.putString("isSozlesme",isAccepted);
+        editor.apply();
+
+        return xd.getString("isSozlesme", "isSozlesme");
+    }               //SharedPref den username gibi bilgiler almak için
+    public void sozlesmeDialogAc(String title, String message) {
+    android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(this).create();
+
+
+        alertDialog.setTitle(title);
+        alertDialog.setCancelable(false);
+        alertDialog.setMessage(message);
+
+        alertDialog.setButton(Dialog.BUTTON_POSITIVE,"Kullanım sözleşmesini ediyorum",new DialogInterface.OnClickListener(){
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            sendSozlesmeRequest("1");
+        }
+    });
+        alertDialog.setButton(Dialog.BUTTON_NEGATIVE,"Reddet",new DialogInterface.OnClickListener(){
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            sendSozlesmeRequest("0");
+        }
+    });
+        alertDialog.show();
+
+}
+    public void sendSozlesmeRequest(final String isAccepted){
+
+        setIsSozlesme(isAccepted);
+        Log.d(TAG, "update Sozlesme ....");
+        Log.d(TAG, "isSozlesme --> "+isAccepted);
+
+        String url = getResources().getString(R.string.isKullanimSozlesmesiUrl);    // Post atılan adres.
+
+        StringRequest jsonStringRequest = new StringRequest(
+                Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, "Response to updtaeSozlesme >> " + response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something when error occurred
+                        Toast.makeText(etkinlikOlustur.this, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("user_token", userTokenPost);
+                params.put("isSozlesme", isAccepted);
+                return params;
+            }
+        };
+        // request queue
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        jsonStringRequest.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));    // Yeniden istek gönderebilmek için uyulması gereken kurallar
+
+        jsonStringRequest.setShouldCache(false);        // "CacheTutulmasıDurumu=false"
+        queue.add(jsonStringRequest);
     }
 }
+

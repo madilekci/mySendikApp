@@ -56,7 +56,7 @@ public class loginActivity extends AppCompatActivity {
         boolean isInternetPresent = isConnectingToInternet(ctx);
 
         if (!isInternetPresent) {
-            showAlertDialog(ctx, "İnternet bağlantınız yok", "Lütfen internet bağlantınızı kontrol edip yeniden deneyin", false);
+            showAlertDialog(ctx, "İnternet bağlantınız yok", "Lütfen internet bağlantınızı kontrol edip yeniden deneyin");
         }
 
         return isInternetPresent;
@@ -75,7 +75,7 @@ public class loginActivity extends AppCompatActivity {
         }
         return false;
     }
-    public static void showAlertDialog(Context context, String title, String message, Boolean status) {
+    public static void showAlertDialog(Context context, String title, String message) {
         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
 
         // Setting Dialog Title

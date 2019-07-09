@@ -35,7 +35,7 @@ public class rvAdapterBildirim extends RecyclerView.Adapter<rvAdapterBildirim.My
     private LayoutInflater inflater;
     private ArrayList<bildirimModel> bildirimModelArrayList;
     public String TAG = "rvAdapterBildirim";
-    public String userTokenPost = "rvAdapterBildirim", bidPost, typePost;
+    public String userTokenPost = "", bidPost, typePost;
     private Context ctx;
 
     public rvAdapterBildirim(Context ctx, ArrayList<bildirimModel> bildirimModelArrayList) {
@@ -105,7 +105,7 @@ public class rvAdapterBildirim extends RecyclerView.Adapter<rvAdapterBildirim.My
                     Log.d(TAG, "Clicked to rv item   --> " + bildirimID);
                     Log.d(TAG, "readed --> " + readed + "\n\n");
 
-                    if (Integer.parseInt(readed) < 0) {
+                    if (Integer.parseInt(readed) == 0) {
                         ll_holder.setBackgroundResource(R.color.color10);
                         title.setBackgroundColor(Color.parseColor("#77777777"));
                         content.setBackgroundColor(Color.parseColor("#77777777"));

@@ -40,13 +40,13 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGetter{
+public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGetter {
     etkinlikModel ne_etkinlik;
 
-    String TAG ="etkinlikDetaylari";
-    TextView mTv,olusturanTv;
+    String TAG = "etkinlikDetaylari";
+    TextView mTv, olusturanTv;
     LinearLayout ll_root;
-    String adSoyad,firma,telNo;
+    String adSoyad = "", firma = "", telNo = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +55,14 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
         this.ne_etkinlik = new etkinlikModel();
         this.getEtkinlikDetails(getIntent().getExtras().getString("etkinlik_id"), this.ne_etkinlik);
 
-        olusturanTv= (TextView)findViewById(R.id.tv_olusturan_etkinlikDetaylari);
+        olusturanTv = (TextView) findViewById(R.id.tv_olusturan_etkinlikDetaylari);
 
-        ll_root=(LinearLayout) findViewById(R.id.ll_root_etkinlikDetay);
+        ll_root = (LinearLayout) findViewById(R.id.ll_root_etkinlikDetay);
         ll_root.setVisibility(View.INVISIBLE);
     }
+
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         Intent i = new Intent(etkinlikDetaylari.this, ActivityDashboard.class);
         startActivity(i);
     }
@@ -77,7 +78,7 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d("", "Response to getDetail "+etkinlik_id+" ->>" + response);
+                        Log.d("", "Response to getDetail " + etkinlik_id + " ->>" + response);
                         parseJson(response, etkinlikModel_ne_etkinlik);
                     }
                 },
@@ -99,10 +100,8 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
         jsonStringRequest.setShouldCache(false);        // "CacheTutulmasıDurumu=false"
         queue.add(jsonStringRequest);
     }
+
     public void parseJson(String response, etkinlikModel etkinlikModel_ne_etkinlik) {
-        adSoyad=new String("");
-        firma=new String("");
-        telNo=new String("");
 
         try {
             haberAkisi.removeSimpleProgressDialog();
@@ -113,16 +112,24 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
             etkinlikModel_ne_etkinlik.setContent(dataobj.getString("content"));
             etkinlikModel_ne_etkinlik.setUrl(dataobj.getString("picture"));
             etkinlikModel_ne_etkinlik.setDate(dataobj.getString("date"));
-            adSoyad=dataobj.getString("adi");
-            firma=dataobj.getString("firma");
-            telNo=dataobj.getString("telefon");
 
-            olusturanTv.setText(olusturanTv.getText()+"\n"+adSoyad);
-            if(!firma.equals("")){
-                olusturanTv.setText(olusturanTv.getText()+"\n"+firma);
-            }
-            if (!telNo.equals("")){
-                olusturanTv.setText(olusturanTv.getText()+"\n"+telNo);
+
+            adSoyad = dataobj.getString("adi");
+            firma = dataobj.getString("firma");
+            telNo = dataobj.getString("telefon");
+
+            Log.d(TAG, "adSoyad --> " + adSoyad);
+            if (adSoyad.equals("null")) {
+                Log.d(TAG, "IF IF IF IF ");
+                olusturanTv.setVisibility(View.INVISIBLE);
+            } else {
+                olusturanTv.setText(olusturanTv.getText() + "\n" + adSoyad);
+                if (!firma.equals("")) {
+                    olusturanTv.setText(olusturanTv.getText() + "\n" + firma);
+                }
+                if (!telNo.equals("")) {
+                    olusturanTv.setText(olusturanTv.getText() + "\n" + telNo);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -132,6 +139,7 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
 
 
     }
+
     public void etkinlikYazdirConsole() {
         System.out.println("*//--*------*-----*-------*-------//*");
         System.out.println("" + this.ne_etkinlik.getContent());
@@ -140,6 +148,7 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
         System.out.println("" + this.ne_etkinlik.getDate());
         System.out.println("*//--*------*-----*-------*-------//*");
     }
+
     public void etkinlikGoster() {
         if (this.ne_etkinlik.equals(null)) {
             return;
@@ -151,7 +160,7 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
         tv_baslik.setText(this.ne_etkinlik.getTitle());
 
         ImageView iv = (ImageView) findViewById(R.id.iv_etkinlikDetaylari);
-        Picasso.get().load(""+this.ne_etkinlik.getUrl()).into(iv);
+        Picasso.get().load("" + this.ne_etkinlik.getUrl()).into(iv);
 
         Spanned spanned = Html.fromHtml(this.ne_etkinlik.getContent(), this, null);
         mTv = (TextView) findViewById(R.id.tv_content_etkinlikDetaylari);
@@ -171,6 +180,7 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
 
         return d;
     }
+
     class LoadImage extends AsyncTask<Object, Void, Bitmap> {
 
         private LevelListDrawable mDrawable;

@@ -3,13 +3,17 @@ package com.example.mysendikapp.bildirimler;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -29,12 +33,12 @@ import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
-import static android.nfc.tech.MifareUltralight.PAGE_SIZE;
-
 public class bildirimAkisi extends AppCompatActivity {
     private static ProgressDialog mProgressDialog;
     ArrayList<bildirimModel> bildirimModelArrayList;
     LinearLayoutManager lManager;
+    Button btnTumuOkundu;
+    public String userTokenPost = "", bidPost, typePost;
 
     private rvAdapterBildirim rvAdapter;
     private RecyclerView recyclerView;
@@ -55,30 +59,15 @@ public class bildirimAkisi extends AppCompatActivity {
         fetchingJSON();
         //initScrollListener();
 
-    }
-
-    /*public void initScrollListener() {
-
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        btnTumuOkundu = (Button) findViewById(R.id.btn_tumuOkundu_bildirimAkisi);
+        btnTumuOkundu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                int visibleItemCount = lManager.getChildCount();
-                int totalItemCount = lManager.getItemCount();
-                int firstVisibleItemPosition = lManager.findFirstVisibleItemPosition();
-
-
-                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
-                        && firstVisibleItemPosition >= 0
-                        && totalItemCount >= PAGE_SIZE && !isLoading) {
-
-                    bildirimAkisi.this.postPage++;
-                    fetchingJSON();
-
-                }
+            public void onClick(View v) {
+                tumuOkunduOnClick(v);
             }
         });
-    }*/
+
+    }
 
     @Override
     protected void onDestroy() {
@@ -94,6 +83,7 @@ public class bildirimAkisi extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     public static boolean deleteDir(File dir) {
         if (dir != null && dir.isDirectory()) {
             String[] children = dir.list();
@@ -118,7 +108,6 @@ public class bildirimAkisi extends AppCompatActivity {
         recyclerView.setAdapter(rvAdapter);
         isLoading = false;
     }
-
 
 
     private void fetchingJSON() {
@@ -158,10 +147,10 @@ public class bildirimAkisi extends AppCompatActivity {
         jsonStringRequest.setShouldCache(false);        // "CacheTutulmasıDurumu=false"
         queue.add(jsonStringRequest);
 
-    }       //getAllEvents
+    }
 
     public void parseJSONData(String response) {
-        isLoading=false;
+        isLoading = false;
         try {
 //                            JSONObject obj = new JSONObject(response);
             JSONObject obj = new JSONObject(response);
@@ -204,4 +193,65 @@ public class bildirimAkisi extends AppCompatActivity {
         SharedPreferences.Editor editor = xd.edit();
         return xd.getString("userToken", "noTokens");
     }
+
+    public void tumuOkunduOnClick(View v) {
+        Log.d(TAG, " --- tumuOkunduOnClick --- ");
+        Log.d(TAG, "bildirimModelArrayList size --> " + bildirimModelArrayList.size());
+        okunduBilgisiGonder(0);
+        for (int i = 0; i < bildirimModelArrayList.size(); i++) {
+            okunduBilgisiGonder(i);
+        }
+        finish();
+        startActivity(getIntent());
+    }
+
+    public void okunduBilgisiGonder(final int i) {
+        bidPost = bildirimModelArrayList.get(i).getBid();
+        typePost = bildirimModelArrayList.get(i).getType();
+        userTokenPost = getUserToken();
+        Log.d(TAG, "\n\nFetching JSON ....");
+        Log.d(TAG, "i  --> " + i);
+        Log.d(TAG, "userToken  --> " + userTokenPost);
+        Log.d(TAG, "bid  --> " + bidPost);
+        Log.d(TAG, "type  --> " + typePost);
+
+
+        String url = getResources().getString(R.string.bildirimOkunduUrl);    // Post atılan adres.
+        StringRequest jsonStringRequest = new StringRequest(
+                Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, "Response to bildirimOkundu >> " + response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something when error occurred
+                        Toast.makeText(bildirimAkisi.this, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("token", userTokenPost);
+                params.put("id", bidPost);
+                params.put("type", typePost);
+                return params;
+            }
+        };
+
+        // request queue
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        jsonStringRequest.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));    // Yeniden istek gönderebilmek için uyulması gereken kurallar
+
+        jsonStringRequest.setShouldCache(false);        // "CacheTutulmasıDurumu=false"
+        queue.add(jsonStringRequest);
+
+    }       //Bildirimin okunduğuna dair bilgi gönderir.
+
+
 }

@@ -27,6 +27,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.anketler.anketWebViev;
 import com.example.mysendikapp.ActivityAyarlar;
+import com.example.mysendikapp.anlasmaliYerlerActivity;
 import com.example.mysendikapp.bildirimler.bildirimAkisi;
 import com.example.mysendikapp.etkinlik.etkinlikAkisi;
 import com.example.mysendikapp.etkinlik.etkinlikOlustur;
@@ -41,6 +42,7 @@ import com.example.mysendikapp.icerikSayfalari.ActivityYonetim;
 import com.example.mysendikapp.icerikSayfalari.ActivityGallery;
 import com.example.mysendikapp.sosyal.*;
 
+import com.example.mysendikapp.sosyalTesisler.sosyalTesisler;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import org.json.JSONArray;
@@ -200,24 +202,32 @@ public class ActivityDashboard extends AppCompatActivity  {
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent i = new Intent();
         switch (item.getItemId()) {
-            case R.id.opMenuLogout:
-                this.logout();
+            case R.id.opMenuYonetim:
+                i = new Intent(ActivityDashboard.this, ActivityYonetim.class);
+                startActivity(i);
                 break;
             case R.id.opMenuHakkinda:
                 i = new Intent(ActivityDashboard.this,ActivityHakkinda.class);
-                startActivity(i);
-                break;
-            case R.id.opMenuYonetim:
-                i = new Intent(ActivityDashboard.this, ActivityYonetim.class);
                 startActivity(i);
                 break;
             case R.id.opMenuSubeler:
                 i = new Intent(ActivityDashboard.this, ActivitySubeler.class);
                 startActivity(i);
                 break;
+            case R.id.opMenuSosyalTesisler:
+                i = new Intent(ActivityDashboard.this, sosyalTesisler.class);
+                startActivity(i);
+                break;
+            case R.id.opMenuDiscount:
+                i = new Intent(ActivityDashboard.this, anlasmaliYerlerActivity.class);
+                startActivity(i);
+                break;
             case R.id.opMenuAyarlar:
                 i = new Intent(ActivityDashboard.this, ActivityAyarlar.class);
                 startActivity(i);
+                break;
+            case R.id.opMenuLogout:
+                this.logout();
                 break;
         }
 
@@ -254,7 +264,7 @@ public class ActivityDashboard extends AppCompatActivity  {
             public void run() {
                 handler.post(Update);
             }
-        }, 3000, 3000);
+        }, 6000, 6000);
         // Pager listener over indicator
         indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 

@@ -37,7 +37,7 @@ public class fragmentGirisYap extends Fragment {
 
     SharedPreferences sp = null;
     String TAG = "login_Fragment";
-    String username,password;
+    String username,password,isSozlesme;
 
     public fragmentGirisYap() {
         // Required empty public constructor
@@ -142,8 +142,13 @@ public class fragmentGirisYap extends Fragment {
 
         editor.remove("username");
         editor.putString("username",username);
+
         editor.remove("password");
         editor.putString("password",password);
+
+        editor.remove("isSozlesme");
+        editor.putString("isSozlesme",isSozlesme);
+
         editor.apply();
 
     }
@@ -167,7 +172,9 @@ public class fragmentGirisYap extends Fragment {
                     JSONObject dataobj = obj.getJSONObject("data");
                     System.out.println("Giris basarili.");
                     userToken[0] = dataobj.getString("user_token");
+
                     isActive = dataobj.getInt("is_active");
+                    isSozlesme = dataobj.getString("is_sozlesme");
                     if (isActive == 1) {
                         Log.d("frGirisYap", "giden UserToken :" + userToken[0]);
                         saveUserInfo(userToken[0]);

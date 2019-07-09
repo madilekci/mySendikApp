@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:orientation="vertical"
+    tools:context=".sosyalTesisler.Otel">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:background="@color/color10"
+        android:gravity="center"
+        android:text="OTEL REZERVASYONU"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/sp_otelSec"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color11"
+                android:entries="@array/otel_items" />
+
+            <Button
+                android:id="@+id/btn_tarihsec_otel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimaryDark"
+                android:text="Rezervasyon tarihi seç"
+                android:textColor="@color/color10"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/et_kisiSayisi_otel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Kişi sayısı girin"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/btn_send_otel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:text="REZERVASYON TALEBİ GÖNDER"
+            android:textColor="@color/color10" />
+
+    </LinearLayout>
+
+</LinearLayout>

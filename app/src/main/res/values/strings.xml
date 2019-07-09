@@ -7,7 +7,6 @@
     <string name="signInUrl">https://www.yucelyavuz.com/muhammed/login/kaydol.php</string>
 
 
-
     <!--            -->
     <!--    POST    -->
     <!--            -->
@@ -23,6 +22,7 @@
     <string name="loginUrl">https://www.e-stk.com/Api/Login</string>
     <string name="notificationTokenGuncelleUrl">https://www.e-stk.com/Api/updateNotificationToken</string>
     <string name="sifreGuncelleUrl">https://www.e-stk.com/Api/updatePassword</string>
+    <string name="isKullanimSozlesmesiUrl">https://www.e-stk.com/Api/updateSozlesme</string>
 
     <!--ETKİNLİKLER-->
     <string name="etkinlikListeleUrl">https://www.e-stk.com/Api/getAllEvents</string>
@@ -54,10 +54,40 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
+    <string-array name="tesis_items">
+        <item>Seçiniz</item>
+        <item>BURSA OSMANGAZİ SOSYAL TESİSLERİ</item>
+        <item>ANKARA KIZILAY İŞÇİ EVİ</item>
+        <item>İSTANBUL ŞİRİNEVLER SOSYAL TESİSLERİ</item>
+    </string-array>
+    <string-array name="otel_items">
+        <item>Seçiniz</item>
+        <item>BÜYÜK ANADOLU EREĞLİ HOTEL</item>
+        <item>BÜYÜK ANADOLU GİRNE HOTEL</item>
+        <item>BÜYÜK ANADOLU DİDİM RESORT HOTEL</item>
+    </string-array>
+
+    <string-array name="anlasmali_kategori_items">
+        <item>Sektör Seçiniz</item>
+        <item>Sağlık</item>
+        <item>Eğitim</item>
+        <item>Hizmet</item>
+        <item>Alışveriş</item>
+    </string-array>
+    <string-array name="anlasmali_sehir_items">
+        <item>Şehir Seçiniz</item>
+        <item>Kocaeli</item>
+        <item>Adıyaman</item>
+        <item>Ankara</item>
+        <item>Bursa</item>
+        <item>Çanakkale</item>
+    </string-array>
+
+
     <string name="talepSikayetHint">Görüşleriniz bizim için çok değerli.\nLütfen bize yazmaktan çekinmeyin.</string>
     <string-array name="talepSikayetItems">
-        <item>ŞUBEYE GÖNDER</item>
         <item>GENEL MERKEZE GÖNDER</item>
+        <item>ŞUBEYE GÖNDER</item>
     </string-array>
     <string-array name="etkinlikOlusturItems">
         <item>Cemiyet (Düğün-Sünnet)</item>
@@ -70,7 +100,8 @@
         <item>Emeklilik</item>
         <item>Diğer</item>
     </string-array>
-    <string name="spinnerHint">Etkinlik türünü seçiniz</string>
+    <string name="etkinlikTipleriSpinnerHint">Etkinlik türünü seçiniz</string>
+    <string name="kullanimSozlesmesiMetni">Kullanıcı e-stk.com’a üye olurken Kullanıcı Sözleşmesini onaylamak ve üyelik sonrası Web Sitesi veya Mobil uygulama içerisindeki hareketleri esnasında, veri sorumlusu e-Stk ile paylaştıkları ad, soyad, elektronik posta adresi, sipariş adres/adresleri, telefon numarası gibi kişisel verilerinin Kişisel Verilerin Korunması Hakkındaki Kanun’da belirlenmiş olan esaslar çerçevesinde işlenmesine, 3. kişilere ve yurtdışına aktarılmasına açıkça rıza gösterdiğini kabul ve beyan eder. Kişisel Veriler’in işlenmesi, 3. kişilere ve yurtdışına aktarılması Kullanıcı ile e-STK.com arasında kurulan hukuki ilişkiye dayanmaktadır. Kişisel Veriler e-STK.com ve e-STK.com iştirakleri tarafından işbu sözleşmesel ilişki kapsamında ve e-STK.com ve iştiraklerinin sözleşmesel ilişkisi bulunan iş ortakları tarafından pazarlama, analiz, istatistik gibi amaçlarla işlenebilir, 3. kişilere ve yurtdışına aktarılabilir veya anonimleştirilerek kullanılabilir. Buna ek olarak Kullanıcılar Kişisel Verileri dışındaki sipariş bilgileri (sipariş verdikleri restoranlar, sipariş verilen ürün tipi, sipariş adedi, sipariş saati, sipariş verilen bölge gibi Web Sitesi (veya kullanılan benzeri mobil veya elektronik mecra) üzerindeki tüm davranışları, sipariş detayları gibi) ve benzeri verilerinin  e-STK.com, e-STK.com iştirakleri ve iş ortakları tarafından kaydedilmesi, işlenmesi ve listelenmesinde ve/veya anonimleştirilerek analizlerde 3. kişilerle hizmetin daha iyi sağlanması veya çeşitli uygulamaların veya programların e-STK.com üzerinde çalıştırılabilmesi için anonim şekilde kullanılmasına açık rızalarının olduğunu kabul ve beyan ederler.</string>
     <!-- INAPP STRINGS-->
 
 
