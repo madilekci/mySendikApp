@@ -143,7 +143,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 break;
             case 4:
                 Log.d(TAG, "Normal bildirim");
-                myIntent = new Intent(this, ActivityDashboard.class);
+                myIntent = new Intent(this, bildirimAkisi.class);
                 showNotification();
                 break;
             case 5:
@@ -192,6 +192,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setVibrate((new long[]{50, 0, 0, 50, 0, 0, 0, 200}))
                 .setContentInfo("Info")
                 .setSound(alarmSound)
+                .setAutoCancel(true)
                 .setOnlyAlertOnce(true);
 
     }

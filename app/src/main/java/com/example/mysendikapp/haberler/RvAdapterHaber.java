@@ -3,6 +3,7 @@ package com.example.mysendikapp.haberler;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +39,7 @@ public class RvAdapterHaber extends RecyclerView.Adapter<RvAdapterHaber.MyViewHo
 
         Picasso.get().load(this.haberModelArrayList.get(position).getUrl() ).into(holder.pic);
         holder.title.setText(this.haberModelArrayList.get(position).getTitle() );
-        holder.summary.setText(this.haberModelArrayList.get(position).getSummary() );
+        holder.summary.setText(Html.fromHtml(this.haberModelArrayList.get(position).getSummary()).toString());
         holder.btn_view.setText(this.haberModelArrayList.get(position).getView() +" Kez Görüntülendi" );
         holder.setHaberID(this.haberModelArrayList.get(position).id);
 

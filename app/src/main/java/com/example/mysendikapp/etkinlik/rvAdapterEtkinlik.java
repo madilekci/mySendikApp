@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +42,7 @@ public class rvAdapterEtkinlik extends RecyclerView.Adapter<rvAdapterEtkinlik.My
     public void onBindViewHolder(@NonNull rvAdapterEtkinlik.MyViewHolder holder, int position) {
         Picasso.get().load(this.etkinlikModelArrayList.get(position).getUrl() ).into(holder.pic);
         holder.title.setText(this.etkinlikModelArrayList.get(position).getTitle() );
-        holder.summary.setText(this.etkinlikModelArrayList.get(position).getSummary() );
+        holder.summary.setText(Html.fromHtml(this.etkinlikModelArrayList.get(position).getSummary()).toString());
         holder.btn_date.setText(this.etkinlikModelArrayList.get(position).getDate() );
         holder.setEtkinlikID(this.etkinlikModelArrayList.get(position).id);
 

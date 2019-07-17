@@ -63,7 +63,7 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(etkinlikDetaylari.this, ActivityDashboard.class);
+        Intent i = new Intent(etkinlikDetaylari.this, etkinlikAkisi.class);
         startActivity(i);
     }
 

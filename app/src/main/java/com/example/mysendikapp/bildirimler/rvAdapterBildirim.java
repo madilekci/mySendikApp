@@ -145,7 +145,7 @@ public class rvAdapterBildirim extends RecyclerView.Adapter<rvAdapterBildirim.My
                     break;
                 case 2:     //Etkinlik
                     i = new Intent(ctxx, etkinlikDetaylari.class);
-                    i.putExtra("haber_id", "" + ID);
+                    i.putExtra("etkinlik_id", "" + ID);
                     ctx.startActivity(i);
                     break;
                 case 3:     //Anket
@@ -153,6 +153,8 @@ public class rvAdapterBildirim extends RecyclerView.Adapter<rvAdapterBildirim.My
                     ctx.startActivity(i);
                     break;
                 case 4:     //Bildirim
+                    i = new Intent(ctxx, bildirimAkisi.class);
+                    ctx.startActivity(i);
                     break;
             }
 

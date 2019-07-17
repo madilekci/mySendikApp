@@ -2,6 +2,7 @@ package com.example.mysendikapp.etkinlik;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.R;
+import com.example.mysendikapp.dashboard.ActivityDashboard;
+import com.example.mysendikapp.haberler.haberAkisi;
 import com.example.mysendikapp.login.loginActivity;
 
 
@@ -200,5 +203,9 @@ public class etkinlikAkisi extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onBackPressed(){
+        Intent i = new Intent(etkinlikAkisi.this , ActivityDashboard.class);
+        startActivity(i);
+    }
 }
