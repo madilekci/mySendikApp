@@ -11,11 +11,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -60,6 +62,8 @@ public class ActivityDashboard extends AppCompatActivity  {
     private static int currentPage = 0;
     private static int NUM_PAGES = 0;
     private  String[] haber_id;
+    private  String[] haber_basligi;
+    private TextView tvBaslik;
     private  String[] urls;
     SharedPreferences sp = null;
 
@@ -70,11 +74,13 @@ public class ActivityDashboard extends AppCompatActivity  {
 
         this.urls = new String[5];
         this.haber_id = new String[5];
+        this.haber_basligi = new String[6];
 
         //SlidingImages
         fetchingJSON();
         initMenuButtons();
         initOptionMenu();
+        tvBaslik=(TextView)findViewById(R.id.tv_haberBasligi_dashboard);
 
     }
 
@@ -271,12 +277,16 @@ public class ActivityDashboard extends AppCompatActivity  {
             @Override
             public void onPageSelected(int position) {
                 currentPage = position;
+                Log.d("ActivityDashboard","Selected currentPage --> "+currentPage);
             }
             @Override
             public void onPageScrolled(int pos, float arg1, int arg2) {
+                Log.d("ActivityDashboard","Scrolled currentPage --> "+currentPage);
+                tvBaslik.setText(Html.fromHtml(haber_basligi[currentPage]).toString());
             }
             @Override
             public void onPageScrollStateChanged(int pos) {
+                Log.d("ActivityDashboard","ScrollStateChanged currentPage --> "+currentPage);
             }
         });
 
@@ -323,17 +333,18 @@ public class ActivityDashboard extends AppCompatActivity  {
 
     }       //getAllNews
     public void parseJSONData(String response){
+        Log.d("ActivityDashboard","-- Response to getLastNews ----> "+response);
         try {
             JSONObject obj = new JSONObject(response);
             JSONArray dataArray = obj.getJSONArray("data");
             System.out.println("Gelen slide sayısı" + dataArray.length());
 
             for (int i = 0; i < dataArray.length(); i++) {
-                haberModel haberModel1 = new haberModel();
                 JSONObject dataobj = dataArray.getJSONObject(i);
 
                 urls[i]=dataobj.getString("picture");
                 haber_id[i]=dataobj.getString("id");
+                haber_basligi[i]=dataobj.getString("adi");
             }
 
         } catch (JSONException e) {
@@ -360,27 +371,6 @@ public class ActivityDashboard extends AppCompatActivity  {
         startActivity(i);
     }
 
-    public  void showAlertDialog(Context context, String title, String message) {
-        final AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-
-
-        alertDialog.setMessage("Uygulamadan çıkmak istiyor musunuz ?");
-
-        alertDialog.setButton(Dialog.BUTTON_POSITIVE,"Çıkış",new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                onBackPressed();
-            }
-        });
-        alertDialog.setButton(Dialog.BUTTON_NEGATIVE,"İptal",new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                alertDialog.dismiss();
-            }
-        });
-        // Showing Alert Message
-        alertDialog.show();
-    }
 
 }
 
