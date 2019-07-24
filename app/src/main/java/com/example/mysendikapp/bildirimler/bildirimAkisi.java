@@ -2,6 +2,7 @@ package com.example.mysendikapp.bildirimler;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.R;
+import com.example.mysendikapp.dashboard.ActivityDashboard;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -69,6 +71,11 @@ public class bildirimAkisi extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(bildirimAkisi.this, ActivityDashboard.class);
+        startActivity(i);
+    }
     @Override
     protected void onDestroy() {
         deleteCache(this);

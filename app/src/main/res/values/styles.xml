@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -14,7 +14,7 @@
         <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
 
-    <!-- Custom Toolbar style. -->
+    <!-- Custom Option style. -->
     <style name="CustomOptionStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:background">@color/color10</item>
 
@@ -29,7 +29,7 @@
     <style name="switchButtonStyle" parent="Theme.AppCompat.Light">
         <!-- active thumb & track color (30% transparency) -->
         <!--<item name="colorControlActivated">@color/enable_thumb</item>-->
-        <item name="colorControlActivated">@color/colorPrimaryDark</item>
+        <item name="colorControlActivated">@color/enable_thumb</item>
 
         <!-- inactive thumb color -->
         <item name="colorSwitchThumbNormal">@color/disable_foreground</item>

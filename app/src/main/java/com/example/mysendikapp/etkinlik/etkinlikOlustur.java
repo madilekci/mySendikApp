@@ -320,7 +320,7 @@ public class etkinlikOlustur extends AppCompatActivity {
                         pickTime();
                     }
                 }, year, month, dayOfMonth);
-        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()-10000);
         datePickerDialog.show();
 
     }

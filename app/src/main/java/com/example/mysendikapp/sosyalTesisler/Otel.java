@@ -95,7 +95,7 @@ public class Otel extends AppCompatActivity {
 
                     }
                 }, year, month, dayOfMonth);
-        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()-10000);
         if (whichDate == 1){
             datePickerDialog.setTitle("Başlangıç tarihi seçin");
         }else if (whichDate == 2){
