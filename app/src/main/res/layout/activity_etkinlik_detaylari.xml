@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/disable_foreground"
+    android:background="@color/primaryLightColor"
     tools:context=".etkinlik.etkinlikDetaylari">
 
     <LinearLayout
@@ -27,7 +27,7 @@
                 android:layout_weight="1"
                 android:padding="10dp"
                 android:text="qweqeasd"
-                android:textColor="@android:color/black"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -37,10 +37,10 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@color/colorAccent"
+                android:background="@color/secondaryDarkColor"
                 android:maxLines="1"
                 android:padding="10dp"
-                android:textColor="@color/color10" />
+                android:textColor="@color/secondaryTextColor" />
         </LinearLayout>
 
         <LinearLayout
@@ -65,10 +65,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@color/color10"
                 android:padding="10dp"
                 android:text="content "
-                android:textColor="@color/vpi__bright_foreground_holo_light"
+                android:textColor="@color/primaryLightTextColor"
                 android:textSize="18sp"
                 android:textStyle="italic" />
 
@@ -85,11 +84,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@color/color10"
                 android:padding="10dp"
                 android:text="Etkinliği oluşturan kişinin bilgileri : "
                 android:textAllCaps="false"
-                android:textColor="@color/vpi__bright_foreground_holo_light"
+                android:textColor="@color/primaryLightTextColor"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
 

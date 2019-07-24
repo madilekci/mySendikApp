@@ -5,7 +5,7 @@
     android:id="@+id/ll_bildirimFeed"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/primaryLightColor"
     android:orientation="vertical"
     tools:context=".bildirimler.bildirimAkisi">
 
@@ -15,9 +15,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
-        android:background="@color/colorPrimaryDark"
         android:text="Tümünü Okundu olarak işaretle"
-        android:textColor="@color/color10" />
+        android:shadowColor="#A8A8A8"
+        android:textColor="@color/secondaryTextColor"
+        android:shadowRadius="5"
+        android:background="@drawable/button_shape_def"
+        />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_bildirimFeed"

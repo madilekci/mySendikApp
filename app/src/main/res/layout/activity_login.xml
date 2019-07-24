@@ -12,9 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/secondaryColor"
         app:tabSelectedTextColor="@android:color/white"
-        app:tabTextColor="@android:color/black">
+        app:tabTextColor="@color/secondaryTextColor">
 
         <android.support.design.widget.TabItem
             android:id="@+id/tabGiris"

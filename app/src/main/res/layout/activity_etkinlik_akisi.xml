@@ -5,7 +5,7 @@
     android:id="@+id/ll_etkinlikFeed"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/disable_foreground"
+    android:background="@color/primaryLightColor"
     android:orientation="vertical"
     tools:context=".MainActivity">
 

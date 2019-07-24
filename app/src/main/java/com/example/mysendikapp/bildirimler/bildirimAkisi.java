@@ -204,6 +204,10 @@ public class bildirimAkisi extends AppCompatActivity {
     public void tumuOkunduOnClick(View v) {
         Log.d(TAG, " --- tumuOkunduOnClick --- ");
         Log.d(TAG, "bildirimModelArrayList size --> " + bildirimModelArrayList.size());
+        
+        if (bildirimModelArrayList.size()==0)
+            return;
+        
         okunduBilgisiGonder(0);
         for (int i = 0; i < bildirimModelArrayList.size(); i++) {
             okunduBilgisiGonder(i);

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/disable_foreground"
+    android:background="@color/primaryColor"
     android:orientation="vertical"
     tools:context=".sosyal.ActivityTwitter">
 
@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="3"
-            android:background="@color/color10"
+            android:background="@color/primaryLightColor"
             android:spinnerMode="dropdown">
 
         </Spinner>
@@ -34,14 +34,14 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="2.7"
-            android:background="@color/color10"
+            android:background="@color/primaryLightColor"
             android:ems="10"
             android:gravity="top"
             android:hint="Konu"
             android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
             android:maxLines="1"
             android:padding="15dp"
-            android:textColor="@android:color/black" />
+            android:textColor="@color/primaryLightTextColor" />
 
         <EditText
             android:id="@+id/tv_aciklama_claimComplaint"
@@ -49,13 +49,13 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="1.2"
-            android:background="@color/color10"
+            android:background="@color/primaryLightColor"
             android:ems="10"
             android:gravity="top"
             android:hint="@string/talepSikayetHint"
             android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
             android:padding="15dp"
-            android:textColor="@android:color/black" />
+            android:textColor="@color/primaryLightTextColor" />
 
     </LinearLayout>
 
@@ -71,12 +71,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/colorPrimaryDark"
-            android:drawableEnd="@drawable/photo_camera_icon"
+            android:background="@drawable/button_shape_def"
+
+            android:drawableRight="@drawable/photo_camera_icon"
             android:paddingRight="10dp"
+            android:shadowColor="#A8A8A8"
+            android:shadowRadius="5"
             android:text="Fotoğraf ekle  "
-            android:textColor="@color/color10"
-            android:textSize="10sp" />
+            android:textColor="@color/secondaryTextColor"
+            android:textColorLink="@color/secondaryTextColor"
+            android:textSize="14sp" />
 
         <CheckBox
             android:id="@+id/cb_bilgiGizle_talepSikayet"
@@ -84,9 +88,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Bilgilerimi gizle"
-            android:textColor="@color/colorPrimaryDark"
-            app:buttonTint="@color/colorPrimaryDark"
-            />
+            android:textColor="@color/secondaryTextColor" />
     </LinearLayout>
 
     <LinearLayout
@@ -108,13 +110,15 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="8dp"
             android:layout_weight="3.6"
-            android:background="@color/colorPrimaryDark"
+            android:background="@drawable/button_shape_def"
+            android:shadowColor="#A8A8A8"
+            android:shadowRadius="5"
             android:text="GÖNDER"
-            android:textColor="@color/color10"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:typeface="serif"
-            tools:layout_editor_absoluteX="0dp" />
+            android:textColor="@color/secondaryTextColor"
+            android:textColorLink="@color/secondaryTextColor"
+            android:textSize="14sp"
+
+            />
     </LinearLayout>
 
 

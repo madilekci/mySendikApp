@@ -65,15 +65,19 @@
     </LinearLayout>
 
     <Button
+
+        android:textSize="18sp"
         android:id="@+id/btn_girisYap"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="15dp"
-        android:background="@color/color10"
         android:text="Giriş Yap"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:background="@drawable/button_shape_def"
+        android:textColor="#ffffff"
+        android:shadowColor="#A8A8A8"
+        android:shadowRadius="5"
+         />
 
 </LinearLayout>

@@ -3,21 +3,20 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/secondaryColor</item>
     </style>
+
     <!-- Custom Toolbar style. -->
     <style name="CustomToolbarStyle" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:background">@color/colorAccent</item>
-        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:background">@color/primaryColor</item>
+        <item name="android:textColor">@color/primaryLightTextColor</item>
     </style>
 
     <!-- Custom Option style. -->
     <style name="CustomOptionStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:background">@color/color10</item>
-
     </style>
 
     <!-- SplashScreen theme. -->
@@ -26,17 +25,12 @@
     </style>
 
     <!-- Switch Buttons Style-->
-    <style name="switchButtonStyle" parent="Theme.AppCompat.Light">
-        <!-- active thumb & track color (30% transparency) -->
-        <!--<item name="colorControlActivated">@color/enable_thumb</item>-->
-        <item name="colorControlActivated">@color/enable_thumb</item>
+    <style parent="Theme.AppCompat.Light" name="switchButtonStyle">
 
-        <!-- inactive thumb color -->
-        <item name="colorSwitchThumbNormal">@color/disable_foreground</item>
+        <item name="colorControlActivated">@color/secondaryLightColor</item>
+        <item name="colorSwitchThumbNormal">@color/defBlueGray</item>
+        <item name="android:colorForeground">@color/secondaryDarkColor</item>
 
-        <!-- inactive track color (30% transparency) -->
-        <item name="android:colorForeground">@color/disable_thumb</item>
-        <!-- Switch Buttons Style-->
     </style>
 
 </resources>

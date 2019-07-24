@@ -25,4 +25,21 @@
     <color name="color11">#77777777</color>
     <color name="color12">#777777</color>
 
+
+    <color name="primaryLightColor">#E3F2FD</color>
+    <color name="primaryColor">#1E88E5</color>
+    <color name="primaryDarkColor">#005cb2</color>
+
+    <color name="secondaryColor">#455a64</color>
+    <color name="secondaryLightColor">#718792</color>
+    <color name="secondaryDarkColor">#1c313a</color>
+
+    <color name="primaryTextColor">#e0f7fa</color>
+    <color name="primaryLightTextColor">#1c313a</color>
+    <color name="secondaryTextColor">#e1f5fe</color>
+
+    <color name="defaultTextColor">#000000</color>
+    <color name="defBlueGray">#607D8B</color>
+    <color name="defWhiteBackground">#FFEBEE</color>
+
 </resources>

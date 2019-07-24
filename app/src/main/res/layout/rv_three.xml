@@ -4,9 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="150dp"
     android:layout_marginBottom="3dp"
-    android:background="@color/colorPrimary"
-    android:orientation="vertical"
-    android:padding="1dp">
+    android:background="@color/primaryLightColor"
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cv_rv_three"
@@ -55,9 +54,13 @@
                     android:layout_height="match_parent"
                     android:layout_marginBottom="3dp"
                     android:layout_weight="3"
-                    android:background="@color/color3"
+                    android:background="@drawable/button_shape_def"
                     android:drawableRight="@drawable/okundu_logo"
+                    android:shadowColor="#A8A8A8"
+
+                    android:shadowRadius="5"
                     android:text="Okundu olarak işaretle"
+                    android:textColor="@color/secondaryTextColor"
                     android:textSize="8sp" />
             </LinearLayout>
 

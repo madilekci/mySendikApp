@@ -282,6 +282,7 @@ public class ActivityDashboard extends AppCompatActivity  {
             @Override
             public void onPageScrolled(int pos, float arg1, int arg2) {
                 Log.d("ActivityDashboard","Scrolled currentPage --> "+currentPage);
+                if(haber_basligi[currentPage] != null )
                 tvBaslik.setText(""+Html.fromHtml(haber_basligi[currentPage]).toString());
             }
             @Override
