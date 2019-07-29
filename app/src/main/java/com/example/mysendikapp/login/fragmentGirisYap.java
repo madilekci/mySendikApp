@@ -224,8 +224,8 @@ public class fragmentGirisYap extends Fragment {
         
         sp = getActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
         
-        defUsername = sp.getString("usernameDef", "default");
-        defPassword = sp.getString("passwordDef", "default");
+        defUsername = sp.getString("usernameDef", "");
+        defPassword = sp.getString("passwordDef", "");
     
         Log.d(TAG,"beniHatirla  ----->"+sp.getString("username", "default")+"   "+sp.getString("password", "default") );
         
