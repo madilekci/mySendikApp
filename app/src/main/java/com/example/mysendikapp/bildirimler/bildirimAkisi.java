@@ -69,8 +69,13 @@ public class bildirimAkisi extends AppCompatActivity {
             }
         });
     
-        if (getIntent().getExtras() != null) {
-            bildirimdenAcildimOkundum( (getIntent().getExtras().getString("notification_id") ) , "4");
+        try {
+            String bid = (getIntent().getExtras().getString("notification_id") );
+            if(bid != null){
+                bildirimdenAcildimOkundum( (getIntent().getExtras().getString("notification_id") ) , "4");
+            }
+        }catch (NullPointerException ex){
+            Log.d(TAG,"bildirimdenAcildimOkundum Error --> "+ex.getMessage() );
         }
 
     }

@@ -58,8 +58,13 @@ public class haberDetaylari extends AppCompatActivity implements Html.ImageGette
         ll_root= (LinearLayout) findViewById(R.id.ll_root_haberDetaylari);
         ll_root.setVisibility(View.INVISIBLE);
     
-        if (getIntent().getExtras() != null) {
-            bildirimdenAcildimOkundum( (getIntent().getExtras().getString("notification_id") ) , "4");
+        try {
+            String bid = (getIntent().getExtras().getString("notification_id") );
+            if(bid != null){
+            bildirimdenAcildimOkundum( (getIntent().getExtras().getString("notification_id") ) , "1");
+            }
+        }catch (NullPointerException ex){
+            Log.d(TAG,"bildirimdenAcildimOkundum Error --> "+ex.getMessage() );
         }
 
     }
@@ -159,6 +164,7 @@ public class haberDetaylari extends AppCompatActivity implements Html.ImageGette
     public void bildirimdenAcildimOkundum(final String bid, final String btype) {
         
         Log.d(TAG,"bildirimdenAcildimOkundum");
+        getIntent().getExtras().clear();
         
         final String bUserToken = getUserToken();
         Log.d(TAG, "\n\nFetching JSON ....");

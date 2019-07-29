@@ -60,9 +60,14 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
         setContentView(R.layout.activity_etkinlik_detaylari);
         this.ne_etkinlik = new etkinlikModel();
         this.getEtkinlikDetails(getIntent().getExtras().getString("etkinlik_id"), this.ne_etkinlik);
-        
-        if (getIntent().getExtras() != null) {
-            bildirimdenAcildimOkundum(getIntent().getExtras().getString("notification_id") ,"2" ) ;
+    
+        try {
+            String bid = (getIntent().getExtras().getString("notification_id") );
+            if(bid != null){
+                bildirimdenAcildimOkundum( (getIntent().getExtras().getString("notification_id") ) , "2");
+            }
+        }catch (NullPointerException ex){
+            Log.d(TAG,"bildirimdenAcildimOkundum Error --> "+ex.getMessage() );
         }
         
         olusturanTv = (TextView) findViewById(R.id.tv_olusturan_etkinlikDetaylari);
