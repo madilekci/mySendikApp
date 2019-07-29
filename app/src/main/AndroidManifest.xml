@@ -54,12 +54,6 @@
             android:name=".sosyal.hangiSosyalActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".anketler.anketDoldur"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".anketler.anketAkisi"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".bildirimler.bildirimAkisi"
             android:screenOrientation="portrait" />
         <activity

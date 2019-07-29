@@ -14,7 +14,15 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.R;
 import com.example.mysendikapp.SplashActivityMain;
 import com.example.mysendikapp.anketler.anketWebViev;
@@ -26,15 +34,15 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "MyFirebaseMsgService";
-    private String body = "", title = "", type = "", id = "";
+    private String body = "", title = "", type = "", id = "", bid="";
     private Intent myIntent;
-
     private boolean isClickable = true;       //True if user already logged in
     private boolean isNotifyable = true;      //From settings
 
@@ -66,13 +74,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 title = "" + hmp.get("\"title\"").toString().replaceAll("\"", "");
                 type = "" + hmp.get("\"type\"").toString().replaceAll("\"", "");
                 id = "" + hmp.get("\"id\"").toString().replaceAll("\"", "");
+                bid = "" + hmp.get("\"bid\"").toString().replaceAll("\"", "");
 
 
-                Log.d(TAG, "HMP.GET ->> "
+                Log.d(TAG,
+                        "\n"+"HMP.GET ->> "
                         + "\n" + "-----> " + body
                         + "\n" + "-----> " + title
                         + "\n" + "-----> " + type
                         + "\n" + "-----> " + id
+                        + "\n" + "-----> " + bid
                 );
                 inspectNotificationData();
             } else {
@@ -121,29 +132,32 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             type = "5";
         }
         this.createChannelHigh();
-
-
+        
         switch (Integer.parseInt(type)) {
             case 1:
                 Log.d(TAG, "Haber bildirimi");
                 myIntent = new Intent(this, haberDetaylari.class);
                 myIntent.putExtra("haber_id", "" + id);
+                myIntent.putExtra("notification_id", "" + bid);
                 showNotification();
                 break;
             case 2:
                 Log.d(TAG, "Etkinlik bildirimi");
                 myIntent = new Intent(this, etkinlikDetaylari.class);
                 myIntent.putExtra("etkinlik_id", "" + id);
+                myIntent.putExtra("notification_id", "" + bid);
                 showNotification();
                 break;
             case 3:
                 Log.d(TAG, "Anket bildirimi");
                 myIntent = new Intent(this, anketWebViev.class);
+                myIntent.putExtra("notification_id", "" + bid);
                 showNotification();
                 break;
             case 4:
                 Log.d(TAG, "Normal bildirim");
                 myIntent = new Intent(this, bildirimAkisi.class);
+                myIntent.putExtra("notification_id", "" + bid);
                 showNotification();
                 break;
             case 5:
@@ -209,6 +223,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         notificationManager.notify(new Random().nextInt(), notificationBuilder.build());
     }
+    
+   
 
 
     public void getAbles() {
@@ -216,8 +232,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         isClickable = sp.getBoolean("isLogged", false);
         isNotifyable = sp.getBoolean("isNotifyable", true);
     }
-
-
     public void saveToken(String token) {
         SharedPreferences xd = this.getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = xd.edit();
@@ -226,11 +240,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         editor.putString("notificationToken", token);
         editor.apply();
     }
-
     @Override
     public void onNewToken(String token) {
         Log.d(TAG, "onRefreshed Token:" + token);
         this.saveToken(token);
     }
+    
+    
 
 }

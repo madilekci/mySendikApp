@@ -68,6 +68,10 @@ public class bildirimAkisi extends AppCompatActivity {
                 tumuOkunduOnClick(v);
             }
         });
+    
+        if (getIntent().getExtras() != null) {
+            bildirimdenAcildimOkundum( (getIntent().getExtras().getString("notification_id") ) , "4");
+        }
 
     }
 
@@ -262,6 +266,54 @@ public class bildirimAkisi extends AppCompatActivity {
         jsonStringRequest.setShouldCache(false);        // "CacheTutulmasıDurumu=false"
         queue.add(jsonStringRequest);
 
+    }       //Bildirimin okunduğuna dair bilgi gönderir.
+    
+    public void bildirimdenAcildimOkundum(final String bid, final String btype) {
+        
+        Log.d(TAG,"bildirimdenAcildimOkundum");
+        
+        final String bUserToken = getUserToken();
+        Log.d(TAG, "\n\nFetching JSON ....");
+        Log.d(TAG, "userToken  --> " + bUserToken);
+        Log.d(TAG, "bid  --> " + bid);
+        Log.d(TAG, "type  --> " + btype);
+        
+        
+        String url = getResources().getString(R.string.bildirimOkunduUrl);    // Post atılan adres.
+        StringRequest jsonStringRequest = new StringRequest(
+                Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, "Response to bildirimdenAcildimOkundum >> " + response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something when error occurred
+                        Toast.makeText(bildirimAkisi.this, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("token", bUserToken);
+                params.put("id", bid);
+                params.put("type", btype);
+                return params;
+            }
+        };
+        
+        // request queue
+        RequestQueue queue = Volley.newRequestQueue(this);
+        
+        jsonStringRequest.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));    // Yeniden istek gönderebilmek için uyulması gereken kurallar
+        
+        jsonStringRequest.setShouldCache(false);        // "CacheTutulmasıDurumu=false"
+        queue.add(jsonStringRequest);
+        
     }       //Bildirimin okunduğuna dair bilgi gönderir.
 
 

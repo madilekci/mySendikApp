@@ -1,6 +1,8 @@
 package com.example.mysendikapp.haberler;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,7 +19,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -25,6 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysendikapp.R;
+import com.example.mysendikapp.bildirimler.bildirimAkisi;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -52,6 +57,10 @@ public class haberDetaylari extends AppCompatActivity implements Html.ImageGette
 
         ll_root= (LinearLayout) findViewById(R.id.ll_root_haberDetaylari);
         ll_root.setVisibility(View.INVISIBLE);
+    
+        if (getIntent().getExtras() != null) {
+            bildirimdenAcildimOkundum( (getIntent().getExtras().getString("notification_id") ) , "4");
+        }
 
     }
 
@@ -145,9 +154,60 @@ public class haberDetaylari extends AppCompatActivity implements Html.ImageGette
         mTv.setText(spanned);
         ll_root.setVisibility(View.VISIBLE);
     }
-
-
-
+    
+    
+    public void bildirimdenAcildimOkundum(final String bid, final String btype) {
+        
+        Log.d(TAG,"bildirimdenAcildimOkundum");
+        
+        final String bUserToken = getUserToken();
+        Log.d(TAG, "\n\nFetching JSON ....");
+        Log.d(TAG, "userToken  --> " + bUserToken);
+        Log.d(TAG, "bid  --> " + bid);
+        Log.d(TAG, "type  --> " + btype);
+        
+        
+        String url = getResources().getString(R.string.bildirimOkunduUrl);    // Post atılan adres.
+        StringRequest jsonStringRequest = new StringRequest(
+                Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, "Response to bildirimdenAcildimOkundum >> " + response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something when error occurred
+                        Toast.makeText(haberDetaylari.this, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("token", bUserToken);
+                params.put("id", bid);
+                params.put("type", btype);
+                return params;
+            }
+        };
+        
+        // request queue
+        RequestQueue queue = Volley.newRequestQueue(this);
+        
+        jsonStringRequest.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));    // Yeniden istek gönderebilmek için uyulması gereken kurallar
+        
+        jsonStringRequest.setShouldCache(false);        // "CacheTutulmasıDurumu=false"
+        queue.add(jsonStringRequest);
+        
+    }       //Bildirimin okunduğuna dair bilgi gönderir.
+    public String getUserToken() {
+        SharedPreferences xd = getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = xd.edit();
+        return xd.getString("userToken", "noTokens");
+    }
     @Override
     public Drawable getDrawable(String source) {
         LevelListDrawable d = new LevelListDrawable();
