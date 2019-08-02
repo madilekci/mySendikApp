@@ -93,7 +93,7 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d("", "Response to getDetail " + etkinlik_id + " ->>" + response);
+                        Log.d(TAG, "Response to getDetail " + etkinlik_id + " ->>" + response);
                         parseJson(response, etkinlikModel_ne_etkinlik);
                     }
                 },
@@ -101,6 +101,7 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
+                        Log.d(TAG,"Error while fetching JSON");
                     }
                 }
         ) {
@@ -123,6 +124,10 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
             JSONObject obj = new JSONObject(response);
             JSONObject dataobj = obj.getJSONObject("data");
             
+            if(dataobj.toString().equals("{\"error\":\"0\"}")) {          //Etkinlik silinmiş mi ?
+                Log.d(TAG,"Etkinlik silinmiş. ");
+                return;
+            }
             etkinlikModel_ne_etkinlik.setTitle(dataobj.getString("header"));
             etkinlikModel_ne_etkinlik.setContent(dataobj.getString("content"));
             etkinlikModel_ne_etkinlik.setUrl(dataobj.getString("picture"));
@@ -163,23 +168,29 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
         System.out.println("" + this.ne_etkinlik.getDate());
         System.out.println("*//--*------*-----*-------*-------//*");
     }
-    
+    public void etkinlikSilinmiş(){
+        TextView tv_baslik = (TextView) findViewById(R.id.tv_baslik_etkinlikDetaylari);
+        tv_baslik.setText("Görmek istediğiniz etkinlik silinmiş.");
+    }
     public void etkinlikGoster() {
         if (this.ne_etkinlik.equals(null)) {
             return;
+        }else if(this.ne_etkinlik.title.equals("null")){
+            etkinlikSilinmiş();
+        }else {
+            Button btnDate = (Button) findViewById(R.id.btn_date_etkinlikDetaylari);
+            btnDate.setText("" + this.ne_etkinlik.getDate());
+    
+            TextView tv_baslik = (TextView) findViewById(R.id.tv_baslik_etkinlikDetaylari);
+            tv_baslik.setText(this.ne_etkinlik.getTitle());
+    
+            ImageView iv = (ImageView) findViewById(R.id.iv_etkinlikDetaylari);
+            Picasso.get().load("" + this.ne_etkinlik.getUrl()).into(iv);
+    
+            Spanned spanned = Html.fromHtml(this.ne_etkinlik.getContent(), this, null);
+            mTv = (TextView) findViewById(R.id.tv_content_etkinlikDetaylari);
+            mTv.setText(spanned);
         }
-        Button btnDate = (Button) findViewById(R.id.btn_date_etkinlikDetaylari);
-        btnDate.setText("" + this.ne_etkinlik.getDate());
-        
-        TextView tv_baslik = (TextView) findViewById(R.id.tv_baslik_etkinlikDetaylari);
-        tv_baslik.setText(this.ne_etkinlik.getTitle());
-        
-        ImageView iv = (ImageView) findViewById(R.id.iv_etkinlikDetaylari);
-        Picasso.get().load("" + this.ne_etkinlik.getUrl()).into(iv);
-        
-        Spanned spanned = Html.fromHtml(this.ne_etkinlik.getContent(), this, null);
-        mTv = (TextView) findViewById(R.id.tv_content_etkinlikDetaylari);
-        mTv.setText(spanned);
         ll_root.setVisibility(View.VISIBLE);
     }
     
