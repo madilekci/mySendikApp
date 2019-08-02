@@ -182,6 +182,7 @@ public class bildirimAkisi extends AppCompatActivity {
                 JSONObject dataobj = dataArray.getJSONObject(i);
 
                 bildirimModel1.setTitle(dataobj.getString("title"));
+                bildirimModel1.setDate(dataobj.getString("date"));
                 bildirimModel1.setContent(dataobj.getString("message"));
                 bildirimModel1.setId(dataobj.getString("id"));
                 bildirimModel1.setBid(dataobj.getString("bid"));

@@ -54,6 +54,7 @@ public class rvAdapterBildirim extends RecyclerView.Adapter<rvAdapterBildirim.My
     @Override
     public void onBindViewHolder(@NonNull rvAdapterBildirim.MyViewHolder holder, int position) {
         holder.title.setText(this.bildirimModelArrayList.get(position).getTitle());
+        holder.date.setText(this.bildirimModelArrayList.get(position).getDate());
         holder.content.setText(this.bildirimModelArrayList.get(position).getContent());
         holder.setBildirimID(this.bildirimModelArrayList.get(position).getBid());
         holder.setID(this.bildirimModelArrayList.get(position).getId());
@@ -64,11 +65,13 @@ public class rvAdapterBildirim extends RecyclerView.Adapter<rvAdapterBildirim.My
             Log.d(TAG, "onBind readed-->>>>>>>  " + this.bildirimModelArrayList.get(position).bid);
             holder.ll_holder.setBackgroundResource(R.color.color10);
             holder.title.setBackgroundColor(Color.parseColor("#77777777"));
+            holder.date.setBackgroundColor(Color.parseColor("#77777777"));
             holder.content.setBackgroundColor(Color.parseColor("#77777777"));
         } else {
             Log.d(TAG, "onBind not readed -->>>>>>> " + this.bildirimModelArrayList.get(position).bid);
             holder.ll_holder.setBackgroundResource(R.color.color11);
             holder.title.setBackgroundColor(Color.parseColor("#F5F5F5"));
+            holder.date.setBackgroundColor(Color.parseColor("#F5F5F5"));
             holder.content.setBackgroundColor(Color.parseColor("#F5F5F5"));
         }
     }
@@ -86,7 +89,7 @@ public class rvAdapterBildirim extends RecyclerView.Adapter<rvAdapterBildirim.My
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         String bildirimType, readed, ID, bildirimID;
-        TextView title, content;
+        TextView title,date,content;
         LinearLayout ll_holder;
 
         public MyViewHolder(View itemView) {
@@ -94,6 +97,7 @@ public class rvAdapterBildirim extends RecyclerView.Adapter<rvAdapterBildirim.My
             itemView.setOnClickListener(this);
 
             title = (TextView) itemView.findViewById(R.id.tv_title_rv_three);
+            date = (TextView) itemView.findViewById(R.id.tv_date_rv_three);
             content = (TextView) itemView.findViewById(R.id.tv_content_rv_three);
             ll_holder = (LinearLayout) itemView.findViewById(R.id.ll_holder_bildirimAkisi);
             itemView.setOnClickListener(this);
@@ -108,6 +112,7 @@ public class rvAdapterBildirim extends RecyclerView.Adapter<rvAdapterBildirim.My
                     if (Integer.parseInt(readed) == 0) {
                         ll_holder.setBackgroundResource(R.color.color10);
                         title.setBackgroundColor(Color.parseColor("#77777777"));
+                        date.setBackgroundColor(Color.parseColor("#77777777"));
                         content.setBackgroundColor(Color.parseColor("#77777777"));
 
                         bidPost = bildirimID;
@@ -176,6 +181,8 @@ public class rvAdapterBildirim extends RecyclerView.Adapter<rvAdapterBildirim.My
         public void setReaded(String gelenReaded) {
             this.readed = gelenReaded;
         }
+        
+        
     }
 
     public void sendStringRequest() {

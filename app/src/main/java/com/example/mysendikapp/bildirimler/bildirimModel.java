@@ -1,7 +1,7 @@
 package com.example.mysendikapp.bildirimler;
 
 public class bildirimModel {
-    public String id="0",title,content,type,bid="0",readed;
+    public String id="0",title,date,content,type,bid="0",readed;
 
     public bildirimModel(){}
 
@@ -15,6 +15,15 @@ public class bildirimModel {
     public String getReaded() {
         return readed;
     }
+    
+    public String getDate() {
+        return date;
+    }
+    
+    public void setDate(String date) {
+        this.date = date;
+    }
+    
     public void setReaded(String readed) {
         this.readed = readed;
     }

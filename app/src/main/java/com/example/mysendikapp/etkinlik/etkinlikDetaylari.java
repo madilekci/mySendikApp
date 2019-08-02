@@ -183,7 +183,7 @@ public class etkinlikDetaylari extends AppCompatActivity implements Html.ImageGe
     
             TextView tv_baslik = (TextView) findViewById(R.id.tv_baslik_etkinlikDetaylari);
             tv_baslik.setText(this.ne_etkinlik.getTitle());
-    
+
             ImageView iv = (ImageView) findViewById(R.id.iv_etkinlikDetaylari);
             Picasso.get().load("" + this.ne_etkinlik.getUrl()).into(iv);
     
