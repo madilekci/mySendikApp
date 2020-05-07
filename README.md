@@ -1,7 +1,7 @@
 Bu Uygulama kullanım amacıyla yazılmamıştır.
 
 
-Bu program sendikaya veya vakıf gibi bir sivil toplum kuruluşunun; organizasyon,iletişim, etkileşim gibi bir çok ihtiyacını karşılayabileceği bir mobil uygulama olarak hazırlanmıştır. Eğer bu gerçek bir projeye çevirilecek olursa bir web sitesi ve hem mobil uygulamayı hem de web sitesini yönetebileceğiniz bir panel oluşturulması planlanmıştır.
+Bu program sendikaya veya vakıf gibi bir sivil toplum kuruluşunun; organizasyon,iletişim, etkileşim gibi bir çok ihtiyacını karşılayabileceği bir mobil uygulama olarak hazırlanmıştır.Eğer bu gerçek bir projeye çevirilecek olursa bir web sitesi ve hem mobil uygulamayı hem de web sitesini yönetebileceğiniz bir panel oluşturulması planlanmıştır ancak geliştirme aşamasında kolaylık olması açısından panel yerine taslak PHP dosyalarıyla çalışılmıştır..
 
 Uygulamanın tamamlanan fonksiyonları ;
 
