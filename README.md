@@ -18,16 +18,16 @@ Hangi bildirimin kaç kişi tarafından görüldüğü, bildirime bağlı bir ha
 
 
 
-
-
-
-
-
-
 Bu projenin katkılarından bazıları ;
+
 ♣ RecyclerView , cardView gibi temel android objelerini ve çeşitli layoutları detaylı özelleştirmeler yaparak kullandım.
+
 ♠ Android fotoğraf kütüphaneleriyle çalıştım. Fotoğrafları sıkıştırdım/şifreledim/gönderdim veya uygulamamda görüntüledim.
+
 ♣ JSON yapısında olan haber verilerini sunucumdan istedim ve uygulamamda gösterdim.
+
 ♠ Üyelik, giriş yapma kullanıcı bilgilerinin doğrulanması ve güvenliği konularında çalıştım.
+
 ♣ Firebase MS kullanarak bildirim gönderilmesi ve cihazda gösterilmesi, bildirim içeriğinin düzenlenmesi gibi konularda çalıştım.
+
 ♣ Android işletim sisteminin nasıl çalıştığı ve programları nasıl çalıştırdığı ile ilgili detaylı bilgi sahibi oldum.
